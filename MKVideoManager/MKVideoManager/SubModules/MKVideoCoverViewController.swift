@@ -26,6 +26,9 @@ class MKVideoCoverViewController: UIViewController {
     
     var selectedImageView: UIImageView?
     
+    var backButton: UIButton!
+    var doneButton: UIButton!
+    
     var coverArray: NSMutableArray?
     
     var selectedCoverIndex: Int = 0
@@ -34,10 +37,10 @@ class MKVideoCoverViewController: UIViewController {
     var time:CMTime?
     var seconds: Float?
     var generator: AVAssetImageGenerator?
-    var slider: MKVideoCoverSlider?
     var tapGes: UITapGestureRecognizer?
     
     var player: AVPlayer?
+    var currentProgress: Float = 0
     
     deinit {
         print("deninit")
@@ -58,6 +61,7 @@ class MKVideoCoverViewController: UIViewController {
             make.top.left.right.bottom.equalToSuperview()
         })
         self.initPlayerView()
+        self.setNavigationView()
         self.setCollectionView()
         self.setSelectImageView()
 //        self.addSlider()
@@ -84,6 +88,34 @@ class MKVideoCoverViewController: UIViewController {
         self.player?.pause()
     }
     
+    func setNavigationView() {
+        if self.backButton == nil {
+            self.backButton = UIButton.init()
+            self.backButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
+            self.backButton.setTitle("CANCEL", for: .normal)
+            self.backButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+            self.view.addSubview(self.backButton)
+            self.backButton.snp.makeConstraints { (make) in
+                make.left.equalToSuperview().offset(14)
+                make.top.equalToSuperview().offset(MKDefine.statusBarHeight)
+                make.size.equalTo(CGSize.init(width: 80, height: 44))
+            }
+        }
+        if self.doneButton == nil {
+            self.doneButton = UIButton()
+            self.doneButton.setTitle("DONE", for: .normal)
+            self.doneButton.setTitleColor(UIColor.white, for: .normal)
+            self.doneButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.right
+            self.view.addSubview(self.doneButton)
+            self.doneButton.addTarget(self, action: #selector(doneAction), for: .touchUpInside)
+            self.doneButton.snp.makeConstraints { (make) in
+                make.top.equalToSuperview().offset(MKDefine.statusBarHeight)
+                make.right.equalToSuperview().offset(-14)
+                make.size.equalTo(CGSize.init(width: 60, height: 40))
+            }
+        }
+    }
+    
     func setCollectionView() {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = UICollectionViewScrollDirection.horizontal
@@ -94,7 +126,7 @@ class MKVideoCoverViewController: UIViewController {
         flowLayout.headerReferenceSize = CGSize(width: 0, height: MKVideoCoverViewController.collectionHeight)
         flowLayout.footerReferenceSize = CGSize(width: 0, height: MKVideoCoverViewController.collectionHeight)
         collectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: MKVideoCoverViewController.collectionWidth, height: MKVideoCoverViewController.collectionHeight), collectionViewLayout: flowLayout)
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "coverCell")
+        collectionView?.register(MKCoverCollectionCell.self, forCellWithReuseIdentifier: "coverCell")
         collectionView?.dataSource = self
         collectionView?.delegate = self
         collectionView?.allowsMultipleSelection = false
@@ -162,6 +194,17 @@ class MKVideoCoverViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: Action
+    func cancelAction() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func doneAction() {
+        //get cover
+        let image = self.getImageWithTime(self.currentProgress)
+        //输出 封面
+    }
 }
 
 extension MKVideoCoverViewController{
@@ -223,47 +266,12 @@ extension MKVideoCoverViewController{
             gesture.setTranslation(CGPoint.init(x: 0, y: 0), in: gesture.view)
             let progress: Float = Float(newSliderX / (self.selectedView!.frame.size.width - self.selectedImageView!.frame.size.width))
             self.reloadImageWithTime(progress)
-            
         }
-    }
-    func addSlider() {
-        
-//        let sliderImage: UIImage = UIImage.init(named: "border")!
-//        self.slider = MKVideoCoverSlider.init(frame: CGRect.init(x: 8, y: 0, width: UIScreen.main.bounds.width - 17 - 18 - 16, height: 80))
-//        self.slider!.setThumbImage(sliderImage, for: .normal)
-//        self.slider!.setMinimumTrackImage(UIImage.getImageWith(UIColor.blue, CGSize.init(width: 1, height: 1)), for: .normal)
-//        self.slider!.setMaximumTrackImage(UIImage.getImageWith(UIColor.red, CGSize.init(width: 1, height: 1)), for: .normal)
-//        self.slider!.addTarget(self, action: #selector(sliderValueChange), for: .valueChanged)
-//        self.tapGes = UITapGestureRecognizer.init(target: self, action: #selector(sliderTapGes(_:)))
-//        self.slider!.addGestureRecognizer(self.tapGes!)
-//        self.slider!.addTarget(self, action: #selector(sliderTouchDown(_:)), for: .touchDown)
-//        self.slider!.addTarget(self, action: #selector(sliderTouchUp(_:)), for: .touchUpInside)
-//        self.collectionView?.addSubview(self.slider!)
-    }
-    
-    @objc func sliderTouchDown(_ slider: UISlider){
-        self.tapGes?.isEnabled = false
-    }
-    @objc func sliderTouchUp(_ slider: UISlider){
-        self.tapGes?.isEnabled = true
-    }
-    
-    @objc func sliderTapGes(_ tapGes: UITapGestureRecognizer){
-        let point: CGPoint = tapGes.location(in: tapGes.view)
-    
-        let value: Float = (self.slider!.maximumValue - self.slider!.minimumValue) * Float((point.x / (self.slider?.frame.size.width)!))
-        self.slider?.setValue(value, animated: true)
-        self.reloadImageWithTime(self.slider!.value)
-    }
-    
-    @objc func sliderValueChange(_ slider: UISlider) {
-
-        let progress: Float = slider.value
-        self.reloadImageWithTime(progress)
     }
     
     //video
     func reloadImageWithTime(_ progress:Float) {
+        currentProgress = progress
         let seekValue = Float((self.time?.value)!) * progress
         let playerTime: CMTime = CMTimeMake(Int64(seekValue), (self.time?.timescale)!)
         self.player?.seek(to: playerTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
@@ -272,7 +280,7 @@ extension MKVideoCoverViewController{
     func getImageWithTime(_ progress:Float) -> UIImage {
         print("progress: \(progress)")
         let timeSelect: Float = self.seconds! * Float(progress)
-        let imgTime: CMTime = CMTimeMakeWithSeconds(Float64(timeSelect), 30);
+        let imgTime: CMTime = CMTimeMakeWithSeconds(Float64(timeSelect), (self.time?.timescale)!);
         
         let img: CGImage = try! self.generator!.copyCGImage(at: imgTime, actualTime: nil)
         let frameImg: UIImage = UIImage(cgImage: img)
@@ -290,13 +298,10 @@ extension MKVideoCoverViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "coverCell", for: indexPath)
-        cell.contentView.backgroundColor = UIColor.orange
-        let imageView: UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: MKVideoCoverViewController.itemWidth, height: MKVideoCoverViewController.itemHeight))
-        cell.contentView.addSubview(imageView)
-        imageView.layer.cornerRadius = 1
-        imageView.layer.masksToBounds = true
-        imageView.image = coverArray?[indexPath.row] as? UIImage
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "coverCell", for: indexPath) as! MKCoverCollectionCell
+//        cell.contentView.backgroundColor = UIColor.orange
+        
+        cell.imageView.image = coverArray?[indexPath.row] as? UIImage
         return cell
     }
     

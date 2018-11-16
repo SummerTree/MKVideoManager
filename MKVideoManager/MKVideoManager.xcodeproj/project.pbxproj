@@ -15,6 +15,7 @@
 		6F49AAE5219E7ADA007EA231 /* MKDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAE4219E7ADA007EA231 /* MKDefine.swift */; };
 		6F49AAE7219EA4E5007EA231 /* MKCaptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAE6219EA4E5007EA231 /* MKCaptionLabel.swift */; };
 		6F49AAEB219EA83C007EA231 /* ViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEA219EA83C007EA231 /* ViewExtention.swift */; };
+		6F49AAED219EBBAD007EA231 /* MKCoverCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEC219EBBAD007EA231 /* MKCoverCollectionCell.swift */; };
 		6F7B0DF8219A730800CA2BD2 /* ColorsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0DF7219A730800CA2BD2 /* ColorsCollectionCell.swift */; };
 		6F7B0DFA219AB46700CA2BD2 /* AttributeStringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0DF9219AB46700CA2BD2 /* AttributeStringExtention.swift */; };
 		6F7B0DFC219ACC1100CA2BD2 /* GestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0DFB219ACC1100CA2BD2 /* GestureViewController.swift */; };
@@ -45,6 +46,7 @@
 		6F49AAE4219E7ADA007EA231 /* MKDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKDefine.swift; sourceTree = "<group>"; };
 		6F49AAE6219EA4E5007EA231 /* MKCaptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCaptionLabel.swift; sourceTree = "<group>"; };
 		6F49AAEA219EA83C007EA231 /* ViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtention.swift; sourceTree = "<group>"; };
+		6F49AAEC219EBBAD007EA231 /* MKCoverCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoverCollectionCell.swift; sourceTree = "<group>"; };
 		6F7B0DF7219A730800CA2BD2 /* ColorsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCollectionCell.swift; sourceTree = "<group>"; };
 		6F7B0DF9219AB46700CA2BD2 /* AttributeStringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeStringExtention.swift; sourceTree = "<group>"; };
 		6F7B0DFB219ACC1100CA2BD2 /* GestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				6F001C54219BFA8B0099602A /* MKFilterMaskView.swift */,
 				6F001C5A219D9D710099602A /* MKVideoCoverSlider.swift */,
 				6F49AAE6219EA4E5007EA231 /* MKCaptionLabel.swift */,
+				6F49AAEC219EBBAD007EA231 /* MKCoverCollectionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				6FC68C5221997E010073F3D2 /* MKVideoEditViewController.swift in Sources */,
 				6F001C5B219D9D710099602A /* MKVideoCoverSlider.swift in Sources */,
 				6F7B0E05219BD68400CA2BD2 /* FilterImageView.swift in Sources */,
+				6F49AAED219EBBAD007EA231 /* MKCoverCollectionCell.swift in Sources */,
 				6F7B0DF8219A730800CA2BD2 /* ColorsCollectionCell.swift in Sources */,
 				6F001C57219C52620099602A /* MKVideoCoverViewController.swift in Sources */,
 				6FC68C4E219971AD0073F3D2 /* TextColorInputView.swift in Sources */,

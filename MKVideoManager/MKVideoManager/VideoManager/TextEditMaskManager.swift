@@ -160,12 +160,12 @@ class TextEditMaskManager: NSObject {
             make.top.equalTo(self.headerView.snp.bottom)
             make.height.equalTo(height)
         }
-        self.editControlView.backgroundColor = UIColor.purple
+//        self.editControlView.backgroundColor = UIColor.purple
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(hideMaskView))
         self.editControlView.addGestureRecognizer(tap)
         
         self.editTextView = EditTextView()
-        self.editTextView.backgroundColor = UIColor.orange
+//        self.editTextView.backgroundColor = UIColor.orange
         self.editTextView.delegate = self
         //textView关闭自动纠错提示
         self.editTextView.autocorrectionType = .no

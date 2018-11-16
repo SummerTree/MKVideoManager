@@ -35,6 +35,11 @@ class MKVideoEditViewController: UIViewController {
         self.addKeyboardObserve()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        if self.player?.currentItem
+    }
+    
     func setupPlayer() {
         let opts: [String: Any] = [AVURLAssetPreferPreciseDurationAndTimingKey: NSNumber.init(booleanLiteral: false)]
         let videoPath = Bundle.main.path(forResource: "220", ofType: "mp4")
@@ -152,7 +157,8 @@ class MKVideoEditViewController: UIViewController {
     }
     
     @objc func chooseCoverAction() {
-        
+        let chooseCoverVC = MKVideoCoverViewController()
+        self.navigationController?.pushViewController(chooseCoverVC, animated: true)
     }
     
     @objc func downAction() {
