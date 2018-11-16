@@ -44,8 +44,6 @@ class MKVideoEditViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        self.maskViewManager.delegate = nil
-        self.maskViewManager = nil
     }
 }
 
@@ -180,7 +178,6 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
             filterView.filterModel?.scale = lastScaleFactor
             filterView.filterModel?.transform = filterView.transform
         }
-       
     }
     
     func rotationAction(_ gesture: UIRotationGestureRecognizer) {
