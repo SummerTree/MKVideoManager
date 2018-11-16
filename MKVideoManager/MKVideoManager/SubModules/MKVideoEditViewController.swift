@@ -8,8 +8,17 @@
 
 import Foundation
 import UIKit
+import AVKit
+
 class MKVideoEditViewController: UIViewController {
+    var backButton: UIButton!
     var textEditButton: UIButton!
+    var coverButton: UIButton!
+    var downButton: UIButton!
+    var postButton: UIButton!
+    var playView: UIView!
+    var player: AVPlayer?
+    
     var maskViewManager: TextEditMaskManager!
     var deltaY: CGFloat = 0
     var maskViews: [UIView]?
@@ -17,37 +26,159 @@ class MKVideoEditViewController: UIViewController {
     var originCenter: CGPoint!
     var netRotation : CGFloat = 1;//旋转
     var lastScaleFactor : CGFloat! = 1  //放大、缩小
+    
     override func viewDidLoad() {
         
-        self.view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+        self.view.backgroundColor = UIColor.white
+        
         self.setSubViews()
         self.addKeyboardObserve()
     }
     
-    func setSubViews() {
-        if self.textEditButton == nil {
-            self.textEditButton = UIButton.init(frame: CGRect.init(x: 40, y: 200, width: UIScreen.main.bounds.width - 80, height: 60))
-            self.view.addSubview(self.textEditButton)
-            self.textEditButton.setTitle("Aa", for: .normal)
-            self.textEditButton.setTitleColor(UIColor.blue, for: .normal)
-            self.textEditButton.addTarget(self, action: #selector(showMask), for: .touchUpInside)
-        }
+    func setupPlayer() {
+        let opts: [String: Any] = [AVURLAssetPreferPreciseDurationAndTimingKey: NSNumber.init(booleanLiteral: false)]
+        let videoPath = Bundle.main.path(forResource: "220", ofType: "mp4")
+        let videoUrl = URL(fileURLWithPath: videoPath!)
+        let asset = AVURLAsset.init(url: videoUrl, options: opts)
+        let playerItem = AVPlayerItem.init(asset: asset)
+        self.player = AVPlayer.init(playerItem: playerItem)
+        let playerLayer = AVPlayerLayer.init(player: self.player)
+        playerLayer.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        playerLayer.videoGravity = AVLayerVideoGravityResizeAspect
+        
+        self.playView.layer.addSublayer(playerLayer)
+        self.addPlayerObserve()
+        self.player?.play()
     }
     
-    @objc func showMask() {
+    func setSubViews() {
+        playView = UIView.init(frame: MKDefine.screenBounds)
+        playView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+        self.view.addSubview(playView)
+        self.view.layer.masksToBounds = true
+        self.setupPlayer()
+        if self.backButton == nil {
+            self.backButton = UIButton.init()
+            self.backButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
+            self.backButton.setImage(UIImage.init(named: "back"), for: .normal)
+            self.backButton.addTarget(self, action: #selector(backNav), for: .touchUpInside)
+            self.view.addSubview(self.backButton)
+            self.backButton.snp.makeConstraints { (make) in
+                make.left.equalToSuperview().offset(4)
+                make.top.equalToSuperview().offset(MKDefine.statusBarHeight)
+                make.size.equalTo(CGSize.init(width: 60, height: 44))
+            }
+        }
+        
+        if self.textEditButton == nil {
+            self.textEditButton = UIButton.init()
+            self.textEditButton.setImage(UIImage.init(named: "text"), for: .normal)
+            self.textEditButton.addTarget(self, action: #selector(textEditAction), for: .touchUpInside)
+            self.view.addSubview(self.textEditButton)
+            
+            self.textEditButton.snp.makeConstraints { (make) in
+                make.top.equalTo(self.backButton)
+                make.right.equalToSuperview().offset(-8)
+                make.size.equalTo(CGSize.init(width: 40, height: 40))
+            }
+        }
+        
+        if self.coverButton == nil {
+            self.coverButton = UIButton.init()
+            self.coverButton.setImage(UIImage.init(named: "cover"), for: .normal)
+            self.coverButton.addTarget(self, action: #selector(chooseCoverAction), for: .touchUpInside)
+            self.view.addSubview(self.coverButton)
+            
+            self.coverButton.snp.makeConstraints { (make) in
+                make.top.equalTo(self.textEditButton.snp.bottom).offset(14)
+                make.right.equalToSuperview().offset(-8)
+                make.size.equalTo(CGSize.init(width: 40, height: 40))
+            }
+        }
+        if self.downButton == nil {
+            self.downButton = UIButton.init()
+            self.downButton.setImage(UIImage.init(named: "save"), for: .normal)
+            self.downButton.addTarget(self, action: #selector(downAction), for: .touchUpInside)
+            self.view.addSubview(self.downButton)
+            self.downButton.snp.makeConstraints { (make) in
+                make.left.equalToSuperview().offset(8)
+                make.bottom.equalToSuperview().offset(-20)
+                make.size.equalTo(CGSize.init(width: 40, height: 44))
+            }
+        }
+        
+        if self.postButton == nil {
+            self.postButton = UIButton.init()
+            self.postButton.setTitle("Post to 🌴", for: .normal)
+            self.postButton.titleLabel?.font = UIFont.init(name: "SFUIText-Medium", size: 17)
+            self.postButton.setTitleColor(UIColor.black, for: .normal)
+            self.postButton.backgroundColor = UIColor.init(red: 1, green: 252/255, blue: 1/255, alpha: 1)
+            self.postButton.layer.cornerRadius = 20
+            self.postButton.addTarget(self, action: #selector(postAction), for: .touchUpInside)
+            self.view.addSubview(self.postButton)
+            
+            self.postButton.snp.makeConstraints { (make) in
+                make.bottom.equalTo(self.downButton.snp.bottom)
+                make.right.equalToSuperview().offset(-14)
+                make.size.equalTo(CGSize.init(width: 117, height: 40))
+            }
+        }
+    }
+    //MARK:
+    func showMask() {
         if self.maskViewManager == nil {
             self.maskViewManager = TextEditMaskManager.shared
             self.maskViewManager.delegate = self
         }
+        self.toggleAcionViewHide(true)
         self.maskViewManager.showMaskViewWithView(nil)
     }
     
+    func toggleAcionViewHide(_ isHide:Bool) {
+        self.backButton.isHidden = isHide
+        self.textEditButton.isHidden = isHide
+        self.coverButton.isHidden = isHide
+        self.downButton.isHidden = isHide
+        self.postButton.isHidden = isHide
+    }
+    
+    //MARK: Action
+    @objc func backNav() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func textEditAction() {
+        self.showMask()
+    }
+    
+    @objc func chooseCoverAction() {
+        
+    }
+    
+    @objc func downAction() {
+        
+    }
+    
+    @objc func postAction(){
+        
+    }
+    
+    //MARK: deinit
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 }
 
 extension MKVideoEditViewController{
+    
+    func addPlayerObserve() {
+        NotificationCenter.default.addObserver(self, selector: #selector(playbackFInished), name: .AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
+    }
+    
+    func playbackFInished(){
+        self.player?.seek(to: CMTime.init(value: 0, timescale: 1))
+        self.player?.play()
+    }
     
     func addKeyboardObserve(){
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(note:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -95,23 +226,43 @@ extension MKVideoEditViewController{
 }
 
 extension MKVideoEditViewController: TextEditMaskManagerDelegate{
+    func maskViewDidHide() {
+        self.toggleAcionViewHide(false)
+    }
+    
     func maskManagerDidOutputView(_ outputView: UIView) {
         let view = outputView as! EditTextView
         view.isEditable = false
         view.isSelectable = false
-        self.view.addSubview(view)
-        self.addGestureToView(view)
         
-        view.snp.makeConstraints { (make) in
-            make.center.equalTo(view.filterModel!.center!)
-            make.size.equalTo(view.filterModel!.size!)
+//        self.view.addSubview(view)
+//        self.addGestureToView(view)
+//        view.snp.makeConstraints { (make) in
+//            make.center.equalTo(view.filterModel!.center!)
+//            make.size.equalTo(view.filterModel!.size!)
+//        }
+//        view.layoutIfNeeded()
+//        if view.filterModel?.transform != nil {
+//            view.transform = (view.filterModel?.transform!)!
+//        }
+        
+        
+        let label = MKCaptionLabel()
+        label.filterModel = view.filterModel
+        label.attributedText = view.attributedText
+        label.numberOfLines = 0
+        label.isUserInteractionEnabled = true
+        self.view.addSubview(label)
+        self.addGestureToView(label)
+        label.snp.makeConstraints { (make) in
+            make.center.equalTo(label.filterModel!.center!)
+            make.size.equalTo(label.filterModel!.size!)
         }
-        view.layoutIfNeeded()
-        if view.filterModel?.transform != nil {
-            view.transform = (view.filterModel?.transform!)!
+        label.layoutIfNeeded()
+        if label.filterModel?.transform != nil {
+            label.transform = (label.filterModel?.transform!)!
         }
-//        view.transform = CGAffineTransform(rotationAngle: view.filterModel!.rotation)
-//        view.transform = CGAffineTransform(scaleX: view.filterModel!.scale, y: view.filterModel!.scale)
+        
     }
 }
 
@@ -132,7 +283,8 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
     //MARK: Gesture Action
     func tap(_ gesture: UITapGestureRecognizer) {
         
-        let filterView = gesture.view as! EditTextView
+//        let filterView = gesture.view as! EditTextView
+        let filterView = gesture.view as! MKCaptionLabel
         filterView.superview?.bringSubview(toFront: filterView)
         self.maskViewManager.showMaskViewWithView(filterView)
         filterView.removeFromSuperview()
@@ -141,7 +293,8 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
     func pan(_ gesture: UIPanGestureRecognizer) {
         let translation  = gesture.translation(in: self.view)
         //设置矩形的位置
-        let filterView = gesture.view as! EditTextView
+//        let filterView = gesture.view as! EditTextView
+        let filterView = gesture.view as! MKCaptionLabel
         filterView.superview?.bringSubview(toFront: filterView)
         if gesture.state == UIPanGestureRecognizer.State.began {
             originCenter = filterView.filterModel?.center
@@ -161,8 +314,8 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
         print("gesture.scale: \(gesture.scale)")
         let factor = gesture.scale
         
-        let filterView = gesture.view as! EditTextView
-        
+//        let filterView = gesture.view as! EditTextView
+        let filterView = gesture.view as! MKCaptionLabel
         if gesture.state == UIGestureRecognizer.State.began {
             lastScaleFactor = 1
         }
@@ -186,7 +339,8 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
         //浮点类型，得到sender的旋转度数
         print("rotation: \(gesture.rotation)")
         let rotation : CGFloat = gesture.rotation
-        let filterView = gesture.view as! EditTextView
+//        let filterView = gesture.view as! EditTextView
+        let filterView = gesture.view as! MKCaptionLabel
         
         if gesture.state == UIPanGestureRecognizer.State.began {
             netRotation = 0

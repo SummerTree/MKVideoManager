@@ -10,5 +10,5 @@ import Foundation
 import UIKit
 
 class EditTextView: UITextView {
-    var filterModel: FilterModel?
+
 }

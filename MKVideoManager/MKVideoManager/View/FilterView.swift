@@ -10,5 +10,5 @@ import Foundation
 import UIKit
 
 class FilterView: UIView{
-    var filterModel: FilterModel?
+    
 }

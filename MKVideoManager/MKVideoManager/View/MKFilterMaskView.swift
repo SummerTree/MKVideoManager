@@ -14,8 +14,6 @@ protocol MKFilterMaskViewDelegate {
 }
 
 class MKFilterMaskView: UIView {
-    //data
-    var filterModel: FilterModel!
     
     //view
     var headerView: UIView!

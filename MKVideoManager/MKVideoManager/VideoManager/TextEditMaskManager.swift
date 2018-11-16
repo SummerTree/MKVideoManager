@@ -12,10 +12,15 @@ import SnapKit
 
 
 protocol TextEditMaskManagerDelegate: NSObjectProtocol {
+    func maskViewDidHide()
+    //
     func maskManagerDidOutputView(_ outputView: UIView)
 }
 
 class TextEditMaskManager: NSObject {
+    
+    static let navigationBarHeight:CGFloat = 44
+    static let colorInputHeight:CGFloat = 44
     //maskView
     var maskView: UIView!
     //headerView
@@ -31,6 +36,8 @@ class TextEditMaskManager: NSObject {
     
     var isNewFilter: Bool = false
     var colorType: ColorType = .Text
+    
+    var keyBoardHeight:CGFloat?
     
     weak var delegate : TextEditMaskManagerDelegate?
     
@@ -55,7 +62,8 @@ class TextEditMaskManager: NSObject {
         self.editTextView.becomeFirstResponder()
         //根据inputModel设置当前的编辑状态
         if inputView != nil {
-            let view = inputView as! EditTextView
+//            let view = inputView as! EditTextView
+            let view = inputView as! MKCaptionLabel
             self.editTextView.attributedText = view.filterModel?.arrtibuteText
             self.filterModel = view.filterModel
             self.isNewFilter = false
@@ -101,6 +109,7 @@ class TextEditMaskManager: NSObject {
             self.delegate?.maskManagerDidOutputView(copyView)
         }
         self.editTextView.resignFirstResponder()
+        self.delegate?.maskViewDidHide()
     }
     
     private func setSubViews() {
@@ -113,7 +122,7 @@ class TextEditMaskManager: NSObject {
         self.maskView.addSubview(self.headerView)
         self.headerView.snp.makeConstraints { (make) in
             make.left.top.right.equalToSuperview()
-            make.height.equalTo(88)
+            make.height.equalTo(MKDefine.statusBarHeight + 44)
         }
         
         self.colorTypeButton = UIButton()
@@ -123,10 +132,9 @@ class TextEditMaskManager: NSObject {
         self.headerView.addSubview(self.colorTypeButton)
         self.colorTypeButton.addTarget(self, action: #selector(colorTypeAction), for: .touchUpInside)
         self.colorTypeButton.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(44)
-            make.bottom.equalToSuperview()
-            make.width.equalTo(60)
+            make.left.equalToSuperview().offset(14)
+            make.top.equalToSuperview().offset(MKDefine.statusBarHeight)
+            make.size.equalTo(CGSize.init(width: 44, height: 40))
         }
         self.colorTypeButton.isHidden = true
         
@@ -137,25 +145,27 @@ class TextEditMaskManager: NSObject {
         self.headerView.addSubview(self.doneButton)
         self.doneButton.addTarget(self, action: #selector(doneAction), for: .touchUpInside)
         self.doneButton.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(44)
-            make.right.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview()
-            make.width.equalTo(60)
+            make.top.equalToSuperview().offset(MKDefine.statusBarHeight)
+            make.right.equalToSuperview().offset(-14)
+            make.size.equalTo(CGSize.init(width: 60, height: 40))
         }
         
         //editTextView
         self.editControlView = UIView()
         self.maskView.addSubview(self.editControlView)
-        let height = UIScreen.main.bounds.height - 88 - 346 - 44
+//        let height = UIScreen.main.bounds.height - 88 - 346 - 44
+        let height = UIScreen.main.bounds.height - MKDefine.statusBarHeight - TextEditMaskManager.navigationBarHeight - 350 - TextEditMaskManager.colorInputHeight
         self.editControlView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.headerView.snp.bottom)
             make.height.equalTo(height)
         }
+        self.editControlView.backgroundColor = UIColor.purple
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(hideMaskView))
         self.editControlView.addGestureRecognizer(tap)
         
         self.editTextView = EditTextView()
+        self.editTextView.backgroundColor = UIColor.orange
         self.editTextView.delegate = self
         //textView关闭自动纠错提示
         self.editTextView.autocorrectionType = .no
@@ -203,6 +213,10 @@ class TextEditMaskManager: NSObject {
         self.colorsInputView.snp.updateConstraints { (make) in
             make.bottom.equalToSuperview().offset(-keyBoardHeight)
         }
+        let height = UIScreen.main.bounds.height - MKDefine.statusBarHeight - TextEditMaskManager.navigationBarHeight - keyBoardHeight - TextEditMaskManager.colorInputHeight
+        self.editControlView.snp.updateConstraints { (make) in
+            make.height.equalTo(height)
+        }
     }
     
     //MARK: - Action
@@ -228,7 +242,7 @@ extension TextEditMaskManager: UITextViewDelegate{
         }
         
         let currentString = NSMutableAttributedString.getAttributeString(textView.text, self.filterModel.textColor!, UIColor.clear)
-        let size = currentString.boundingRect(with: CGSize.init(width: 375 - 40, height: 400), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), context: nil)
+        let size = currentString.boundingRect(with: CGSize.init(width: MKDefine.screenWidth - 40, height: 400), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), context: nil)
         print("size: \(String(describing: size))")
         textView.attributedText = currentString
         
