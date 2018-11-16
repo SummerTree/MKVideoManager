@@ -22,5 +22,4 @@ extension UIView{
             return objc_getAssociatedObject(self, &AssociatedKeys.filterModelKey) as? FilterModel
         }
     }
-    
 }

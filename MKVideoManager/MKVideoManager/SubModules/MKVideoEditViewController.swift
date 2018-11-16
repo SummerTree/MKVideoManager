@@ -16,6 +16,7 @@ class MKVideoEditViewController: UIViewController {
     var coverButton: UIButton!
     var downButton: UIButton!
     var postButton: UIButton!
+    var trashButton: UIButton!
     var playView: UIView!
     var player: AVPlayer?
     
@@ -128,6 +129,18 @@ class MKVideoEditViewController: UIViewController {
                 make.size.equalTo(CGSize.init(width: 117, height: 40))
             }
         }
+        
+        if self.trashButton == nil {
+            self.trashButton = UIButton.init()
+            self.trashButton.setImage(UIImage.init(named: "trash"), for: .normal)
+            self.trashButton.isHidden = true
+            self.view.addSubview(self.trashButton)
+            self.trashButton.snp.makeConstraints { (make) in
+                make.centerX.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-20)
+                make.size.equalTo(CGSize.init(width: 40, height: 40))
+            }
+        }
     }
     //MARK:
     func showMask() {
@@ -145,6 +158,11 @@ class MKVideoEditViewController: UIViewController {
         self.coverButton.isHidden = isHide
         self.downButton.isHidden = isHide
         self.postButton.isHidden = isHide
+    }
+    
+    func togglePanActionViewHide(_ subHide: Bool) {
+        self.toggleAcionViewHide(subHide)
+        self.trashButton.isHidden = !subHide
     }
     
     //MARK: Action
@@ -258,7 +276,7 @@ extension MKVideoEditViewController: TextEditMaskManagerDelegate{
         label.attributedText = view.attributedText
         label.numberOfLines = 0
         label.isUserInteractionEnabled = true
-        self.view.addSubview(label)
+        self.playView.addSubview(label)
         self.addGestureToView(label)
         label.snp.makeConstraints { (make) in
             make.center.equalTo(label.filterModel!.center!)
@@ -304,12 +322,14 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
         filterView.superview?.bringSubview(toFront: filterView)
         if gesture.state == UIPanGestureRecognizer.State.began {
             originCenter = filterView.filterModel?.center
+            self.togglePanActionViewHide(true)
         }
         let center = CGPoint(x: originCenter.x + translation.x, y: originCenter.y + translation.y)
         
         if gesture.state == UIPanGestureRecognizer.State.ended {
             originCenter = center
             filterView.filterModel?.center = center
+            self.togglePanActionViewHide(false)
         }
         filterView.snp.updateConstraints { (make) in
             make.center.equalTo(center)
