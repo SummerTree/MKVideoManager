@@ -97,13 +97,16 @@ class TextEditMaskManager: NSObject {
             copyFilter.arrtibuteText = self.editTextView.attributedText
             copyFilter.size = viewSize
             copyFilter.textColor = self.filterModel.textColor
+            
             if self.isNewFilter {
                 copyFilter.center = viewCenter
+                copyFilter.rect = self.editTextView.frame
             }else{
                 copyFilter.center = self.filterModel.center!
                 copyFilter.rotation = self.filterModel.rotation
                 copyFilter.scale = self.filterModel.scale
                 copyFilter.transform = self.filterModel.transform
+                copyFilter.rect = self.filterModel.rect 
             }
             copyView.filterModel = copyFilter
             self.delegate?.maskManagerDidOutputView(copyView)
@@ -153,7 +156,6 @@ class TextEditMaskManager: NSObject {
         //editTextView
         self.editControlView = UIView()
         self.maskView.addSubview(self.editControlView)
-//        let height = UIScreen.main.bounds.height - 88 - 346 - 44
         let height = UIScreen.main.bounds.height - MKDefine.statusBarHeight - TextEditMaskManager.navigationBarHeight - 350 - TextEditMaskManager.colorInputHeight
         self.editControlView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()

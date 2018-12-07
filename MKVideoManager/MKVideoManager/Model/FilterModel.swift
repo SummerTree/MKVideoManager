@@ -35,5 +35,5 @@ class FilterModel: NSObject{
     
     var image: UIImage?
     
-    var filterView: UIView?
+//    var filterView: UIView?
 }

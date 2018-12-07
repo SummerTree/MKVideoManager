@@ -12,10 +12,26 @@
 		6F001C57219C52620099602A /* MKVideoCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C56219C52620099602A /* MKVideoCoverViewController.swift */; };
 		6F001C59219D566C0099602A /* ColorToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C58219D566C0099602A /* ColorToImage.swift */; };
 		6F001C5B219D9D710099602A /* MKVideoCoverSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C5A219D9D710099602A /* MKVideoCoverSlider.swift */; };
+		6F0A9E2521AE64560069C587 /* TLStoryTextLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A9E2321AE64560069C587 /* TLStoryTextLayoutManager.m */; };
+		6F0A9E2821AE649A0069C587 /* MKStoryTextLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A9E2721AE649A0069C587 /* MKStoryTextLayoutManager.m */; };
 		6F49AAE5219E7ADA007EA231 /* MKDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAE4219E7ADA007EA231 /* MKDefine.swift */; };
 		6F49AAE7219EA4E5007EA231 /* MKCaptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAE6219EA4E5007EA231 /* MKCaptionLabel.swift */; };
 		6F49AAEB219EA83C007EA231 /* ViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEA219EA83C007EA231 /* ViewExtention.swift */; };
 		6F49AAED219EBBAD007EA231 /* MKCoverCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEC219EBBAD007EA231 /* MKCoverCollectionCell.swift */; };
+		6F49AAEF219EEF76007EA231 /* MKVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEE219EEF76007EA231 /* MKVideoManager.swift */; };
+		6F49AAF221A268DB007EA231 /* MKVideoExportCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF121A268DB007EA231 /* MKVideoExportCommand.swift */; };
+		6F49AAF421A26904007EA231 /* MKAddWatermarkCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF321A26904007EA231 /* MKAddWatermarkCommand.swift */; };
+		6F49AAF621A26971007EA231 /* MKVideoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF521A26971007EA231 /* MKVideoCommand.swift */; };
+		6F49AAF821A2E823007EA231 /* MKChooseTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF721A2E823007EA231 /* MKChooseTreeViewController.swift */; };
+		6F49AB3821A56B94007EA231 /* GPUImageBeautifyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB2F21A56B93007EA231 /* GPUImageBeautifyFilter.m */; };
+		6F49AB3921A56B94007EA231 /* TLGPUImageAlphaBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3021A56B93007EA231 /* TLGPUImageAlphaBlendFilter.m */; };
+		6F49AB3A21A56B94007EA231 /* GPUImageCustomLookupFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3121A56B93007EA231 /* GPUImageCustomLookupFilter.swift */; };
+		6F49AB3B21A56B94007EA231 /* TLGPUImageMovieFillFiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3221A56B93007EA231 /* TLGPUImageMovieFillFiter.m */; };
+		6F49AB3C21A56B94007EA231 /* MKGPUImageMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3621A56B94007EA231 /* MKGPUImageMovie.m */; };
+		6F49AB4121A56BA3007EA231 /* MKExportStoryConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3E21A56BA3007EA231 /* MKExportStoryConfiguration.swift */; };
+		6F49AB4221A56BA3007EA231 /* MKStoryOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3F21A56BA3007EA231 /* MKStoryOutput.swift */; };
+		6F49AB4621A57882007EA231 /* MKProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB4521A57882007EA231 /* MKProgressHUD.swift */; };
+		6F49AB4D21A57B48007EA231 /* UIImage+ExportStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB4921A57B47007EA231 /* UIImage+ExportStory.swift */; };
 		6F7B0DF8219A730800CA2BD2 /* ColorsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0DF7219A730800CA2BD2 /* ColorsCollectionCell.swift */; };
 		6F7B0DFA219AB46700CA2BD2 /* AttributeStringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0DF9219AB46700CA2BD2 /* AttributeStringExtention.swift */; };
 		6F7B0DFC219ACC1100CA2BD2 /* GestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0DFB219ACC1100CA2BD2 /* GestureViewController.swift */; };
@@ -43,10 +59,33 @@
 		6F001C56219C52620099602A /* MKVideoCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoCoverViewController.swift; sourceTree = "<group>"; };
 		6F001C58219D566C0099602A /* ColorToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToImage.swift; sourceTree = "<group>"; };
 		6F001C5A219D9D710099602A /* MKVideoCoverSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoCoverSlider.swift; sourceTree = "<group>"; };
+		6F0A9E2321AE64560069C587 /* TLStoryTextLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLStoryTextLayoutManager.m; sourceTree = "<group>"; };
+		6F0A9E2421AE64560069C587 /* TLStoryTextLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLStoryTextLayoutManager.h; sourceTree = "<group>"; };
+		6F0A9E2621AE649A0069C587 /* MKStoryTextLayoutManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKStoryTextLayoutManager.h; sourceTree = "<group>"; };
+		6F0A9E2721AE649A0069C587 /* MKStoryTextLayoutManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MKStoryTextLayoutManager.m; sourceTree = "<group>"; };
 		6F49AAE4219E7ADA007EA231 /* MKDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKDefine.swift; sourceTree = "<group>"; };
 		6F49AAE6219EA4E5007EA231 /* MKCaptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCaptionLabel.swift; sourceTree = "<group>"; };
 		6F49AAEA219EA83C007EA231 /* ViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtention.swift; sourceTree = "<group>"; };
 		6F49AAEC219EBBAD007EA231 /* MKCoverCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoverCollectionCell.swift; sourceTree = "<group>"; };
+		6F49AAEE219EEF76007EA231 /* MKVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoManager.swift; sourceTree = "<group>"; };
+		6F49AAF121A268DB007EA231 /* MKVideoExportCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoExportCommand.swift; sourceTree = "<group>"; };
+		6F49AAF321A26904007EA231 /* MKAddWatermarkCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKAddWatermarkCommand.swift; sourceTree = "<group>"; };
+		6F49AAF521A26971007EA231 /* MKVideoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoCommand.swift; sourceTree = "<group>"; };
+		6F49AAF721A2E823007EA231 /* MKChooseTreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKChooseTreeViewController.swift; sourceTree = "<group>"; };
+		6F49AB2E21A56B93007EA231 /* TLGPUImageMovieFillFiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGPUImageMovieFillFiter.h; sourceTree = "<group>"; };
+		6F49AB2F21A56B93007EA231 /* GPUImageBeautifyFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageBeautifyFilter.m; sourceTree = "<group>"; };
+		6F49AB3021A56B93007EA231 /* TLGPUImageAlphaBlendFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLGPUImageAlphaBlendFilter.m; sourceTree = "<group>"; };
+		6F49AB3121A56B93007EA231 /* GPUImageCustomLookupFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPUImageCustomLookupFilter.swift; sourceTree = "<group>"; };
+		6F49AB3221A56B93007EA231 /* TLGPUImageMovieFillFiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLGPUImageMovieFillFiter.m; sourceTree = "<group>"; };
+		6F49AB3321A56B93007EA231 /* TLGPUImageAlphaBlendFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGPUImageAlphaBlendFilter.h; sourceTree = "<group>"; };
+		6F49AB3421A56B93007EA231 /* GPUImageBeautifyFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUImageBeautifyFilter.h; sourceTree = "<group>"; };
+		6F49AB3621A56B94007EA231 /* MKGPUImageMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGPUImageMovie.m; sourceTree = "<group>"; };
+		6F49AB3721A56B94007EA231 /* MKGPUImageMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGPUImageMovie.h; sourceTree = "<group>"; };
+		6F49AB3E21A56BA3007EA231 /* MKExportStoryConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKExportStoryConfiguration.swift; sourceTree = "<group>"; };
+		6F49AB3F21A56BA3007EA231 /* MKStoryOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKStoryOutput.swift; sourceTree = "<group>"; };
+		6F49AB4521A57882007EA231 /* MKProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKProgressHUD.swift; sourceTree = "<group>"; };
+		6F49AB4921A57B47007EA231 /* UIImage+ExportStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ExportStory.swift"; sourceTree = "<group>"; };
+		6F49AB5221A57EA8007EA231 /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
 		6F7B0DF7219A730800CA2BD2 /* ColorsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCollectionCell.swift; sourceTree = "<group>"; };
 		6F7B0DF9219AB46700CA2BD2 /* AttributeStringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeStringExtention.swift; sourceTree = "<group>"; };
 		6F7B0DFB219ACC1100CA2BD2 /* GestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +121,88 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F0A9E2221AE64560069C587 /* TextLayoutManager */ = {
+			isa = PBXGroup;
+			children = (
+				6F0A9E2321AE64560069C587 /* TLStoryTextLayoutManager.m */,
+				6F0A9E2421AE64560069C587 /* TLStoryTextLayoutManager.h */,
+				6F0A9E2621AE649A0069C587 /* MKStoryTextLayoutManager.h */,
+				6F0A9E2721AE649A0069C587 /* MKStoryTextLayoutManager.m */,
+			);
+			path = TextLayoutManager;
+			sourceTree = "<group>";
+		};
+		6F49AAF021A268C2007EA231 /* VideoEdit */ = {
+			isa = PBXGroup;
+			children = (
+				6F49AAF121A268DB007EA231 /* MKVideoExportCommand.swift */,
+				6F49AAF321A26904007EA231 /* MKAddWatermarkCommand.swift */,
+				6F49AAF521A26971007EA231 /* MKVideoCommand.swift */,
+			);
+			path = VideoEdit;
+			sourceTree = "<group>";
+		};
+		6F49AB2C21A56B6E007EA231 /* outputTool */ = {
+			isa = PBXGroup;
+			children = (
+				6F0A9E2221AE64560069C587 /* TextLayoutManager */,
+				6F49AB4721A57B47007EA231 /* Extension */,
+				6F49AB4421A57882007EA231 /* JLHUD */,
+				6F49AB3D21A56BA3007EA231 /* Models */,
+				6F49AB3521A56B94007EA231 /* GPUImageExtension */,
+				6F49AB2D21A56B93007EA231 /* GPUImageFilter */,
+			);
+			path = outputTool;
+			sourceTree = "<group>";
+		};
+		6F49AB2D21A56B93007EA231 /* GPUImageFilter */ = {
+			isa = PBXGroup;
+			children = (
+				6F49AB2E21A56B93007EA231 /* TLGPUImageMovieFillFiter.h */,
+				6F49AB2F21A56B93007EA231 /* GPUImageBeautifyFilter.m */,
+				6F49AB3021A56B93007EA231 /* TLGPUImageAlphaBlendFilter.m */,
+				6F49AB3121A56B93007EA231 /* GPUImageCustomLookupFilter.swift */,
+				6F49AB3221A56B93007EA231 /* TLGPUImageMovieFillFiter.m */,
+				6F49AB3321A56B93007EA231 /* TLGPUImageAlphaBlendFilter.h */,
+				6F49AB3421A56B93007EA231 /* GPUImageBeautifyFilter.h */,
+			);
+			path = GPUImageFilter;
+			sourceTree = "<group>";
+		};
+		6F49AB3521A56B94007EA231 /* GPUImageExtension */ = {
+			isa = PBXGroup;
+			children = (
+				6F49AB3721A56B94007EA231 /* MKGPUImageMovie.h */,
+				6F49AB3621A56B94007EA231 /* MKGPUImageMovie.m */,
+			);
+			path = GPUImageExtension;
+			sourceTree = "<group>";
+		};
+		6F49AB3D21A56BA3007EA231 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6F49AB3E21A56BA3007EA231 /* MKExportStoryConfiguration.swift */,
+				6F49AB3F21A56BA3007EA231 /* MKStoryOutput.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6F49AB4421A57882007EA231 /* JLHUD */ = {
+			isa = PBXGroup;
+			children = (
+				6F49AB4521A57882007EA231 /* MKProgressHUD.swift */,
+			);
+			path = JLHUD;
+			sourceTree = "<group>";
+		};
+		6F49AB4721A57B47007EA231 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6F49AB4921A57B47007EA231 /* UIImage+ExportStory.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		6F7B0DFF219BBCFE00CA2BD2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +217,8 @@
 				6FC68C4F2199751F0073F3D2 /* TextEditMaskManager.swift */,
 				6F7B0DFD219AE86200CA2BD2 /* FilterProtocol.swift */,
 				6F49AAE4219E7ADA007EA231 /* MKDefine.swift */,
+				6F49AAEE219EEF76007EA231 /* MKVideoManager.swift */,
+				6F49AAF021A268C2007EA231 /* VideoEdit */,
 			);
 			path = VideoManager;
 			sourceTree = "<group>";
@@ -107,6 +230,7 @@
 				6FC68C5121997E010073F3D2 /* MKVideoEditViewController.swift */,
 				6F7B0DFB219ACC1100CA2BD2 /* GestureViewController.swift */,
 				6F001C56219C52620099602A /* MKVideoCoverViewController.swift */,
+				6F49AAF721A2E823007EA231 /* MKChooseTreeViewController.swift */,
 			);
 			path = SubModules;
 			sourceTree = "<group>";
@@ -167,6 +291,7 @@
 		6FDE325921991B74008CB0E9 /* MKVideoManager */ = {
 			isa = PBXGroup;
 			children = (
+				6F49AB2C21A56B6E007EA231 /* outputTool */,
 				6F7B0DFF219BBCFE00CA2BD2 /* Model */,
 				6FC68C4C219971990073F3D2 /* View */,
 				6FC68C4921996F1D0073F3D2 /* extension */,
@@ -175,6 +300,7 @@
 				6FC68C40219955170073F3D2 /* VideoManager */,
 				6FDE325A21991B74008CB0E9 /* AppDelegate.swift */,
 				6FDE325C21991B75008CB0E9 /* ViewController.swift */,
+				6F49AB5221A57EA8007EA231 /* Bridge.h */,
 				6FDE326121991B77008CB0E9 /* Assets.xcassets */,
 				6FDE326321991B77008CB0E9 /* LaunchScreen.storyboard */,
 				6FDE326621991B77008CB0E9 /* Info.plist */,
@@ -299,14 +425,18 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MKVideoManager/Pods-MKVideoManager-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,29 +451,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F49AB4121A56BA3007EA231 /* MKExportStoryConfiguration.swift in Sources */,
 				6F7B0E03219BD5D500CA2BD2 /* FilterView.swift in Sources */,
+				6F49AAEF219EEF76007EA231 /* MKVideoManager.swift in Sources */,
 				6F7B0E01219BBD1700CA2BD2 /* FilterModel.swift in Sources */,
 				6F49AAE7219EA4E5007EA231 /* MKCaptionLabel.swift in Sources */,
+				6F49AB3821A56B94007EA231 /* GPUImageBeautifyFilter.m in Sources */,
+				6F49AB3B21A56B94007EA231 /* TLGPUImageMovieFillFiter.m in Sources */,
 				6F7B0DFA219AB46700CA2BD2 /* AttributeStringExtention.swift in Sources */,
 				6F7B0DFC219ACC1100CA2BD2 /* GestureViewController.swift in Sources */,
+				6F49AAF821A2E823007EA231 /* MKChooseTreeViewController.swift in Sources */,
+				6F0A9E2521AE64560069C587 /* TLStoryTextLayoutManager.m in Sources */,
 				6F49AAE5219E7ADA007EA231 /* MKDefine.swift in Sources */,
+				6F49AB3A21A56B94007EA231 /* GPUImageCustomLookupFilter.swift in Sources */,
+				6F49AAF221A268DB007EA231 /* MKVideoExportCommand.swift in Sources */,
+				6F49AAF421A26904007EA231 /* MKAddWatermarkCommand.swift in Sources */,
+				6F49AB4D21A57B48007EA231 /* UIImage+ExportStory.swift in Sources */,
 				6FC68C482199618E0073F3D2 /* MKTextEdit.swift in Sources */,
 				6F49AAEB219EA83C007EA231 /* ViewExtention.swift in Sources */,
 				6F7B0DFE219AE86200CA2BD2 /* FilterProtocol.swift in Sources */,
+				6F49AAF621A26971007EA231 /* MKVideoCommand.swift in Sources */,
 				6F001C55219BFA8B0099602A /* MKFilterMaskView.swift in Sources */,
 				6FC68C502199751F0073F3D2 /* TextEditMaskManager.swift in Sources */,
+				6F49AB4621A57882007EA231 /* MKProgressHUD.swift in Sources */,
 				6FC68C4B21996F480073F3D2 /* MKViewToImageViewController.swift in Sources */,
 				6FC68C54219985FB0073F3D2 /* EditTextView.swift in Sources */,
 				6FDE325D21991B75008CB0E9 /* ViewController.swift in Sources */,
 				6FC68C5221997E010073F3D2 /* MKVideoEditViewController.swift in Sources */,
+				6F49AB3921A56B94007EA231 /* TLGPUImageAlphaBlendFilter.m in Sources */,
 				6F001C5B219D9D710099602A /* MKVideoCoverSlider.swift in Sources */,
 				6F7B0E05219BD68400CA2BD2 /* FilterImageView.swift in Sources */,
+				6F49AB4221A56BA3007EA231 /* MKStoryOutput.swift in Sources */,
 				6F49AAED219EBBAD007EA231 /* MKCoverCollectionCell.swift in Sources */,
 				6F7B0DF8219A730800CA2BD2 /* ColorsCollectionCell.swift in Sources */,
 				6F001C57219C52620099602A /* MKVideoCoverViewController.swift in Sources */,
+				6F49AB3C21A56B94007EA231 /* MKGPUImageMovie.m in Sources */,
 				6FC68C4E219971AD0073F3D2 /* TextColorInputView.swift in Sources */,
 				6F001C59219D566C0099602A /* ColorToImage.swift in Sources */,
 				6FDE325B21991B74008CB0E9 /* AppDelegate.swift in Sources */,
+				6F0A9E2821AE649A0069C587 /* MKStoryTextLayoutManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +629,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = Q3VZHMHCPE;
 				INFOPLIST_FILE = MKVideoManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -492,6 +639,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoxiang.demo.MKVideoManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/holla/Documents/Demo/MKVideoManager/MKVideoManager/MKVideoManager/Bridge.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -503,6 +651,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = Q3VZHMHCPE;
 				INFOPLIST_FILE = MKVideoManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -512,6 +661,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoxiang.demo.MKVideoManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/holla/Documents/Demo/MKVideoManager/MKVideoManager/MKVideoManager/Bridge.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

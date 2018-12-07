@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AVKit
+import Photos
 
 class MKVideoEditViewController: UIViewController {
     var backButton: UIButton!
@@ -17,8 +18,13 @@ class MKVideoEditViewController: UIViewController {
     var downButton: UIButton!
     var postButton: UIButton!
     var trashButton: UIButton!
+    
     var playView: UIView!
+    var playerLayer: AVPlayerLayer!
     var player: AVPlayer?
+    var captionView: UIView?
+    
+    var videoSize: CGSize?
     
     var maskViewManager: TextEditMaskManager!
     var deltaY: CGFloat = 0
@@ -46,9 +52,10 @@ class MKVideoEditViewController: UIViewController {
         let videoPath = Bundle.main.path(forResource: "220", ofType: "mp4")
         let videoUrl = URL(fileURLWithPath: videoPath!)
         let asset = AVURLAsset.init(url: videoUrl, options: opts)
+    
         let playerItem = AVPlayerItem.init(asset: asset)
         self.player = AVPlayer.init(playerItem: playerItem)
-        let playerLayer = AVPlayerLayer.init(player: self.player)
+        playerLayer = AVPlayerLayer.init(player: self.player)
         playerLayer.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         playerLayer.videoGravity = AVLayerVideoGravityResizeAspect
         
@@ -63,6 +70,12 @@ class MKVideoEditViewController: UIViewController {
         self.view.addSubview(playView)
         self.view.layer.masksToBounds = true
         self.setupPlayer()
+        
+        captionView = UIView.init(frame: MKDefine.screenBounds)
+        captionView?.backgroundColor = UIColor.clear
+        self.view.addSubview(captionView!)
+        
+        
         if self.backButton == nil {
             self.backButton = UIButton.init()
             self.backButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
@@ -184,7 +197,12 @@ class MKVideoEditViewController: UIViewController {
     }
     
     @objc func postAction(){
-        
+        let subViews = self.captionView?.subviews
+        self.addWatermarkViewWith(subViews![0])
+//        self.addWatermarkViewWith(self.captionView!)
+//        let treeVC = MKChooseTreeVIewController()
+//        treeVC.setContentImage((self.captionView?.asImage())!)
+//        self.navigationController?.pushViewController(treeVC, animated: true)
     }
     
     //MARK: deinit
@@ -195,6 +213,131 @@ class MKVideoEditViewController: UIViewController {
 
 extension MKVideoEditViewController{
     
+    // change To renderSize
+    func getRenderOriginX(_ originX: CGFloat) -> CGFloat{
+        return (videoSize?.width)! * originX / MKDefine.screenWidth
+    }
+    
+    func getRenderOriginY(_ originY: CGFloat) -> CGFloat {
+        return (videoSize?.height)! * originY / MKDefine.screenHeight
+    }
+    
+    func getRenderOriginPoint(_ originPoint: CGPoint) -> CGPoint {
+        return CGPoint.init(x: self.getRenderOriginX(originPoint.x), y: self.getRenderOriginY(originPoint.y))
+    }
+    
+    func getRenderWidth(_ originWidth: CGFloat) -> CGFloat {
+        return (videoSize?.width)! * originWidth / MKDefine.screenWidth
+    }
+    func getRenderHeight(_ originHeight: CGFloat) -> CGFloat {
+        return (videoSize?.height)! * originHeight / MKDefine.screenHeight
+    }
+    func getRenderSize(_ originSize: CGSize) -> CGSize {
+        let renderWidth = self.getRenderWidth(originSize.width)
+        let rebderHeight = self.getRenderHeight(originSize.height)
+        return CGSize.init(width: renderWidth, height: rebderHeight)
+    }
+    
+    //MARK: watermark
+    func addWatermarkViewWith(_ watermarkView: UIView) {
+        //video
+        let opts: [String: Any] = [AVURLAssetPreferPreciseDurationAndTimingKey: NSNumber.init(booleanLiteral: false)]
+        let videoPath = Bundle.main.path(forResource: "220", ofType: "mp4")
+        let videoUrl = URL(fileURLWithPath: videoPath!)
+        let asset = AVURLAsset.init(url: videoUrl, options: opts)
+        //
+        
+        //video track
+        let assetVideoTrack = asset.tracks(withMediaType: AVMediaTypeVideo)[0]
+        
+        //composition
+        let mutableComposition = AVMutableComposition.init()
+        
+       //video composition Track
+        let videoCompositionTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid)
+        //insert video track
+        try! videoCompositionTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, asset.duration), of: assetVideoTrack, at: kCMTimeZero)
+        //
+        let mutableVideoComposition = AVMutableVideoComposition()
+        mutableVideoComposition.frameDuration = CMTimeMake(1, 30)//30fps
+        mutableVideoComposition.renderSize = assetVideoTrack.naturalSize
+        self.videoSize = assetVideoTrack.naturalSize
+        let passThroughnstruction: AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
+        passThroughnstruction.timeRange = CMTimeRangeMake(kCMTimeZero, mutableComposition.duration)
+        let videoTrack: AVAssetTrack = mutableComposition.tracks(withMediaType: AVMediaTypeVideo)[0]
+        let passThroughLayer: AVMutableVideoCompositionLayerInstruction = AVMutableVideoCompositionLayerInstruction.init(assetTrack: videoTrack)
+        passThroughnstruction.layerInstructions = [passThroughLayer]
+        
+        mutableVideoComposition.instructions = [passThroughnstruction]
+
+        //watermarkLayer
+        //videoLayer and parentLayer
+        let parentLayer: CALayer = CALayer.init()
+        let videoLayer: CALayer = CALayer.init()
+        parentLayer.frame = CGRect.init(x: 0, y: 0, width: mutableVideoComposition.renderSize.width, height: mutableVideoComposition.renderSize.height)
+        videoLayer.frame = CGRect.init(x: 0, y: 0, width: mutableVideoComposition.renderSize.width, height: mutableVideoComposition.renderSize.height)
+        parentLayer.addSublayer(videoLayer)
+        
+        //把整个captionView加到视频中
+        let copyView = self.captionView!.copyView()
+        let captionLayer = CALayer()
+        captionLayer.bounds = CGRect.init(x: 0, y: 0, width: mutableVideoComposition.renderSize.width, height: mutableVideoComposition.renderSize.height)
+        captionLayer.contents = copyView.asImage().cgImage
+         let waterLayer = CALayer()
+        
+        waterLayer.position = CGPoint.init(x: mutableVideoComposition.renderSize.width / 2, y: mutableVideoComposition.renderSize.height / 2)
+        
+        waterLayer.addSublayer(captionLayer)
+        parentLayer.addSublayer(waterLayer)
+        mutableVideoComposition.animationTool = AVVideoCompositionCoreAnimationTool.init(postProcessingAsVideoLayer: videoLayer, in: parentLayer)
+        
+        //export
+        let baseDirectory = URL(fileURLWithPath: NSTemporaryDirectory())
+        let exportUrl = (baseDirectory.appendingPathComponent("export.mp4", isDirectory: false) as NSURL).filePathURL!
+        deleteExistingFile(url: exportUrl)
+        print("export path : \(exportUrl)")
+        //这里设置导出质量
+        let export = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
+        export!.outputURL = exportUrl
+        export!.videoComposition = mutableVideoComposition
+        export!.outputFileType = AVFileTypeQuickTimeMovie
+        export!.exportAsynchronously(completionHandler: {() -> Void in
+            switch export!.status{
+            case .completed:
+                let photos = PHPhotoLibrary.shared()
+                photos.performChanges({
+                    let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: exportUrl)
+                    var placeholder = PHObjectPlaceholder.init()
+                    placeholder = (request?.placeholderForCreatedAsset)!
+                }, completionHandler: { (finish, error) in
+                    
+                })
+                break
+            case .failed:
+                break
+            case .unknown:
+                break
+            case .waiting:
+                break
+            case .exporting:
+                break
+            case .cancelled:
+                break
+            }
+        })
+        
+    }
+    func deleteExistingFile(url: URL) {
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(at: url)
+        }
+        catch _ as NSError {
+            
+        }
+    }
+    
+    //MARK: player observe
     func addPlayerObserve() {
         NotificationCenter.default.addObserver(self, selector: #selector(playbackFInished), name: .AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
     }
@@ -259,24 +402,13 @@ extension MKVideoEditViewController: TextEditMaskManagerDelegate{
         view.isEditable = false
         view.isSelectable = false
         
-//        self.view.addSubview(view)
-//        self.addGestureToView(view)
-//        view.snp.makeConstraints { (make) in
-//            make.center.equalTo(view.filterModel!.center!)
-//            make.size.equalTo(view.filterModel!.size!)
-//        }
-//        view.layoutIfNeeded()
-//        if view.filterModel?.transform != nil {
-//            view.transform = (view.filterModel?.transform!)!
-//        }
-        
-        
         let label = MKCaptionLabel()
         label.filterModel = view.filterModel
         label.attributedText = view.attributedText
         label.numberOfLines = 0
         label.isUserInteractionEnabled = true
-        self.playView.addSubview(label)
+        label.layer.allowsEdgeAntialiasing = true
+        self.captionView!.addSubview(label)
         self.addGestureToView(label)
         label.snp.makeConstraints { (make) in
             make.center.equalTo(label.filterModel!.center!)
@@ -324,16 +456,27 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
             originCenter = filterView.filterModel?.center
             self.togglePanActionViewHide(true)
         }
-        let center = CGPoint(x: originCenter.x + translation.x, y: originCenter.y + translation.y)
+        var center = CGPoint.init(x: 0, y: 0)
+        let locationPoint = gesture.location(in: self.view)
+        if self.trashButton.frame.contains(locationPoint){
+            center = self.trashButton.center
+            
+            gesture.view?.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
+        }else{
+            center = CGPoint(x: originCenter.x + translation.x, y: originCenter.y + translation.y)
+            gesture.view?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+        }
         
         if gesture.state == UIPanGestureRecognizer.State.ended {
             originCenter = center
             filterView.filterModel?.center = center
+            filterView.filterModel?.rect = filterView.frame
             self.togglePanActionViewHide(false)
         }
         filterView.snp.updateConstraints { (make) in
             make.center.equalTo(center)
         }
+        
     }
     
     func pinchAction(_ gesture: UIPinchGestureRecognizer) {

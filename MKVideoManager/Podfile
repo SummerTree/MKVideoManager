@@ -8,4 +8,6 @@ target 'MKVideoManager' do
   # Pods for MKVideoManager
   pod 'SnapKit', '~> 4.0.0'
   pod 'Hero'
+  pod 'GPUImage'
+  pod 'MBProgressHUD'
 end
