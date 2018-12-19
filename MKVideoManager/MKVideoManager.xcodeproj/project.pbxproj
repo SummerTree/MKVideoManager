@@ -27,7 +27,6 @@
 		6F49AB3921A56B94007EA231 /* TLGPUImageAlphaBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3021A56B93007EA231 /* TLGPUImageAlphaBlendFilter.m */; };
 		6F49AB3A21A56B94007EA231 /* GPUImageCustomLookupFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3121A56B93007EA231 /* GPUImageCustomLookupFilter.swift */; };
 		6F49AB3B21A56B94007EA231 /* TLGPUImageMovieFillFiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3221A56B93007EA231 /* TLGPUImageMovieFillFiter.m */; };
-		6F49AB3C21A56B94007EA231 /* MKGPUImageMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3621A56B94007EA231 /* MKGPUImageMovie.m */; };
 		6F49AB4121A56BA3007EA231 /* MKExportStoryConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3E21A56BA3007EA231 /* MKExportStoryConfiguration.swift */; };
 		6F49AB4221A56BA3007EA231 /* MKStoryOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3F21A56BA3007EA231 /* MKStoryOutput.swift */; };
 		6F49AB4621A57882007EA231 /* MKProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB4521A57882007EA231 /* MKProgressHUD.swift */; };
@@ -79,8 +78,6 @@
 		6F49AB3221A56B93007EA231 /* TLGPUImageMovieFillFiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLGPUImageMovieFillFiter.m; sourceTree = "<group>"; };
 		6F49AB3321A56B93007EA231 /* TLGPUImageAlphaBlendFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGPUImageAlphaBlendFilter.h; sourceTree = "<group>"; };
 		6F49AB3421A56B93007EA231 /* GPUImageBeautifyFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUImageBeautifyFilter.h; sourceTree = "<group>"; };
-		6F49AB3621A56B94007EA231 /* MKGPUImageMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGPUImageMovie.m; sourceTree = "<group>"; };
-		6F49AB3721A56B94007EA231 /* MKGPUImageMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGPUImageMovie.h; sourceTree = "<group>"; };
 		6F49AB3E21A56BA3007EA231 /* MKExportStoryConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKExportStoryConfiguration.swift; sourceTree = "<group>"; };
 		6F49AB3F21A56BA3007EA231 /* MKStoryOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKStoryOutput.swift; sourceTree = "<group>"; };
 		6F49AB4521A57882007EA231 /* MKProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKProgressHUD.swift; sourceTree = "<group>"; };
@@ -172,8 +169,6 @@
 		6F49AB3521A56B94007EA231 /* GPUImageExtension */ = {
 			isa = PBXGroup;
 			children = (
-				6F49AB3721A56B94007EA231 /* MKGPUImageMovie.h */,
-				6F49AB3621A56B94007EA231 /* MKGPUImageMovie.m */,
 			);
 			path = GPUImageExtension;
 			sourceTree = "<group>";
@@ -485,7 +480,6 @@
 				6F49AAED219EBBAD007EA231 /* MKCoverCollectionCell.swift in Sources */,
 				6F7B0DF8219A730800CA2BD2 /* ColorsCollectionCell.swift in Sources */,
 				6F001C57219C52620099602A /* MKVideoCoverViewController.swift in Sources */,
-				6F49AB3C21A56B94007EA231 /* MKGPUImageMovie.m in Sources */,
 				6FC68C4E219971AD0073F3D2 /* TextColorInputView.swift in Sources */,
 				6F001C59219D566C0099602A /* ColorToImage.swift in Sources */,
 				6FDE325B21991B74008CB0E9 /* AppDelegate.swift in Sources */,
@@ -630,7 +624,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = Q3VZHMHCPE;
+				DEVELOPMENT_TEAM = 9343C2GYYD;
 				INFOPLIST_FILE = MKVideoManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -639,7 +633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoxiang.demo.MKVideoManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/holla/Documents/Demo/MKVideoManager/MKVideoManager/MKVideoManager/Bridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/MKVideoManager/Bridge.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -652,7 +646,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = Q3VZHMHCPE;
+				DEVELOPMENT_TEAM = 9343C2GYYD;
 				INFOPLIST_FILE = MKVideoManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -661,7 +655,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiaoxiang.demo.MKVideoManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/holla/Documents/Demo/MKVideoManager/MKVideoManager/MKVideoManager/Bridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/MKVideoManager/Bridge.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

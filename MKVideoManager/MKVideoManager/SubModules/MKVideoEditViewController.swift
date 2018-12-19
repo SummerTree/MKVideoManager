@@ -193,7 +193,11 @@ class MKVideoEditViewController: UIViewController {
     }
     
     @objc func downAction() {
+        let waterImage = self.captionView?.screenshot()
+        let videoPath = Bundle.main.path(forResource: "220", ofType: "mp4")
+        let videoUrl = URL(fileURLWithPath: videoPath!)
         
+        MKVideoManager.default.exportWaterImageVideo(waterImage!, videoUrl)
     }
     
     @objc func postAction(){

@@ -9,5 +9,5 @@
 #import <GPUImage/GPUImageFramework.h>
 
 @interface TLGPUImageMovie : GPUImageMovie
-@property(nonatomic,copy)void (^startProcessingCallback)(void);
+//@property(nonatomic,copy)void (^startProcessingCallback)(void);
 @end

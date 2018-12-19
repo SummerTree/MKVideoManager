@@ -24,4 +24,16 @@ extension UIImage{
         UIGraphicsEndImageContext()
         return image!
     }
+    
+    func imageMontage() -> UIImage {
+        
+        UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
+
+        self.draw(in: CGRect.init(x: 0, y: 0, width: self.size.width, height: self.size.height), blendMode: CGBlendMode.normal, alpha: 1.0)
+        
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result!
+    }
+    
 }

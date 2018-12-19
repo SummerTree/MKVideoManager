@@ -8,7 +8,7 @@
 
 #ifndef Bridge_h
 #define Bridge_h
-#import "MKGPUImageMovie.h"
+//#import "MKGPUImageMovie.h"
 #import "TLGPUImageMovieFillFiter.h"
 #import "TLGPUImageAlphaBlendFilter.h"
 #import "GPUImageBeautifyFilter.h"

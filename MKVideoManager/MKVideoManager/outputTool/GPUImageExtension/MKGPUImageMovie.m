@@ -9,11 +9,11 @@
 #import "MKGPUImageMovie.h"
 
 @implementation MKGPUImageMovie
--(void)startProcessing {
-    [super startProcessing];
-    
-    if (self.startProcessingCallback) {
-        self.startProcessingCallback();
-    }
-}
+//-(void)startProcessing {
+//    [super startProcessing];
+//    
+//    if (self.startProcessingCallback) {
+//        self.startProcessingCallback();
+//    }
+//}
 @end
