@@ -55,6 +55,7 @@ void setColorConversion709( GLfloat conversionMatrix[9] )
 @synthesize outputImageOrientation = _outputImageOrientation;
 @synthesize delegate = _delegate;
 @synthesize horizontallyMirrorFrontFacingCamera = _horizontallyMirrorFrontFacingCamera, horizontallyMirrorRearFacingCamera = _horizontallyMirrorRearFacingCamera;
+@synthesize audioProcessingQueue = audioProcessingQueue, cameraProcessingQueue = cameraProcessingQueue;
 @synthesize frameRate = _frameRate;
 
 #pragma mark -
@@ -360,6 +361,24 @@ void setColorConversion709( GLfloat conversionMatrix[9] )
 - (void)resumeCameraCapture;
 {
     capturePaused = NO;
+}
+
+- (void)pauseMicrophoneCapture {
+	if (!audioInput || ![_captureSession.inputs containsObject:audioInput])
+		return;
+	
+	[_captureSession beginConfiguration];
+	[_captureSession removeInput:audioInput];
+	[_captureSession commitConfiguration];
+}
+
+- (void)resumeMicrophoneCapture {
+	if (!audioInput || [_captureSession.inputs containsObject:audioInput])
+		return;
+	
+	[_captureSession beginConfiguration];
+	[_captureSession addInput:audioInput];
+	[_captureSession commitConfiguration];
 }
 
 - (void)rotateCamera

@@ -13,7 +13,7 @@
 #import "TLGPUImageAlphaBlendFilter.h"
 #import "GPUImageBeautifyFilter.h"
 #import "TLStoryTextLayoutManager.h"
-//#import "TLGPUImageMovie.h"
-//#import "TLGPUImageMovie.h"
+#import "MKRefreshHeaderView.h"
+#import "MKRefreshFooterView.h"
 
 #endif /* Bridge_h */

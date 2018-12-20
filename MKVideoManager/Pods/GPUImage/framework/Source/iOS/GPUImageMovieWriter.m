@@ -35,6 +35,9 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
     BOOL audioEncodingIsFinished, videoEncodingIsFinished;
 
     BOOL isRecording;
+    BOOL allowWriteAudio;
+    BOOL willFinish;
+    void (^completeHandler)(void);
 }
 
 // Movie recording
@@ -62,6 +65,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
 @synthesize shouldInvalidateAudioSampleWhenDone = _shouldInvalidateAudioSampleWhenDone;
 @synthesize paused = _paused;
 @synthesize movieWriterContext = _movieWriterContext;
+@synthesize allowCompositionVideo = _allowCompositionVideo;
 
 @synthesize delegate = _delegate;
 
@@ -278,6 +282,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         }
     });
     isRecording = YES;
+    allowWriteAudio = NO;
 	//    [assetWriter startSessionAtSourceTime:kCMTimeZero];
 }
 
@@ -321,14 +326,36 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
 - (void)finishRecordingWithCompletionHandler:(void (^)(void))handler;
 {
     runSynchronouslyOnContextQueue(_movieWriterContext, ^{
-        isRecording = NO;
         
-        if (assetWriter.status == AVAssetWriterStatusCompleted || assetWriter.status == AVAssetWriterStatusCancelled || assetWriter.status == AVAssetWriterStatusUnknown)
-        {
-            if (handler)
-                runAsynchronouslyOnContextQueue(_movieWriterContext, handler);
-            return;
+        if (!_allowCompositionVideo) {
+            willFinish = NO;
+            if (assetWriter.status == AVAssetWriterStatusCompleted || assetWriter.status == AVAssetWriterStatusCancelled || assetWriter.status == AVAssetWriterStatusUnknown)
+            {
+                isRecording = NO;
+                if (handler)
+                    runAsynchronouslyOnContextQueue(_movieWriterContext, handler);
+                return;
+            }
+            allowWriteAudio = NO;
+            if (CMTimeCompare(previousFrameTime, previousAudioTime) == -1) {
+                // recoreded audio frame is longer than video frame
+                willFinish = YES;
+                completeHandler = handler;
+                return;
+            }
+            completeHandler = NULL;
+            isRecording = NO;
+        }else{
+            isRecording = NO;
+            if (assetWriter.status == AVAssetWriterStatusCompleted || assetWriter.status == AVAssetWriterStatusCancelled || assetWriter.status == AVAssetWriterStatusUnknown)
+            {
+                if (handler)
+                    runAsynchronouslyOnContextQueue(_movieWriterContext, handler);
+                return;
+            }
         }
+        
+        
         if( assetWriter.status == AVAssetWriterStatusWriting && ! videoEncodingIsFinished )
         {
             videoEncodingIsFinished = YES;
@@ -365,7 +392,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
 
 - (void)processAudioBuffer:(CMSampleBufferRef)audioBuffer;
 {
-    if (!isRecording || _paused)
+    if (!isRecording || _paused || (!allowWriteAudio && !_allowCompositionVideo))
     {
         return;
     }
@@ -744,6 +771,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
             
             [assetWriter startSessionAtSourceTime:frameTime];
             startTime = frameTime;
+            allowWriteAudio = YES;
         });
     }
 
@@ -819,6 +847,12 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         write();
         
         [inputFramebufferForBlock unlock];
+        
+        if (!_allowCompositionVideo) {
+            if (willFinish && CMTimeCompare(previousFrameTime, previousAudioTime) != -1) {
+                [self finishRecordingWithCompletionHandler:completeHandler];
+            }
+        }
     });
 }
 

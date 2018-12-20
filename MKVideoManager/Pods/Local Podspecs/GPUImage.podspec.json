@@ -1,6 +1,6 @@
 {
   "name": "GPUImage",
-  "version": "0.1.71",
+  "version": "0.1.73",
   "license": "BSD",
   "summary": "An open source iOS framework for GPU-based image and video processing.",
   "homepage": "https://github.com/BradLarson/GPUImage",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/waitingsnow/GPUImage.git",
-    "tag": "0.1.71"
+    "tag": "0.1.73"
   },
   "source_files": "framework/Source/**/*.{h,m}",
   "resources": "framework/Resources/*.png",

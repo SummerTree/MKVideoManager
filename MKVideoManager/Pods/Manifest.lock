@@ -1,37 +1,41 @@
 PODS:
-  - GPUImage (0.1.71)
+  - GPUImage (0.1.73)
   - Hero (1.4.0)
   - MBProgressHUD (1.1.0)
+  - MJRefresh (3.1.15.7)
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
-  - GPUImage (from `https://github.com/holla-world/GPUImage.git`, tag `0.1.71`)
+  - GPUImage (from `https://github.com/holla-world/GPUImage.git`, tag `0.1.73`)
   - Hero
   - MBProgressHUD
+  - MJRefresh
   - SnapKit (~> 4.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Hero
     - MBProgressHUD
+    - MJRefresh
     - SnapKit
 
 EXTERNAL SOURCES:
   GPUImage:
     :git: https://github.com/holla-world/GPUImage.git
-    :tag: 0.1.71
+    :tag: 0.1.73
 
 CHECKOUT OPTIONS:
   GPUImage:
     :git: https://github.com/holla-world/GPUImage.git
-    :tag: 0.1.71
+    :tag: 0.1.73
 
 SPEC CHECKSUMS:
-  GPUImage: f6034f21f92df6171520f604226ae64b90b35911
+  GPUImage: 821a2bab3fd9023447353740423c74cbcfa05bc1
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: c74c84ec04877275e72143f47ecf7c25e55c8d7d
+PODFILE CHECKSUM: d1c1ca11b38cc6cf31d51365c21f7008efcd7f4e
 
 COCOAPODS: 1.5.3

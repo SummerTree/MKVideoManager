@@ -73,6 +73,7 @@ void setColorConversion709( GLfloat conversionMatrix[9] );
 
 /// These properties determine whether or not the two camera orientations should be mirrored. By default, both are NO.
 @property(readwrite, nonatomic) BOOL horizontallyMirrorFrontFacingCamera, horizontallyMirrorRearFacingCamera;
+@property(readonly, nonatomic) dispatch_queue_t cameraProcessingQueue, audioProcessingQueue;
 
 @property(nonatomic, assign) id<GPUImageVideoCameraDelegate> delegate;
 
@@ -119,6 +120,14 @@ void setColorConversion709( GLfloat conversionMatrix[9] );
 /** Resume camera capturing
  */
 - (void)resumeCameraCapture;
+
+/** Pause Microphone capturing
+ */
+- (void)pauseMicrophoneCapture;
+
+/** Resume Microphone capturing
+ */
+- (void)resumeMicrophoneCapture;
 
 /** Process a video sample
  @param sampleBuffer Buffer to process

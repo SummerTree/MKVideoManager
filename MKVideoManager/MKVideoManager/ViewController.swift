@@ -10,14 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
     var tableView: UITableView!
-    let modules: [String] = ["文字编辑与UI生成图片","给视频打水印","UI交互操作","取视频封面","选择tree","上传视频"]
-    let controllers: [UIViewController.Type] = [MKViewToImageViewController.self, MKVideoEditViewController.self, GestureViewController.self, MKVideoCoverViewController.self]
+    let modules: [String] = ["文字编辑与UI生成图片","给视频打水印","UI交互操作","取视频封面","下拉刷新"]
+    let controllers: [UIViewController.Type] = [MKViewToImageViewController.self, MKVideoEditViewController.self, GestureViewController.self, MKVideoCoverViewController.self, MKRefreshControlViewController.self]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "MKVideoManager"
         self.setSubViews()
-        self.navigationController?.isNavigationBarHidden = true
+//        self.navigationController?.isNavigationBarHidden = true
     }
     
     func setSubViews() {
