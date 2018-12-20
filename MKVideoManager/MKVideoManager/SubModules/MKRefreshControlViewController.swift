@@ -34,7 +34,7 @@ class MKRefreshControlViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(MKRefreshCollectionViewCell.self, forCellWithReuseIdentifier: "MKRefreshCollectionViewCell")
-        collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        collectionView.contentInset = UIEdgeInsetsMake(100, 0, 100, 0)
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview().inset(UIEdgeInsets.zero)
@@ -76,13 +76,19 @@ class MKRefreshControlViewController: UIViewController {
     func setCustomRefresh() {
         self.collectionView.addRefreshHeaderAction {[weak self] in
             guard let self = `self` else {return}
-            self.collectionView.endHeaderRefresh()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                self.collectionView.endHeaderRefresh()
+            })
+            
             //refresh new
         }
         
         self.collectionView.addRefreshFooterAction {[weak self] in
             guard let self = `self` else {return}
-            self.collectionView.endFooterRefresh()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                self.collectionView.endFooterRefresh()
+            })
+            
             //load more
         }
     }

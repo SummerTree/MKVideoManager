@@ -28,7 +28,7 @@
 		6F33C33721CA655900FAE42B /* MKRefreshControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C33621CA655900FAE42B /* MKRefreshControlViewController.swift */; };
 		6F33C33921CA679D00FAE42B /* MKRefreshCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C33821CA679D00FAE42B /* MKRefreshCollectionViewCell.swift */; };
 		6F33C33B21CB378100FAE42B /* MKRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C33A21CB378100FAE42B /* MKRefresh.swift */; };
-		6F33C34121CB42CC00FAE42B /* MKRefreshCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C34021CB42CC00FAE42B /* MKRefreshCollectionView.swift */; };
+		6F33C34121CB42CC00FAE42B /* UIScrollView+MKRefreshScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C34021CB42CC00FAE42B /* UIScrollView+MKRefreshScrollView.swift */; };
 		6F33C34421CB50D500FAE42B /* MKRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C34321CB50D500FAE42B /* MKRefreshHeaderView.m */; };
 		6F33C34721CB5AE900FAE42B /* MKRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C34621CB5AE900FAE42B /* MKRefreshFooterView.m */; };
 		6F49AAE5219E7ADA007EA231 /* MKDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAE4219E7ADA007EA231 /* MKDefine.swift */; };
@@ -93,7 +93,7 @@
 		6F33C33621CA655900FAE42B /* MKRefreshControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKRefreshControlViewController.swift; sourceTree = "<group>"; };
 		6F33C33821CA679D00FAE42B /* MKRefreshCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKRefreshCollectionViewCell.swift; sourceTree = "<group>"; };
 		6F33C33A21CB378100FAE42B /* MKRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKRefresh.swift; sourceTree = "<group>"; };
-		6F33C34021CB42CC00FAE42B /* MKRefreshCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKRefreshCollectionView.swift; sourceTree = "<group>"; };
+		6F33C34021CB42CC00FAE42B /* UIScrollView+MKRefreshScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+MKRefreshScrollView.swift"; sourceTree = "<group>"; };
 		6F33C34221CB50D500FAE42B /* MKRefreshHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKRefreshHeaderView.h; sourceTree = "<group>"; };
 		6F33C34321CB50D500FAE42B /* MKRefreshHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MKRefreshHeaderView.m; sourceTree = "<group>"; };
 		6F33C34521CB5AE900FAE42B /* MKRefreshFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKRefreshFooterView.h; sourceTree = "<group>"; };
@@ -346,7 +346,7 @@
 				6F33C34321CB50D500FAE42B /* MKRefreshHeaderView.m */,
 				6F33C34521CB5AE900FAE42B /* MKRefreshFooterView.h */,
 				6F33C34621CB5AE900FAE42B /* MKRefreshFooterView.m */,
-				6F33C34021CB42CC00FAE42B /* MKRefreshCollectionView.swift */,
+				6F33C34021CB42CC00FAE42B /* UIScrollView+MKRefreshScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -586,7 +586,7 @@
 				6F33C32F21CA655000FAE42B /* XRProvider.swift in Sources */,
 				6F33C33121CA655000FAE42B /* XRBaseRefreshFooter.swift in Sources */,
 				6F001C59219D566C0099602A /* ColorToImage.swift in Sources */,
-				6F33C34121CB42CC00FAE42B /* MKRefreshCollectionView.swift in Sources */,
+				6F33C34121CB42CC00FAE42B /* UIScrollView+MKRefreshScrollView.swift in Sources */,
 				6F33C33B21CB378100FAE42B /* MKRefresh.swift in Sources */,
 				6FDE325B21991B74008CB0E9 /* AppDelegate.swift in Sources */,
 				6F0A9E2821AE649A0069C587 /* MKStoryTextLayoutManager.m in Sources */,

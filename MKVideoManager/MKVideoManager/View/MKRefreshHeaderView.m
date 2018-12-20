@@ -20,7 +20,7 @@
     if (!_loadingView) {
         UIActivityIndicatorView *loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         loadingView.hidesWhenStopped = NO;
-        
+        loadingView.alpha = 0;
         [self addSubview:_loadingView = loadingView];
     }
     return _loadingView;
@@ -70,6 +70,9 @@
 
 - (void)setPullingPercent:(CGFloat)pullingPercent{
     NSLog(@"pulling down: %@", [NSString stringWithFormat:@"%.2f", pullingPercent]);
+    if (pullingPercent <= 1.0) {
+        self.loadingView.alpha = pullingPercent;
+    }
 }
 
 #pragma mark - custom setting
