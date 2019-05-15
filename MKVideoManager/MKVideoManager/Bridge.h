@@ -15,5 +15,6 @@
 #import "TLStoryTextLayoutManager.h"
 #import "MKRefreshHeaderView.h"
 #import "MKRefreshFooterView.h"
-
+#import "PRTween.h"
+#import "PRTweenTimingFunctions.h"
 #endif /* Bridge_h */

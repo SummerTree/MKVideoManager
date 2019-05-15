@@ -60,7 +60,7 @@ public extension XR where Base: UIScrollView {
     /// MARK: - Pull to refreshing
     // heightForFooter: 真正的refreshHeaderView显示的高度
     // ignoreTopHeight: 忽略的刷新头部高度，用来适配iPhoneX, XS, XR, XS Max机型
-    public func addPullToRefreshHeader(refreshHeader: XRBaseRefreshHeader,
+	func addPullToRefreshHeader(refreshHeader: XRBaseRefreshHeader,
                                        heightForHeader: CGFloat = 70,
                                        ignoreTopHeight: CGFloat = 0,
                                        refreshingClosure refreshClosure:@escaping (() -> Swift.Void)) {
@@ -84,7 +84,7 @@ public extension XR where Base: UIScrollView {
     }
     
     // auto refresh for header.
-    public func beginHeaderRefreshing() {
+	func beginHeaderRefreshing() {
         
         DispatchQueue.main.async {
             self.base.setContentOffset(CGPoint.zero, animated: false)
@@ -93,7 +93,7 @@ public extension XR where Base: UIScrollView {
     }
     
     // end refresh for header.
-    public func endHeaderRefreshing() {
+	func endHeaderRefreshing() {
         
         self.base.refreshHeaderView?.endRefreshing()
     }
@@ -101,7 +101,7 @@ public extension XR where Base: UIScrollView {
     /// MARK: - Pull to loading more
     // heightForFooter: 真正的refreshFooterView显示的高度
     // ignoreBottomHeight: 忽略的刷新底部高度，用来适配iPhoneX, XS, XR, XS Max机型
-    public func addPullToRefreshFooter(refreshFooter: XRBaseRefreshFooter,
+	func addPullToRefreshFooter(refreshFooter: XRBaseRefreshFooter,
                                        heightForFooter: CGFloat = 60,
                                        ignoreBottomHeight: CGFloat = XRRefreshMarcos.xr_BottomIndicatorHeight,
                                      refreshingClosure refreshClosure:@escaping (() -> Swift.Void)) {
@@ -127,25 +127,25 @@ public extension XR where Base: UIScrollView {
     
     // To end the bottom refresh method, be sure to finish the refresh after
     // the TableView or CollectionView reloadData is loaded
-    public func endFooterRefreshing() {
+	func endFooterRefreshing() {
         
         self.base.refreshFooterView?.endRefreshing()
     }
     
     // End refresh, bottom display no more data
-    public func endFooterRefreshingWithNoMoreData() {
+	func endFooterRefreshingWithNoMoreData() {
         
         self.base.refreshFooterView?.endRefreshingWithNoMoreData()
     }
     
     // End refresh, data load failed, click reload more
-    public func endFooterRefreshingWithLoadingFailure() {
+	func endFooterRefreshingWithLoadingFailure() {
         
         self.base.refreshFooterView?.endRefreshingWithLoadingFailure()
     }
     
     // The refresh ends, the data is all loaded, and the footerRefresh is removed
-    public func endFooterRefreshingWithRemoveLoadingMoreView() {
+	func endFooterRefreshingWithRemoveLoadingMoreView() {
         
         self.base.refreshFooterView?.removeLoadMoreRefreshing()
     }
@@ -158,7 +158,7 @@ public extension XR where Base: WKWebView {
     /// MARK: - Pull to refreshing
     // heightForFooter: 真正的refreshHeaderView显示的高度
     // ignoreTopHeight: 忽略的刷新头部高度，用来适配iPhoneX, XS, XR, XS Max机型
-    public func addPullToRefreshHeader(refreshHeader: XRBaseRefreshHeader,
+	func addPullToRefreshHeader(refreshHeader: XRBaseRefreshHeader,
                                        heightForHeader: CGFloat = 70,
                                        ignoreTopHeight: CGFloat = 0,
                                        refreshingClosure refreshClosure:@escaping (() -> Swift.Void)) {
@@ -182,7 +182,7 @@ public extension XR where Base: WKWebView {
     }
     
     // auto refresh for header.
-    public func beginHeaderRefreshing() {
+	func beginHeaderRefreshing() {
         
         DispatchQueue.main.async {
             self.base.scrollView.setContentOffset(CGPoint.zero, animated: false)
@@ -191,7 +191,7 @@ public extension XR where Base: WKWebView {
     }
     
     // end refresh for header.
-    public func endHeaderRefreshing() {
+	func endHeaderRefreshing() {
         
         self.base.scrollView.refreshHeaderView?.endRefreshing()
     }

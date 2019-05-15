@@ -13,14 +13,14 @@ extension NSMutableAttributedString {
     static func getAttributeString(_ string: String, _ textColor:UIColor, _ backgroundColor: UIColor) -> NSMutableAttributedString {
         let attributedString = NSAttributedString(string: string,
                                                   attributes: [
-                                                    NSBackgroundColorAttributeName : backgroundColor,
-                                                    NSForegroundColorAttributeName : textColor,
-                                                    NSFontAttributeName: UIFont.boldSystemFont(ofSize: 24)
+													NSAttributedString.Key.backgroundColor : backgroundColor,
+													NSAttributedString.Key.foregroundColor : textColor,
+													NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24)
             ])
         let attString = NSMutableAttributedString.init(attributedString: attributedString)
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment = NSTextAlignment.center
-        let dic = [NSParagraphStyleAttributeName: paraStyle]
+		let dic = [NSAttributedString.Key.paragraphStyle: paraStyle]
         
         attString.addAttributes(dic, range: NSMakeRange(0, attString.length))
         return attString

@@ -27,7 +27,7 @@ class MKVideoManager: NSObject {
     func exportWaterImageVideo(_ watermarkImage: UIImage, _ videoUrl: URL) {
         let opts: [String: Any] = [AVURLAssetPreferPreciseDurationAndTimingKey: NSNumber.init(booleanLiteral: false)]
         let asset = AVURLAsset.init(url: videoUrl, options: opts)
-        let assetVideoTrack = asset.tracks(withMediaType: AVMediaTypeVideo)[0]
+		let assetVideoTrack = asset.tracks(withMediaType: AVMediaType.video)[0]
         let movieSize = assetVideoTrack.naturalSize
 //        let mp4Url = URL.init(fileURLWithPath: Bundle.main.path(forResource: "test", ofType: "mp4")!)
 //        movieFilter = GPUImageMovie.init(url: mp4Url)
@@ -58,7 +58,7 @@ class MKVideoManager: NSObject {
         movieWriter = GPUImageMovieWriter.init(movieURL: exportUrl, size: movieSize)
         //        movieWriter = GPUImageMovieWriter.init(movieURL: exportUrl, size: movieSize, fileType: AVFileTypeQuickTimeMovie, outputSettings: nil)
         movieWriter?.shouldPassthroughAudio = true
-        movieWriter?.assetWriter.movieFragmentInterval = kCMTimeInvalid
+		movieWriter?.assetWriter.movieFragmentInterval = CMTime.invalid
         
         movieFilter?.audioEncodingTarget = movieWriter
         movieFilter?.enableSynchronizedEncoding(using: movieWriter)
@@ -116,7 +116,7 @@ class MKVideoManager: NSObject {
 }
 extension UIView {
     public func screenshot() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 1)
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, UIScreen.main.scale)
         self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

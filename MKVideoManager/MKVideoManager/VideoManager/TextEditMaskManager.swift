@@ -35,8 +35,8 @@ class TextEditMaskManager: NSObject {
     var colorsInputView: ColorsInputView!
     
     var isNewFilter: Bool = false
-    var colorType: ColorType = .Text
-    
+//    var colorType: ColorType = .Text
+	
     var keyBoardHeight:CGFloat?
     
     weak var delegate : TextEditMaskManagerDelegate?
@@ -58,33 +58,39 @@ class TextEditMaskManager: NSObject {
     }
     
     func showMaskViewWithView(_ inputView: UIView?) {
-        self.getWindow().addSubview(self.maskView)
-        self.editTextView.becomeFirstResponder()
-        //根据inputModel设置当前的编辑状态
-        if inputView != nil {
-//            let view = inputView as! EditTextView
-            let view = inputView as! MKCaptionLabel
-            self.editTextView.attributedText = view.filterModel?.arrtibuteText
-            self.filterModel = view.filterModel
-            self.isNewFilter = false
-            self.editTextView.tintColor = view.filterModel?.textColor
-            self.editTextView.snp.updateConstraints { (make) in
-                make.size.equalTo((view.filterModel?.size)!)
-            }
-        }else{
-            self.editTextView.text = ""
-            self.filterModel = FilterModel()
-            self.isNewFilter = true
-            self.editTextView.tintColor = UIColor.white
-            self.editTextView.snp.updateConstraints { (make) in
-                make.size.equalTo(CGSize.init(width: 44, height: 44))
-            }
-        }
-        self.reloadData(self.filterModel)
+//		self.maskView.alpha = 0
+//		self.getWindow().addSubview(self.maskView)
+		//根据inputModel设置当前的编辑状态
+		if let view = inputView as? MKCaptionLabel {
+			//            let view = inputView as! EditTextView
+//			let view = inputView as! MKCaptionLabel
+			self.editTextView.attributedText = view.filterModel?.arrtibuteText
+			self.filterModel = view.filterModel
+			self.isNewFilter = false
+			self.editTextView.tintColor = view.filterModel?.textColor
+			self.editTextView.snp.updateConstraints { (make) in
+				make.size.equalTo((view.filterModel?.size)!)
+			}
+		}else{
+			self.editTextView.text = ""
+			self.filterModel = FilterModel()
+			self.isNewFilter = true
+			self.editTextView.tintColor = UIColor.white
+			self.editTextView.snp.updateConstraints { (make) in
+				make.size.equalTo(CGSize.init(width: 44, height: 44))
+			}
+		}
+		UIView.animate(withDuration: 0.25, animations: {
+			self.maskView.alpha = 1
+//			if
+		}) { (complete) in
+			self.reloadData(self.filterModel)
+		}
     }
     
     @objc func hideMaskView() {
-        self.maskView.removeFromSuperview()
+		
+		
         //判断是否有文字
         if self.editTextView.text.count > 0 && self.delegate != nil{
             self.editControlView.layoutIfNeeded()
@@ -101,7 +107,7 @@ class TextEditMaskManager: NSObject {
             if self.isNewFilter {
                 copyFilter.center = viewCenter
                 copyFilter.rect = self.editTextView.frame
-            }else{
+            } else {
                 copyFilter.center = self.filterModel.center!
                 copyFilter.rotation = self.filterModel.rotation
                 copyFilter.scale = self.filterModel.scale
@@ -111,15 +117,28 @@ class TextEditMaskManager: NSObject {
             copyView.filterModel = copyFilter
             self.delegate?.maskManagerDidOutputView(copyView)
         }
-        self.editTextView.resignFirstResponder()
+		UIView.animate(withDuration: 0.25, animations: {
+			self.maskView.alpha = 0
+			if self.isNewFilter == false {
+//				self.editTextView.center = self.filterModel.center!
+//				self.editTextView.transform = self.filterModel.transform!
+			}
+
+		}) { (complete) in
+			//			self.maskView.removeFromSuperview()
+//			self.editTextView.center
+		}
         self.delegate?.maskViewDidHide()
     }
     
     private func setSubViews() {
+		
         //maskView
         self.maskView = UIView.init(frame: UIScreen.main.bounds)
+		self.maskView.alpha = 0
         self.maskView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-        
+
+		
         //headerView
         self.headerView = UIView()
         self.maskView.addSubview(self.headerView)
@@ -182,39 +201,26 @@ class TextEditMaskManager: NSObject {
             make.size.equalTo(CGSize.init(width: 44, height: 44))
         }
         
-        self.colorsInputView = ColorsInputView(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
-        self.colorsInputView.delegate = self
-        self.colorsInputView.colors = [
-            UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
-            UIColor.init(red: 246/255, green: 66/255, blue: 52/255, alpha: 1),
-            UIColor.init(red: 246/255, green: 153/255, blue: 52/255, alpha: 1),
-            UIColor.init(red: 246/255, green: 221/255, blue: 52/255, alpha: 1),
-            UIColor.init(red: 89/255, green: 227/255, blue: 40/255, alpha: 1),
-            UIColor.init(red: 40/255, green: 227/255, blue: 219/255, alpha: 1),
-            UIColor.init(red: 40/255, green: 105/255, blue: 227/255, alpha: 1),
-            UIColor.init(red: 100/255, green: 74/255, blue: 241/255, alpha: 1),
-            UIColor.init(red: 197/255, green: 70/255, blue: 239/255, alpha: 1),
-            UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)
-        ]
-        
-        self.maskView.addSubview(self.colorsInputView)
-        self.colorsInputView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(44)
-            make.bottom.equalToSuperview().offset(-346)
-        }
+//        self.colorsInputView = ColorsInputView(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
+//        self.colorsInputView.delegate = self
+//        self.maskView.addSubview(self.colorsInputView)
+//        self.colorsInputView.snp.makeConstraints { (make) in
+//            make.left.right.equalToSuperview()
+//            make.height.equalTo(44)
+//            make.bottom.equalToSuperview().offset(-346)
+//        }
     }
     
     //MARK: - reload View
     func reloadData(_ input: FilterModel?) {
-        self.colorsInputView.selectedColorIndex = input?.textColorSelectedIndex
+//        self.colorsInputView.selectedColorIndex = input?.textColorSelectedIndex
         self.editTextView.text = input?.text
     }
     
     func reloadEditViewControlHeight(_ keyBoardHeight: CGFloat) {
-        self.colorsInputView.snp.updateConstraints { (make) in
-            make.bottom.equalToSuperview().offset(-keyBoardHeight)
-        }
+//        self.colorsInputView.snp.updateConstraints { (make) in
+//            make.bottom.equalToSuperview().offset(-keyBoardHeight)
+//        }
         let height = UIScreen.main.bounds.height - MKDefine.statusBarHeight - TextEditMaskManager.navigationBarHeight - keyBoardHeight - TextEditMaskManager.colorInputHeight
         self.editControlView.snp.updateConstraints { (make) in
             make.height.equalTo(height)
@@ -223,13 +229,13 @@ class TextEditMaskManager: NSObject {
     
     //MARK: - Action
     @objc private func colorTypeAction(_ sender: UIButton){
-        if self.colorType == .Background {
-            self.colorType = .Text
-            sender.setTitle("Bg'", for: .normal)
-        }else{
-            self.colorType = .Background
-            sender.setTitle("Tt'", for: .normal)
-        }
+//        if self.colorType == .Background {
+//            self.colorType = .Text
+//            sender.setTitle("Bg'", for: .normal)
+//        }else{
+//            self.colorType = .Background
+//            sender.setTitle("Tt'", for: .normal)
+//        }
     }
     
     @objc private func doneAction(_ sender: UIButton){
@@ -254,30 +260,29 @@ extension TextEditMaskManager: UITextViewDelegate{
     }
 }
 
-
-extension TextEditMaskManager: ColorsInputViewDelegate {
-    enum ColorType {
-        case Text
-        case Background
-    }
-    
-    func didSelectedColor(_ color: UIColor) {
-        switch self.colorType {
-        case .Text:
-            self.filterModel.textColor = color
-            self.editTextView.tintColor = color
-            self.editTextView.attributedText = NSMutableAttributedString.getAttributeString(self.editTextView.text, color, UIColor.clear)
-            break
-        case .Background:
-            self.editTextView.attributedText = NSMutableAttributedString.getAttributeString(self.editTextView.text, UIColor.white, color)
-            break
-        }
-    }
-    
-    func didSelectedIndex(_ index: Int) {
-        self.filterModel.textColorSelectedIndex = index
-    }
-}
+//extension TextEditMaskManager: ColorsInputViewDelegate {
+//    enum ColorType {
+//        case Text
+//        case Background
+//    }
+//
+//    func didSelectedColor(_ color: UIColor) {
+//        switch self.colorType {
+//        case .Text:
+//            self.filterModel.textColor = color
+//            self.editTextView.tintColor = color
+//            self.editTextView.attributedText = NSMutableAttributedString.getAttributeString(self.editTextView.text, color, UIColor.clear)
+//            break
+//        case .Background:
+//            self.editTextView.attributedText = NSMutableAttributedString.getAttributeString(self.editTextView.text, UIColor.white, color)
+//            break
+//        }
+//    }
+//
+//    func didSelectedIndex(_ index: Int) {
+//        self.filterModel.textColorSelectedIndex = index
+//    }
+//}
 
 extension TextEditMaskManager{
     func getWindow()-> UIWindow {

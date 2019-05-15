@@ -11,14 +11,21 @@ import UIKit
 
 class GestureViewController: UIViewController {
     
-    var gesView: UIView!
+    var gesView: UITextView!
     override func viewDidLoad() {
 //        self.navigationController?.isNavigationBarHidden = true
         self.setViews()
     }
-    
+	
+	var fontSize: CGFloat = 15
     func setViews() {
-        gesView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 140))
+//        gesView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 140))
+		gesView = UITextView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 140))
+		gesView.text = "UITEXTVIEW"
+		gesView.font = UIFont.systemFont(ofSize: fontSize)
+		gesView.textColor = UIColor.black
+		gesView.textAlignment = .center
+		gesView.isEditable = false
         gesView.backgroundColor = UIColor.purple
         self.view.addSubview(gesView)
     
@@ -42,27 +49,38 @@ class GestureViewController: UIViewController {
 //        toView.addGestureRecognizer(rotationGes)
     }
     
-    func tapAction(_ gesture: UITapGestureRecognizer) {
+	@objc func tapAction(_ gesture: UITapGestureRecognizer) {
         
     }
     
-    func panAction(_ gesture: UIPanGestureRecognizer) {
-        let point = gesture.location(in: self.view)
-        
+	@objc func panAction(_ gesture: UIPanGestureRecognizer) {
         //设置矩形的位置
-        self.gesView?.center = point
+		let translation = gesture.translation(in: gesView.superview)
+		let newP = CGPoint.init(x: gesView.center.x + translation.x, y: gesView.center.y + translation.y)
+		gesView.center = newP
+		gesture.setTranslation(CGPoint.zero, in: gesView.superview)
+		
     }
-    
-    func pinchAction(_ gesture: UIPinchGestureRecognizer) {
+	
+	fileprivate var lastScale:CGFloat = 1.0
+	@objc func pinchAction(_ gesture: UIPinchGestureRecognizer) {
         print("gesture.scale: \(gesture.scale)")
-        let width = self.gesView.bounds.width
-        let height = self.gesView.bounds.height
-        self.gesView.bounds.size = CGSize(width: width * gesture.scale, height: height * gesture.scale)
-        
+		if(gesture.state == .ended) {
+			gesView.font = UIFont.systemFont(ofSize: fontSize * gesture.scale)
+			lastScale = 1.0
+			return
+		}
+		
+		let scale = 1.0 - (lastScale - gesture.scale)
+		
+		let newTransform = self.gesView.transform.scaledBy(x: scale, y: scale)
+		
+		self.gesView.transform = newTransform
+		lastScale = gesture.scale
     }
     
-    func rotationAction(_ gesture: UIRotationGestureRecognizer) {
-        self.gesView.transform = CGAffineTransform(rotationAngle: gesture.rotation*(180/(CGFloat(Double.pi))))
-        
+	@objc func rotationAction(_ gesture: UIRotationGestureRecognizer) {
+		gesView.transform = gesView.transform.rotated(by: gesture.rotation)
+		gesture.rotation = 0
     }
 }

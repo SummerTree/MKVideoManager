@@ -23,6 +23,9 @@ class MKVideoEditViewController: UIViewController {
     var playerLayer: AVPlayerLayer!
     var player: AVPlayer?
     var captionView: UIView?
+	
+	var colorsInputView: ColorsInputView!
+	var colorType: ColorType = .Text
     
     var videoSize: CGSize?
     
@@ -41,10 +44,15 @@ class MKVideoEditViewController: UIViewController {
         self.setSubViews()
         self.addKeyboardObserve()
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		self.navigationController?.isNavigationBarHidden = true
+	}
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        if self.player?.currentItem
+		self.navigationController?.isNavigationBarHidden = false
     }
     
     func setupPlayer() {
@@ -57,7 +65,7 @@ class MKVideoEditViewController: UIViewController {
         self.player = AVPlayer.init(playerItem: playerItem)
         playerLayer = AVPlayerLayer.init(player: self.player)
         playerLayer.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        playerLayer.videoGravity = AVLayerVideoGravityResizeAspect
+		playerLayer.videoGravity = AVLayerVideoGravity.resizeAspect
         
         self.playView.layer.addSublayer(playerLayer)
         self.addPlayerObserve()
@@ -154,15 +162,24 @@ class MKVideoEditViewController: UIViewController {
                 make.size.equalTo(CGSize.init(width: 40, height: 40))
             }
         }
+		
+		self.maskViewManager = TextEditMaskManager.shared
+		self.maskViewManager.delegate = self
+		self.view.addSubview(self.maskViewManager.maskView)
+//		self.maskView.snp.makeConstraints { (make) in
+//			make.edges.equalToSuperview().inset(UIEdgeInsets.zero)
+//		}
+		self.colorsInputView = ColorsInputView(frame: CGRect.init(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: 44))
+		self.colorsInputView.delegate = self
+		
+		self.view.addSubview(self.colorsInputView)
     }
     //MARK:
     func showMask() {
-        if self.maskViewManager == nil {
-            self.maskViewManager = TextEditMaskManager.shared
-            self.maskViewManager.delegate = self
-        }
+		
         self.toggleAcionViewHide(true)
         self.maskViewManager.showMaskViewWithView(nil)
+		self.maskViewManager.editTextView.becomeFirstResponder()
     }
     
     func toggleAcionViewHide(_ isHide:Bool) {
@@ -252,23 +269,23 @@ extension MKVideoEditViewController{
         //
         
         //video track
-        let assetVideoTrack = asset.tracks(withMediaType: AVMediaTypeVideo)[0]
+		let assetVideoTrack = asset.tracks(withMediaType: AVMediaType.video)[0]
         
         //composition
         let mutableComposition = AVMutableComposition.init()
         
        //video composition Track
-        let videoCompositionTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid)
+		let videoCompositionTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)
         //insert video track
-        try! videoCompositionTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, asset.duration), of: assetVideoTrack, at: kCMTimeZero)
+		try! videoCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: assetVideoTrack, at: CMTime.zero)
         //
         let mutableVideoComposition = AVMutableVideoComposition()
-        mutableVideoComposition.frameDuration = CMTimeMake(1, 30)//30fps
+		mutableVideoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)//30fps
         mutableVideoComposition.renderSize = assetVideoTrack.naturalSize
         self.videoSize = assetVideoTrack.naturalSize
         let passThroughnstruction: AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
-        passThroughnstruction.timeRange = CMTimeRangeMake(kCMTimeZero, mutableComposition.duration)
-        let videoTrack: AVAssetTrack = mutableComposition.tracks(withMediaType: AVMediaTypeVideo)[0]
+		passThroughnstruction.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: mutableComposition.duration)
+		let videoTrack: AVAssetTrack = mutableComposition.tracks(withMediaType: AVMediaType.video)[0]
         let passThroughLayer: AVMutableVideoCompositionLayerInstruction = AVMutableVideoCompositionLayerInstruction.init(assetTrack: videoTrack)
         passThroughnstruction.layerInstructions = [passThroughLayer]
         
@@ -304,7 +321,7 @@ extension MKVideoEditViewController{
         let export = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality)
         export!.outputURL = exportUrl
         export!.videoComposition = mutableVideoComposition
-        export!.outputFileType = AVFileTypeQuickTimeMovie
+		export!.outputFileType = AVFileType.mov
         export!.exportAsynchronously(completionHandler: {() -> Void in
             switch export!.status{
             case .completed:
@@ -346,48 +363,50 @@ extension MKVideoEditViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(playbackFInished), name: .AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
     }
     
-    func playbackFInished(){
+	@objc func playbackFInished(){
         self.player?.seek(to: CMTime.init(value: 0, timescale: 1))
         self.player?.play()
     }
     
     func addKeyboardObserve(){
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(note:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHidden(note:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(note:)), name:
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(note:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden(note:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func keyboardWillShow(note: NSNotification) {
+	@objc func keyboardWillShow(note: NSNotification) {
         let userInfo = note.userInfo!
-        let  keyBoardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+		let  keyBoardBounds = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+		let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         
         self.deltaY = keyBoardBounds.size.height
         print("deltaY: \(self.deltaY)")
         
         let animations:(() -> Void) = {
             //键盘的偏移量
+			self.colorsInputView.frame = CGRect.init(x: 0, y: UIScreen.main.bounds.height - 44 - self.deltaY, width: UIScreen.main.bounds.width, height: 44)
             self.maskViewManager.reloadEditViewControlHeight(self.deltaY)
         }
         
         if duration > 0 {
-            let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
+			let options = UIView.AnimationOptions(rawValue: UInt((userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
             
             UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
         }else{
             animations()
         }
     }
-    func keyboardWillHidden(note: NSNotification) {
+	@objc func keyboardWillHidden(note: NSNotification) {
         let userInfo  = note.userInfo!
-        let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+		let duration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         
         let animations:(() -> Void) = {
             //键盘的偏移量
-            
+            self.colorsInputView.frame = CGRect.init(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: 44)
         }
         if duration > 0 {
-            let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
+			let options = UIView.AnimationOptions(rawValue: UInt((userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
             
             UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
         }else{
@@ -398,6 +417,7 @@ extension MKVideoEditViewController{
 
 extension MKVideoEditViewController: TextEditMaskManagerDelegate{
     func maskViewDidHide() {
+		self.maskViewManager.editTextView.resignFirstResponder()
         self.toggleAcionViewHide(false)
     }
     
@@ -441,21 +461,22 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
     }
     
     //MARK: Gesture Action
-    func tap(_ gesture: UITapGestureRecognizer) {
+	@objc func tap(_ gesture: UITapGestureRecognizer) {
         
 //        let filterView = gesture.view as! EditTextView
         let filterView = gesture.view as! MKCaptionLabel
-        filterView.superview?.bringSubview(toFront: filterView)
+		filterView.superview?.bringSubviewToFront(filterView)
         self.maskViewManager.showMaskViewWithView(filterView)
+		self.maskViewManager.editTextView.becomeFirstResponder()
         filterView.removeFromSuperview()
     }
     
-    func pan(_ gesture: UIPanGestureRecognizer) {
+	@objc func pan(_ gesture: UIPanGestureRecognizer) {
         let translation  = gesture.translation(in: self.view)
         //设置矩形的位置
 //        let filterView = gesture.view as! EditTextView
         let filterView = gesture.view as! MKCaptionLabel
-        filterView.superview?.bringSubview(toFront: filterView)
+		filterView.superview?.bringSubviewToFront(filterView)
         if gesture.state == UIPanGestureRecognizer.State.began {
             originCenter = filterView.filterModel?.center
             self.togglePanActionViewHide(true)
@@ -483,7 +504,7 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
         
     }
     
-    func pinchAction(_ gesture: UIPinchGestureRecognizer) {
+	@objc func pinchAction(_ gesture: UIPinchGestureRecognizer) {
         print("gesture.scale: \(gesture.scale)")
         let factor = gesture.scale
         
@@ -506,9 +527,7 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
         }
     }
     
-    func rotationAction(_ gesture: UIRotationGestureRecognizer) {
-        
-        
+	@objc func rotationAction(_ gesture: UIRotationGestureRecognizer) {
         //浮点类型，得到sender的旋转度数
         print("rotation: \(gesture.rotation)")
         let rotation : CGFloat = gesture.rotation
@@ -524,7 +543,7 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
         print("newRotation: \(newRotation)")
         netRotation = rotation
         //状态结束，保存数据
-        if gesture.state == UIGestureRecognizerState.ended{
+		if gesture.state == UIGestureRecognizer.State.ended{
             filterView.filterModel?.rotation = netRotation
             filterView.filterModel?.transform = filterView.transform
         }
@@ -533,4 +552,26 @@ extension MKVideoEditViewController : UIGestureRecognizerDelegate{
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+}
+
+extension MKVideoEditViewController: ColorsInputViewDelegate {
+	enum ColorType {
+		case Text
+		case Background
+	}
+	
+	func didSelectedColor(_ color: UIColor) {
+		switch self.colorType {
+		case .Text:
+			
+			break
+		case .Background:
+			
+			break
+		}
+	}
+	
+	func didSelectedIndex(_ index: Int) {
+		
+	}
 }

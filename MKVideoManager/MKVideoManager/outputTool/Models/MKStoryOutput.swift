@@ -112,7 +112,8 @@ class TLStoryOutput: NSObject {
             
             let resultImg = cImg!.imageMontage(img: container,bgColor: UIColor.black,size: MKExportStoryConfiguration.outputPhotoSize).addWatermark(img: MKExportStoryConfiguration.watermarkImage, p: MKExportStoryConfiguration.watermarkPosition)
             
-            let imgData = UIImageJPEGRepresentation(resultImg, 1)
+            let imgData = resultImg.jpegData(compressionQuality: 1)
+
             
             guard let exportUrl = TLStoryOutput.outputFilePath(type: .photo, isTemp: false) else {
                 DispatchQueue.main.async(execute: {

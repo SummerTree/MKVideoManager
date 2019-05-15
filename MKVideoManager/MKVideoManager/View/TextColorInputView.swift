@@ -19,7 +19,20 @@ class ColorsInputView: UIView {
     weak var delegate: ColorsInputViewDelegate? = nil
     var collectionView: UICollectionView!
     
-    var colors: [UIColor]?
+	var colors: [UIColor]  = {
+		return [
+			UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
+			UIColor.init(red: 246/255, green: 66/255, blue: 52/255, alpha: 1),
+			UIColor.init(red: 246/255, green: 153/255, blue: 52/255, alpha: 1),
+			UIColor.init(red: 246/255, green: 221/255, blue: 52/255, alpha: 1),
+			UIColor.init(red: 89/255, green: 227/255, blue: 40/255, alpha: 1),
+			UIColor.init(red: 40/255, green: 227/255, blue: 219/255, alpha: 1),
+			UIColor.init(red: 40/255, green: 105/255, blue: 227/255, alpha: 1),
+			UIColor.init(red: 100/255, green: 74/255, blue: 241/255, alpha: 1),
+			UIColor.init(red: 197/255, green: 70/255, blue: 239/255, alpha: 1),
+			UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+		]
+	} ()
     var selectedColorIndex: Int? = 0 {
         didSet{
             self.collectionView.reloadData()
@@ -41,8 +54,8 @@ class ColorsInputView: UIView {
     
     func setSubViews() {
         let defaultLayout = UICollectionViewFlowLayout()
-        defaultLayout.scrollDirection = UICollectionViewScrollDirection.horizontal
-        defaultLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+		defaultLayout.scrollDirection = UICollectionView.ScrollDirection.horizontal
+		defaultLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         defaultLayout.itemSize = CGSize(width: 32, height: 32)
         defaultLayout.minimumLineSpacing = (UIScreen.main.bounds.width - 20 - 32*10) / 9.0
         defaultLayout.minimumInteritemSpacing = 0
@@ -70,7 +83,7 @@ extension ColorsInputView : UICollectionViewDelegate, UICollectionViewDataSource
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.colors?.count ?? 0
+        return self.colors.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,7 +96,7 @@ extension ColorsInputView : UICollectionViewDelegate, UICollectionViewDataSource
             cell.isSelected = false
         }
         
-        cell.normalContentView?.backgroundColor = self.colors?[indexPath.row]
+        cell.normalContentView?.backgroundColor = self.colors[indexPath.row]
         return cell
     }
     
@@ -95,7 +108,7 @@ extension ColorsInputView : UICollectionViewDelegate, UICollectionViewDataSource
         }
         
         self.selectedColorIndex = indexPath.row
-        let color = self.colors?[indexPath.row]
+        let color = self.colors[indexPath.row]
         print("color: \(String(describing: color))")
         if self.delegate != nil {
             self.delegate?.didSelectedColor(color ?? UIColor.white)

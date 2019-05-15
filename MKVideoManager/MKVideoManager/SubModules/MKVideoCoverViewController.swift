@@ -55,7 +55,7 @@ class MKVideoCoverViewController: UIViewController {
         
         backgroundImageView = UIImageView.init(image: nil)
         backgroundImageView?.backgroundColor = UIColor.purple
-        backgroundImageView?.contentMode = UIViewContentMode.scaleAspectFill
+		backgroundImageView?.contentMode = UIView.ContentMode.scaleAspectFill
         self.view.addSubview(backgroundImageView!)
         backgroundImageView?.snp.makeConstraints({ (make) in
             make.top.left.right.bottom.equalToSuperview()
@@ -76,13 +76,13 @@ class MKVideoCoverViewController: UIViewController {
         seconds = Float(time!.value) / Float(time!.timescale)
         generator = AVAssetImageGenerator(asset: asset!)
         generator!.appliesPreferredTrackTransform = true
-        generator!.requestedTimeToleranceAfter = kCMTimeZero
-        generator!.requestedTimeToleranceBefore = kCMTimeZero
+		generator!.requestedTimeToleranceAfter = CMTime.zero
+		generator!.requestedTimeToleranceBefore = CMTime.zero
         let playerItem = AVPlayerItem.init(asset: self.asset!)
         self.player = AVPlayer.init(playerItem: playerItem)
         let playerLayer = AVPlayerLayer.init(player: self.player)
         playerLayer.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        playerLayer.videoGravity = AVLayerVideoGravityResizeAspect
+		playerLayer.videoGravity = AVLayerVideoGravity.resizeAspect
         
         self.backgroundImageView?.layer.addSublayer(playerLayer)
         self.player?.pause()
@@ -118,8 +118,8 @@ class MKVideoCoverViewController: UIViewController {
     
     func setCollectionView() {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = UICollectionViewScrollDirection.horizontal
-        flowLayout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8)
+		flowLayout.scrollDirection = UICollectionView.ScrollDirection.horizontal
+		flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
         flowLayout.itemSize = CGSize.init(width: MKVideoCoverViewController.itemWidth, height: MKVideoCoverViewController.itemHeight)
@@ -196,11 +196,11 @@ class MKVideoCoverViewController: UIViewController {
     }
     
     //MARK: Action
-    func cancelAction() {
+	@objc func cancelAction() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func doneAction() {
+	@objc func doneAction() {
         //get cover
         let image = self.getImageWithTime(self.currentProgress)
         //输出 封面
@@ -219,7 +219,7 @@ extension MKVideoCoverViewController{
         view.addGestureRecognizer(tap)
     }
     
-    func tapGes(_ gesture: UITapGestureRecognizer) {
+	@objc func tapGes(_ gesture: UITapGestureRecognizer) {
 //        let sliderX = self.selectedImageView?.frame.origin.x
 //        let sliderMaxX = self.selectedImageView?.frame.maxX
         let locationPoint = gesture.location(in: gesture.view)
@@ -240,7 +240,7 @@ extension MKVideoCoverViewController{
         self.reloadImageWithTime(progress)
     }
     
-    func panGes(_ gesture: UIPanGestureRecognizer) {
+	@objc func panGes(_ gesture: UIPanGestureRecognizer) {
 //        var originCenterX: CGFloat! = 0.0
         if gesture.state == UIGestureRecognizer.State.began {
             self.selectedView?.layoutIfNeeded()
@@ -273,14 +273,14 @@ extension MKVideoCoverViewController{
     func reloadImageWithTime(_ progress:Float) {
         currentProgress = progress
         let seekValue = Float((self.time?.value)!) * progress
-        let playerTime: CMTime = CMTimeMake(Int64(seekValue), (self.time?.timescale)!)
-        self.player?.seek(to: playerTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+		let playerTime: CMTime = CMTimeMake(value: Int64(seekValue), timescale: (self.time?.timescale)!)
+		self.player?.seek(to: playerTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
     }
     
     func getImageWithTime(_ progress:Float) -> UIImage {
         print("progress: \(progress)")
         let timeSelect: Float = self.seconds! * Float(progress)
-        let imgTime: CMTime = CMTimeMakeWithSeconds(Float64(timeSelect), (self.time?.timescale)!);
+		let imgTime: CMTime = CMTimeMakeWithSeconds(Float64(timeSelect), preferredTimescale: (self.time?.timescale)!);
         
         let img: CGImage = try! self.generator!.copyCGImage(at: imgTime, actualTime: nil)
         let frameImg: UIImage = UIImage(cgImage: img)

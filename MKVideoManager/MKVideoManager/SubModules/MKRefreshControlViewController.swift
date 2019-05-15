@@ -26,7 +26,7 @@ class MKRefreshControlViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout.init()
         flowLayout.minimumLineSpacing = 6
         flowLayout.minimumInteritemSpacing = 6
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 7, 0, 7)
+		flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 7)
         flowLayout.itemSize = CGSize.init(width: 60, height: 60)
         collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = UIColor.white
@@ -34,7 +34,7 @@ class MKRefreshControlViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(MKRefreshCollectionViewCell.self, forCellWithReuseIdentifier: "MKRefreshCollectionViewCell")
-        collectionView.contentInset = UIEdgeInsetsMake(100, 0, 100, 0)
+		collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview().inset(UIEdgeInsets.zero)
