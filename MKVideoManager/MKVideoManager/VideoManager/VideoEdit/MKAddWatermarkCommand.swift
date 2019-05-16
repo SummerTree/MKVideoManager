@@ -30,30 +30,25 @@ class MKAddWatermarkCommand: MKVideoCommand {
 //		let naturalSize = assetVideoTrack.naturalSize
 	}
 	
-	static private func setupVideoTrack(asset: AVURLAsset, composition: AVMutableComposition) -> AVMutableCompositionTrack? {
+	static private func setupVideoTrack(asset: AVAsset, videoTrack: AVMutableCompositionTrack, startTime: CMTime) {
 		//3 视频通道  工程文件中的轨道，有音频轨、视频轨等，里面可以插入各种对应的素材
-		guard let videoTrack: AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid) else {
-			return nil
-		}
 		let videoAssetTracks = asset.tracks(withMediaType: AVMediaType.video)
 		if videoAssetTracks.isEmpty == true {
 			//no video track error
-			
-			return nil
+			return
 		}
 		for videoAssetTrack: AVAssetTrack in videoAssetTracks {
 			do{
 				//把视频轨道数据加入到可变轨道中 这部分可以做视频裁剪TimeRange
-				try videoTrack.insertTimeRange(videoAssetTrack.timeRange, of: videoAssetTrack, at: CMTime.zero)
+				try videoTrack.insertTimeRange(videoAssetTrack.timeRange, of: videoAssetTrack, at: startTime)
 			}catch{
 				print(error)
-				return nil
+				return
 			}
 		}
-		return videoTrack
 	}
 	
-	static private func setupAudioTrack(asset: AVURLAsset, composition: AVMutableComposition) -> AVMutableCompositionTrack? {
+	static private func setupAudioTrack(asset: AVURLAsset, composition: AVMutableComposition, startTime: CMTime) -> AVMutableCompositionTrack? {
 		guard let audioTrack: AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)  else {
 			return nil
 		}
@@ -68,7 +63,7 @@ class MKAddWatermarkCommand: MKVideoCommand {
 		for audioAssetTrack: AVAssetTrack in audioAssetTracks {
 			do {
 				//音频通道
-				try audioTrack.insertTimeRange(audioAssetTrack.timeRange, of: audioAssetTrack, at: CMTime.zero)
+				try audioTrack.insertTimeRange(audioAssetTrack.timeRange, of: audioAssetTrack, at: startTime)
 			} catch {
 				print(error)
 				return nil
@@ -249,34 +244,45 @@ class MKAddWatermarkCommand: MKVideoCommand {
 		return .landscapeLeft
 	}
 	
-	static func compositionStoryWithSys(_ watermarkImage: UIImage, _ videoUrl: URL, _ maskVideoUrl: URL, callback:@escaping ((URL?) -> Void)){
+	static func compositionStoryWithSys(_ watermarkImage: UIImage, _ videoUrl: URL, _ maskVideoUrl: URL, _ preVideoUrl: URL, callback:@escaping ((URL?) -> Void)){
 		// 1 AVURLAsset 初始化视频媒体文件
 		let opts = [AVURLAssetPreferPreciseDurationAndTimingKey: NSNumber.init(value: false)]
+		let preAsset: AVURLAsset = AVURLAsset.init(url: preVideoUrl, options: opts)
 		let asset: AVURLAsset = AVURLAsset.init(url: videoUrl, options: opts)
 		let maskAsset: AVURLAsset = AVURLAsset.init(url: maskVideoUrl, options: opts)
 		// 2 AVMutableComposition 创建AVMutableComposition实例.
 		let mixComposition = AVMutableComposition()
 		
 		//3 AVMutableCompositionTrack 获取视频通道实例
-		
-		// --------------------track 1----------------------
-		guard let videoTrack: AVMutableCompositionTrack = self.setupVideoTrack(asset: asset, composition: mixComposition) else {
+		// --------------------track 0 pre track----------------------
+		guard let preTrack: AVMutableCompositionTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: 1) else {
 			callback(nil)
 			return
 		}
+		self.setupVideoTrack(asset: preAsset, videoTrack: preTrack, startTime: CMTime.zero)
+		
+		// 3 设置合成的视频源
+		// 3.1 AVMutableVideoCompositionLayerInstruction 对视频图层的操作，可以设置视频在指定时间的方向、位置、透明度、裁剪大小等
+		let preLayerInstruction = AVMutableVideoCompositionLayerInstruction.init(assetTrack: preTrack)
+		//		let newSize = videoTrack.naturalSize
+		//对视频轨道进行处理，调整视频，设置transform 和 opacity
+		let (preTransform, preSize) = self.transformRotation(from: preTrack)
+		preLayerInstruction.setTransform(preTransform, at: CMTime.zero)
+		
+		let preDuration: CMTime = preTrack.timeRange.duration
+		preLayerInstruction.setOpacity(0, at: preDuration)
+		// --------------------track 1----------------------
+		guard let videoTrack: AVMutableCompositionTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: 2) else {
+			callback(nil)
+			return
+		}
+		self.setupVideoTrack(asset: asset, videoTrack: videoTrack, startTime: preDuration)
 		// 3 设置合成的视频源
 		// 3.1 AVMutableVideoCompositionLayerInstruction 对视频图层的操作，可以设置视频在指定时间的方向、位置、透明度、裁剪大小等
 		let videoLayerInstruction = AVMutableVideoCompositionLayerInstruction.init(assetTrack: videoTrack)
+//		let newSize = videoTrack.naturalSize
 		//对视频轨道进行处理，调整视频，设置transform 和 opacity
-//		let (videoTransform, newSize) = self.transformRotation(from: videoTrack)
-		//		var newTransForm = videoTransform.scaledBy(x: 0.2, y: 0.2)
-		//		newTransForm = newTransForm.translatedBy(x: 0, y: 180)
-//		videoLayerInstruction.setTransform(videoTransform, at: CMTime.zero)
-		
-		//demo
-		let (videoTransform, newRect) = self.transformTranslate(from: videoTrack)
-		let newSize = newRect.size
-		videoLayerInstruction.setCropRectangle(newRect, at: CMTime.zero)
+		let (videoTransform, newSize) = self.transformRotation(from: videoTrack)
 		videoLayerInstruction.setTransform(videoTransform, at: CMTime.zero)
 		
 		//opacity 默认为 1
@@ -284,29 +290,20 @@ class MKAddWatermarkCommand: MKVideoCommand {
 		
 		// --------------------track 2----------------------
 		//3 AVMutableCompositionTrack 获取视频通道实例
-		guard let maskVideoTrack: AVMutableCompositionTrack = self.setupVideoTrack(asset: maskAsset, composition: mixComposition) else {
+		guard let maskTrack: AVMutableCompositionTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: 3) else {
 			callback(nil)
 			return
 		}
+		self.setupVideoTrack(asset: maskAsset, videoTrack: maskTrack, startTime: preDuration)
 		// 3 设置合成的视频源
 		// 3.1 AVMutableVideoCompositionLayerInstruction 对视频图层的操作，可以设置视频在指定时间的方向、位置、透明度、裁剪大小等
-		let maskVideoLayerInstruction = AVMutableVideoCompositionLayerInstruction.init(assetTrack: maskVideoTrack)
+		let maskVideoLayerInstruction = AVMutableVideoCompositionLayerInstruction.init(assetTrack: maskTrack)
 		//对视频轨道进行处理，调整视频，设置transform 和 opacity
-//		let (maskVideoTransform, maskSize) = self.transformRotation(from: maskVideoTrack)
-//		let identifyTransform = CGAffineTransform.identity
-		
-//		var newTransForm = maskVideoTransform.scaledBy(x: 0.2, y: 0.2)
-//		newTransForm = newTransForm.translatedBy(x: 0, y: 180 * UIScreen.main.scale)
-//		maskVideoLayerInstruction.setTransform(newTransForm, at: CMTime.zero)
-		//demo
-		let (maskVideoTransform, maskRect) = self.transformTranslate(from: videoTrack)
-		let maskSize = maskRect.size
-		var newTransForm = maskVideoTransform.scaledBy(x: 0.2, y: 0.2)
-//		maskVideoLayerInstruction.setCropRectangle(maskRect, at: CMTime.zero)
+		let (maskVideoTransform, maskSize) = self.transformRotation(from: maskTrack)
+		var newTransForm = maskVideoTransform.translatedBy(x: 20 * UIScreen.main.scale, y: 90 * UIScreen.main.scale)
+		newTransForm = newTransForm.scaledBy(x: 0.25, y: 0.25)
 		maskVideoLayerInstruction.setTransform(newTransForm, at: CMTime.zero)
-		
-		
-		
+		print("preSize: \(preSize)")
 		print("firstSize: \(newSize)")
 		print("secondSize: \(maskSize)")
 		// 3.2 - Add instructions
@@ -314,28 +311,53 @@ class MKAddWatermarkCommand: MKVideoCommand {
 		let mainInstruction = AVMutableVideoCompositionInstruction()
 		
 		//这里设置导出视频的时长
-		
-		mainInstruction.timeRange = videoTrack.timeRange
+		let totoaRange: CMTimeRange = CMTimeRangeMake(start: CMTime.zero, duration: CMTimeAdd(preTrack.timeRange.duration, videoTrack.timeRange.duration))
+		mainInstruction.timeRange = totoaRange
 		mainInstruction.backgroundColor = UIColor.red.cgColor
 		//videoCompositionToolWithPostProcessingAsVideoLayer 时需要为 true， default = true
 		//mainInstruction.enablePostProcessing = true
 	
 		//为视频分层，对于添加在相同时间的视频layer，先添加的在最顶层，后添加的在下层
-		mainInstruction.layerInstructions = [maskVideoLayerInstruction, videoLayerInstruction]
+		mainInstruction.layerInstructions = [preLayerInstruction, maskVideoLayerInstruction, videoLayerInstruction]
 		
 		// 4 AVMutableAudioMix 音频混合器，通过AVMutableAudioMixInputParameters 设置音频轨道
 		let audioMixTools: AVMutableAudioMix = AVMutableAudioMix()
-		if let audioTrack: AVMutableCompositionTrack = self.setupAudioTrack(asset: asset, composition: mixComposition) {
-			let mixInputParameter: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters.init(track: audioTrack)
-			mixInputParameter.setVolumeRamp(fromStartVolume: 1, toEndVolume: 1, timeRange: audioTrack.timeRange)
-			mixInputParameter.trackID = audioTrack.trackID
-			audioMixTools.inputParameters = [mixInputParameter]
+		var audioParameters: [AVMutableAudioMixInputParameters] = []
+		var preAudioDuration: CMTime = CMTime.zero
+		if let preAudioTrack: AVMutableCompositionTrack = self.setupAudioTrack(asset: preAsset, composition: mixComposition, startTime: CMTime.zero) {
+			let mixInputParameter: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters.init(track: preAudioTrack)
+			mixInputParameter.setVolumeRamp(fromStartVolume: 1, toEndVolume: 1, timeRange: preAudioTrack.timeRange)
+			mixInputParameter.trackID = preAudioTrack.trackID
+			audioParameters.append(mixInputParameter)
+			preAudioDuration = preAudioTrack.timeRange.duration
+			
 		}
 		
+		if let maskAudioTrack: AVMutableCompositionTrack = self.setupAudioTrack(asset: maskAsset, composition: mixComposition, startTime: preAudioDuration) {
+			let mixInputParameter: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters.init(track: maskAudioTrack)
+
+			mixInputParameter.setVolumeRamp(fromStartVolume: 1, toEndVolume: 1, timeRange: maskAudioTrack.timeRange)
+
+			mixInputParameter.trackID = maskAudioTrack.trackID
+			audioParameters.append(mixInputParameter)
+			
+		}
+		
+		if let audioTrack: AVMutableCompositionTrack = self.setupAudioTrack(asset: asset, composition: mixComposition, startTime: preAudioDuration) {
+			let mixInputParameter: AVMutableAudioMixInputParameters = AVMutableAudioMixInputParameters.init(track: audioTrack)
+
+			mixInputParameter.setVolumeRamp(fromStartVolume: 1, toEndVolume: 1, timeRange: audioTrack.timeRange)
+
+			mixInputParameter.trackID = audioTrack.trackID
+			audioParameters.append(mixInputParameter)
+			
+		}
+		
+		audioMixTools.inputParameters = audioParameters
 		// 5 AVMutableVideoComposition：合成器 管理所有视频轨道，可以决定最终视频的尺寸
 		let videoComposition = AVMutableVideoComposition()
 		
-		videoComposition.renderSize = newSize
+		videoComposition.renderSize = preSize
 		//		mainCompositionInst.renderScale = 1
 		
 		//合成需要执行的操作

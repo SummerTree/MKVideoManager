@@ -20,14 +20,17 @@ class MKVideoCompositionViewController: UIViewController {
 	
 	@IBAction func compositionAction() {
 		let waterImage = self.getWaterView().screenshot()
+		let prePath = Bundle.main.path(forResource: "001", ofType: "MP4")
+		let preUrl = URL(fileURLWithPath: prePath!)
+		
 		let videoPath = Bundle.main.path(forResource: "000", ofType: "MP4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
 //		let maskPath = Bundle.main.path(forResource: "330", ofType: "MOV")
 //		let maskUrl = URL(fileURLWithPath: maskPath!)
-		let maskPath = Bundle.main.path(forResource: "002", ofType: "MOV")
+		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
 		let maskUrl = URL(fileURLWithPath: maskPath!)
-		MKAddWatermarkCommand.compositionStoryWithSys(waterImage, videoUrl, maskUrl) { (exportUrl) in
+		MKAddWatermarkCommand.compositionStoryWithSys(waterImage, videoUrl, maskUrl, preUrl) { (exportUrl) in
 			
 			guard let url = exportUrl else {
 				print("export failed")
