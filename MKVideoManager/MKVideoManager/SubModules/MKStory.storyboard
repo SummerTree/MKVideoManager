@@ -338,6 +338,9 @@
                                 <state key="normal" title="Compostion">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="compositionAction" destination="DHN-Tx-1r6" eventType="touchUpInside" id="oGQ-jC-BVA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AD8-Dz-8gv">
                                 <rect key="frame" x="18" y="322" width="152" height="38"/>
