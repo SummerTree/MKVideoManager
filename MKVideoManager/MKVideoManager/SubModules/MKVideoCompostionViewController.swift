@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import AVKit
 
 let ScreenHeight: CGFloat = UIScreen.main.bounds.height
 let ScreenWidth: CGFloat = UIScreen.main.bounds.width
@@ -18,30 +19,120 @@ class MKVideoCompositionViewController: UIViewController {
 		super.viewDidLoad()
 	}
 	
-	@IBAction func compositionAction() {
-		let waterImage = self.getWaterView().screenshot()
-		let prePath = Bundle.main.path(forResource: "001", ofType: "MP4")
-		let preUrl = URL(fileURLWithPath: prePath!)
-		
-		let videoPath = Bundle.main.path(forResource: "000", ofType: "MP4")
+	deinit {
+		print("dealloc")
+	}
+	
+	@IBAction func compositionWithNoImage(_ sender: Any) {
+	
+		let videoPath = Bundle.main.path(forResource: "999", ofType: "MP4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
-//		let maskPath = Bundle.main.path(forResource: "330", ofType: "MOV")
-//		let maskUrl = URL(fileURLWithPath: maskPath!)
-		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
-		let maskUrl = URL(fileURLWithPath: maskPath!)
-		MKAddWatermarkCommand.compositionStoryWithSys(waterImage, videoUrl, maskUrl, preUrl) { (exportUrl) in
-			
-			guard let url = exportUrl else {
-				print("export failed")
+		let videoEdit = MKVideoEditCommand()
+		videoEdit.compositionVideoAndExport(with: videoUrl, waterImage: nil) {[weak self] (exportUrl) in
+			guard let `self` = self else {
 				return
 			}
-			print(url.path)
-			PHPhotoLibrary.shared().performChanges({
-				PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-			}) { saved, error in
-				print("save to photoLibrary")
+			self.saveVideo(with: exportUrl)
+			guard let url = exportUrl else {
+				return
 			}
+			let asset = AVURLAsset.init(url: url)
+			self.showPlayer(asset: asset)
+		}
+	}
+	@IBAction func compositionWithImage(_ sender: Any) {
+		let waterImage = self.getWaterView().screenshot()
+		let videoPath = Bundle.main.path(forResource: "999", ofType: "MP4")
+		let videoUrl = URL(fileURLWithPath: videoPath!)
+		
+		let videoEdit = MKVideoEditCommand()
+		videoEdit.compositionVideoAndExport(with: videoUrl, waterImage: waterImage) {[weak self] (exportUrl) in
+			guard let `self` = self else {
+				return
+			}
+			self.saveVideo(with: exportUrl)
+			guard let url = exportUrl else {
+				return
+			}
+			let asset = AVURLAsset.init(url: url)
+			self.showPlayer(asset: asset)
+		}
+	}
+	
+	@IBAction func compositionAndExport(_ sender: Any) {
+		let waterImage = self.getWaterView().screenshot()
+		let prePath = Bundle.main.path(forResource: "pre", ofType: "mp4")
+		let preUrl = URL(fileURLWithPath: prePath!)
+		
+		let videoPath = Bundle.main.path(forResource: "main", ofType: "mp4")
+		let videoUrl = URL(fileURLWithPath: videoPath!)
+		
+		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
+		let maskUrl = URL(fileURLWithPath: maskPath!)
+		let videoEdit = MKVideoEditCommand()
+		videoEdit.compositionVideoAndExport(with: waterImage, firstUrl: videoUrl, maskUrl: maskUrl, preUrl: preUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90)) {[weak self] (exportUrl) in
+			guard let `self` = self else {
+				return
+			}
+			self.saveVideo(with: exportUrl)
+			guard let url = exportUrl else {
+				return
+			}
+			let asset = AVURLAsset.init(url: url)
+			self.showPlayer(asset: asset)
+		}
+	}
+	@IBAction func compositionToPlay(_ sender: Any) {
+		let videoPath = Bundle.main.path(forResource: "main", ofType: "mp4")
+		let videoUrl = URL(fileURLWithPath: videoPath!)
+		
+		let maskPath = Bundle.main.path(forResource: "pre", ofType: "mp4")
+		let maskUrl = URL(fileURLWithPath: maskPath!)
+		let videoEdit = MKVideoEditCommand()
+		videoEdit.compositionVideo(with: videoUrl, maskUrl: maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90)) {[weak self] (exportUrl) in
+			guard let `self` = self else {
+				return
+			}
+			self.saveVideo(with: exportUrl)
+			guard let url = exportUrl else {
+				return
+			}
+			let asset = AVURLAsset.init(url: url)
+			self.showPlayer(asset: asset)
+		}
+	}
+	
+	@IBAction func otherClicked(_ sender: Any) {
+		let waterImage = self.getWaterView().screenshot()
+		let prePath = Bundle.main.path(forResource: "pre", ofType: "mp4")
+		let preUrl = URL(fileURLWithPath: prePath!)
+		
+		let videoPath = Bundle.main.path(forResource: "main", ofType: "mp4")
+		let videoUrl = URL(fileURLWithPath: videoPath!)
+		
+		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
+		let maskUrl = URL(fileURLWithPath: maskPath!)
+		let videoEdit = MKVideoEditCommand()
+		guard let asset = videoEdit.compositionVideoToPlay(with: waterImage, firstUrl: videoUrl, maskUrl: maskUrl, preUrl: preUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90)) else {
+			return
+		}
+		
+		self.showPlayer(asset: asset)
+	}
+	func showPlayer(asset: AVAsset) {
+		print(asset.duration)
+		if asset.isPlayable == false {
+			print("can't play")
+			return
+		}
+
+		let playerItem = AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: ["tracks"])
+		let player = AVPlayer.init(playerItem: playerItem)
+		let playerVC = AVPlayerViewController()
+		playerVC.player = player
+		self.present(playerVC, animated: true) {
+			
 		}
 	}
 	
@@ -58,10 +149,42 @@ extension MKVideoCompositionViewController {
 		waterView.font = UIFont.systemFont(ofSize: 16 * scale, weight: .heavy)
 		waterView.textColor = UIColor.white
 		waterView.textAlignment = .center
-		waterView.text = "swipe up to view profile".uppercased()
+		waterView.text = "CREATE YOUR OWN".uppercased()
 		waterView.center = CGPoint.init(x: bgView.bounds.width / 2, y: bgView.bounds.height - 65 * scale)
 		bgView.addSubview(waterView)
 		return bgView
 	}
 
+	func saveVideo(with localUrl: URL?) {
+		guard let url = localUrl else {
+			print("export failed")
+			return
+		}
+		print(url.path)
+		let asset = AVURLAsset.init(url: url)
+		if asset.isCompatibleWithSavedPhotosAlbum {
+			PHPhotoLibrary.shared().performChanges({
+				PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+			}) { saved, error in
+				print("save to photoLibrary")
+			}
+		} else {
+			print("save to photoLibrary failed")
+		}
+//		print(asset.duration)
+//		asset.loadValuesAsynchronously(forKeys: ["duration"]) {
+//			var error: NSError? = nil
+//			// Check for success of loading the assets tracks.
+//			let status: AVKeyValueStatus = asset.statusOfValue(forKey: "duration", error: &error)
+//			if status == .loaded {
+//				print(asset.duration)
+//
+//			}
+//
+//			if status == .failed {
+//				print("save to photoLibrary failed")
+//			}
+//		}
+		
+	}
 }

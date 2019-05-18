@@ -47,7 +47,7 @@
 		6F49AAEF219EEF76007EA231 /* MKVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEE219EEF76007EA231 /* MKVideoManager.swift */; };
 		6F49AAF221A268DB007EA231 /* MKVideoExportCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF121A268DB007EA231 /* MKVideoExportCommand.swift */; };
 		6F49AAF421A26904007EA231 /* MKAddWatermarkCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF321A26904007EA231 /* MKAddWatermarkCommand.swift */; };
-		6F49AAF621A26971007EA231 /* MKVideoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF521A26971007EA231 /* MKVideoCommand.swift */; };
+		6F49AAF621A26971007EA231 /* MKVideoEditCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF521A26971007EA231 /* MKVideoEditCommand.swift */; };
 		6F49AAF821A2E823007EA231 /* MKChooseTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF721A2E823007EA231 /* MKChooseTreeViewController.swift */; };
 		6F49AB3821A56B94007EA231 /* GPUImageBeautifyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB2F21A56B93007EA231 /* GPUImageBeautifyFilter.m */; };
 		6F49AB3921A56B94007EA231 /* TLGPUImageAlphaBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3021A56B93007EA231 /* TLGPUImageAlphaBlendFilter.m */; };
@@ -91,6 +91,8 @@
 		6FF1C99D228D6EEA007E8583 /* 001.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 6FF1C99C228D6EEA007E8583 /* 001.MP4 */; };
 		6FF1C99F228D6F9A007E8583 /* 002.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 6FF1C99E228D6F99007E8583 /* 002.MOV */; };
 		6FF1C9A1228D8806007E8583 /* IMG_0543.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 6FF1C9A0228D8806007E8583 /* IMG_0543.MOV */; };
+		6FF1C9A3228E51F5007E8583 /* pre.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6FF1C9A2228E51F5007E8583 /* pre.mp4 */; };
+		6FF1C9A5228E52AB007E8583 /* main.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6FF1C9A4228E52AB007E8583 /* main.mp4 */; };
 		6FFF54FC2202EFB300FA8156 /* MKAdjustFontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF54FB2202EFB300FA8156 /* MKAdjustFontViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -142,7 +144,7 @@
 		6F49AAEE219EEF76007EA231 /* MKVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoManager.swift; sourceTree = "<group>"; };
 		6F49AAF121A268DB007EA231 /* MKVideoExportCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoExportCommand.swift; sourceTree = "<group>"; };
 		6F49AAF321A26904007EA231 /* MKAddWatermarkCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKAddWatermarkCommand.swift; sourceTree = "<group>"; };
-		6F49AAF521A26971007EA231 /* MKVideoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoCommand.swift; sourceTree = "<group>"; };
+		6F49AAF521A26971007EA231 /* MKVideoEditCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoEditCommand.swift; sourceTree = "<group>"; };
 		6F49AAF721A2E823007EA231 /* MKChooseTreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKChooseTreeViewController.swift; sourceTree = "<group>"; };
 		6F49AB2E21A56B93007EA231 /* TLGPUImageMovieFillFiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGPUImageMovieFillFiter.h; sourceTree = "<group>"; };
 		6F49AB2F21A56B93007EA231 /* GPUImageBeautifyFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageBeautifyFilter.m; sourceTree = "<group>"; };
@@ -192,6 +194,8 @@
 		6FF1C99C228D6EEA007E8583 /* 001.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 001.MP4; sourceTree = "<group>"; };
 		6FF1C99E228D6F99007E8583 /* 002.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 002.MOV; sourceTree = "<group>"; };
 		6FF1C9A0228D8806007E8583 /* IMG_0543.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0543.MOV; sourceTree = "<group>"; };
+		6FF1C9A2228E51F5007E8583 /* pre.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = pre.mp4; sourceTree = "<group>"; };
+		6FF1C9A4228E52AB007E8583 /* main.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = main.mp4; sourceTree = "<group>"; };
 		6FFF54FB2202EFB300FA8156 /* MKAdjustFontViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKAdjustFontViewController.swift; sourceTree = "<group>"; };
 		D24FF6C93D82A2FDBC45E9CF /* Pods-MKVideoManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MKVideoManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-MKVideoManager/Pods-MKVideoManager.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -278,7 +282,7 @@
 			children = (
 				6F49AAF121A268DB007EA231 /* MKVideoExportCommand.swift */,
 				6F49AAF321A26904007EA231 /* MKAddWatermarkCommand.swift */,
-				6F49AAF521A26971007EA231 /* MKVideoCommand.swift */,
+				6F49AAF521A26971007EA231 /* MKVideoEditCommand.swift */,
 			);
 			path = VideoEdit;
 			sourceTree = "<group>";
@@ -399,6 +403,8 @@
 				6FF1C99C228D6EEA007E8583 /* 001.MP4 */,
 				6FF1C99E228D6F99007E8583 /* 002.MOV */,
 				6FF1C9A0228D8806007E8583 /* IMG_0543.MOV */,
+				6FF1C9A2228E51F5007E8583 /* pre.mp4 */,
+				6FF1C9A4228E52AB007E8583 /* main.mp4 */,
 			);
 			path = MP4;
 			sourceTree = "<group>";
@@ -570,8 +576,10 @@
 				6FF1C99D228D6EEA007E8583 /* 001.MP4 in Resources */,
 				6F3BCFBC225F212C003BB3F5 /* MKStory.storyboard in Resources */,
 				6FF1C99F228D6F9A007E8583 /* 002.MOV in Resources */,
+				6FF1C9A3228E51F5007E8583 /* pre.mp4 in Resources */,
 				6FC68C44219957C80073F3D2 /* 220.mp4 in Resources */,
 				6FF1C999228D63A3007E8583 /* 111.MP4 in Resources */,
+				6FF1C9A5228E52AB007E8583 /* main.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,7 +678,7 @@
 				6FC68C482199618E0073F3D2 /* MKTextEdit.swift in Sources */,
 				6F49AAEB219EA83C007EA231 /* ViewExtention.swift in Sources */,
 				6F7B0DFE219AE86200CA2BD2 /* FilterProtocol.swift in Sources */,
-				6F49AAF621A26971007EA231 /* MKVideoCommand.swift in Sources */,
+				6F49AAF621A26971007EA231 /* MKVideoEditCommand.swift in Sources */,
 				6F33C33721CA655900FAE42B /* MKRefreshControlViewController.swift in Sources */,
 				6F001C55219BFA8B0099602A /* MKFilterMaskView.swift in Sources */,
 				6FC68C502199751F0073F3D2 /* TextEditMaskManager.swift in Sources */,
