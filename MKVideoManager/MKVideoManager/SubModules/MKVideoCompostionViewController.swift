@@ -28,7 +28,7 @@ class MKVideoCompositionViewController: UIViewController {
 		let videoPath = Bundle.main.path(forResource: "999", ofType: "MP4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
-		let videoEdit = MKVideoEditCommand()
+		let videoEdit = VideoEditCommand()
 		videoEdit.compositionVideoAndExport(with: videoUrl, waterImage: nil) {[weak self] (exportUrl) in
 			guard let `self` = self else {
 				return
@@ -46,7 +46,7 @@ class MKVideoCompositionViewController: UIViewController {
 		let videoPath = Bundle.main.path(forResource: "999", ofType: "MP4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
-		let videoEdit = MKVideoEditCommand()
+		let videoEdit = VideoEditCommand()
 		videoEdit.compositionVideoAndExport(with: videoUrl, waterImage: waterImage) {[weak self] (exportUrl) in
 			guard let `self` = self else {
 				return
@@ -70,8 +70,8 @@ class MKVideoCompositionViewController: UIViewController {
 		
 		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
 		let maskUrl = URL(fileURLWithPath: maskPath!)
-		let videoEdit = MKVideoEditCommand()
-		videoEdit.compositionVideoAndExport(with: waterImage, firstUrl: videoUrl, maskUrl: maskUrl, preUrl: preUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90)) {[weak self] (exportUrl) in
+		let videoEdit = VideoEditCommand()
+		videoEdit.compositionVideoAndExport(with: waterImage, firstUrl: videoUrl, maskUrl: maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90), callback: {[weak self] (exportUrl) in
 			guard let `self` = self else {
 				return
 			}
@@ -81,16 +81,16 @@ class MKVideoCompositionViewController: UIViewController {
 			}
 			let asset = AVURLAsset.init(url: url)
 			self.showPlayer(asset: asset)
-		}
+		})
 	}
 	@IBAction func compositionToPlay(_ sender: Any) {
 		let videoPath = Bundle.main.path(forResource: "main", ofType: "mp4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
-		let maskPath = Bundle.main.path(forResource: "pre", ofType: "mp4")
+		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
 		let maskUrl = URL(fileURLWithPath: maskPath!)
-		let videoEdit = MKVideoEditCommand()
-		videoEdit.compositionVideo(with: videoUrl, maskUrl: maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90)) {[weak self] (exportUrl) in
+		let videoEdit = VideoEditCommand()
+		videoEdit.compositionVideoAndExport(with: nil, firstUrl: videoUrl, maskUrl: maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90), callback: {[weak self] (exportUrl) in
 			guard let `self` = self else {
 				return
 			}
@@ -100,24 +100,26 @@ class MKVideoCompositionViewController: UIViewController {
 			}
 			let asset = AVURLAsset.init(url: url)
 			self.showPlayer(asset: asset)
-		}
+		})
 	}
 	
 	@IBAction func otherClicked(_ sender: Any) {
 		let waterImage = self.getWaterView().screenshot()
-		let prePath = Bundle.main.path(forResource: "pre", ofType: "mp4")
-		let preUrl = URL(fileURLWithPath: prePath!)
+//		let prePath = Bundle.main.path(forResource: "pre", ofType: "mp4")
+//		let preUrl = URL(fileURLWithPath: prePath!)
 		
 		let videoPath = Bundle.main.path(forResource: "main", ofType: "mp4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
 		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
 		let maskUrl = URL(fileURLWithPath: maskPath!)
-		let videoEdit = MKVideoEditCommand()
-		guard let asset = videoEdit.compositionVideoToPlay(with: waterImage, firstUrl: videoUrl, maskUrl: maskUrl, preUrl: preUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90)) else {
+//		let videoComposition = VideoCompositionCommand()
+		let (mixcomposition, videoComposition, audioMix) = VideoCompositionCommand.compositionStoryWithSys(videoUrl, maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90))
+		guard let asset = mixcomposition else {
 			return
 		}
-		
+		//经过测试，mixcomposition 可以正常播放修改了音频的对象
+		//如果修改了视频轨道，只能播放第一个添加的视频
 		self.showPlayer(asset: asset)
 	}
 	func showPlayer(asset: AVAsset) {
@@ -132,7 +134,7 @@ class MKVideoCompositionViewController: UIViewController {
 		let playerVC = AVPlayerViewController()
 		playerVC.player = player
 		self.present(playerVC, animated: true) {
-			
+			player.play()
 		}
 	}
 	

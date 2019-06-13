@@ -45,9 +45,6 @@
 		6F49AAEB219EA83C007EA231 /* ViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEA219EA83C007EA231 /* ViewExtention.swift */; };
 		6F49AAED219EBBAD007EA231 /* MKCoverCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEC219EBBAD007EA231 /* MKCoverCollectionCell.swift */; };
 		6F49AAEF219EEF76007EA231 /* MKVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEE219EEF76007EA231 /* MKVideoManager.swift */; };
-		6F49AAF221A268DB007EA231 /* MKVideoExportCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF121A268DB007EA231 /* MKVideoExportCommand.swift */; };
-		6F49AAF421A26904007EA231 /* MKAddWatermarkCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF321A26904007EA231 /* MKAddWatermarkCommand.swift */; };
-		6F49AAF621A26971007EA231 /* MKVideoEditCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF521A26971007EA231 /* MKVideoEditCommand.swift */; };
 		6F49AAF821A2E823007EA231 /* MKChooseTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAF721A2E823007EA231 /* MKChooseTreeViewController.swift */; };
 		6F49AB3821A56B94007EA231 /* GPUImageBeautifyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB2F21A56B93007EA231 /* GPUImageBeautifyFilter.m */; };
 		6F49AB3921A56B94007EA231 /* TLGPUImageAlphaBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AB3021A56B93007EA231 /* TLGPUImageAlphaBlendFilter.m */; };
@@ -64,6 +61,10 @@
 		6F7B0E01219BBD1700CA2BD2 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0E00219BBD1700CA2BD2 /* FilterModel.swift */; };
 		6F7B0E03219BD5D500CA2BD2 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0E02219BD5D500CA2BD2 /* FilterView.swift */; };
 		6F7B0E05219BD68400CA2BD2 /* FilterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0E04219BD68400CA2BD2 /* FilterImageView.swift */; };
+		6FA4FA1722B25CD3000BB650 /* VideoEditCommond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1222B25CD3000BB650 /* VideoEditCommond.swift */; };
+		6FA4FA1822B25CD3000BB650 /* VideoCompositionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1322B25CD3000BB650 /* VideoCompositionCommand.swift */; };
+		6FA4FA1A22B25CD3000BB650 /* VideoWatermarkCommond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1522B25CD3000BB650 /* VideoWatermarkCommond.swift */; };
+		6FA4FA1B22B25CD3000BB650 /* VideoExportCommond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1622B25CD3000BB650 /* VideoExportCommond.swift */; };
 		6FBBB5B4228A8F0100213FDF /* 330.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 6FBBB5B3228A8F0000213FDF /* 330.MOV */; };
 		6FBBB5B6228A8F8900213FDF /* MKVideoCompostionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBBB5B5228A8F8900213FDF /* MKVideoCompostionViewController.swift */; };
 		6FC68C44219957C80073F3D2 /* 220.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6FC68C43219957C80073F3D2 /* 220.mp4 */; };
@@ -142,9 +143,6 @@
 		6F49AAEA219EA83C007EA231 /* ViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtention.swift; sourceTree = "<group>"; };
 		6F49AAEC219EBBAD007EA231 /* MKCoverCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoverCollectionCell.swift; sourceTree = "<group>"; };
 		6F49AAEE219EEF76007EA231 /* MKVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoManager.swift; sourceTree = "<group>"; };
-		6F49AAF121A268DB007EA231 /* MKVideoExportCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoExportCommand.swift; sourceTree = "<group>"; };
-		6F49AAF321A26904007EA231 /* MKAddWatermarkCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKAddWatermarkCommand.swift; sourceTree = "<group>"; };
-		6F49AAF521A26971007EA231 /* MKVideoEditCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoEditCommand.swift; sourceTree = "<group>"; };
 		6F49AAF721A2E823007EA231 /* MKChooseTreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKChooseTreeViewController.swift; sourceTree = "<group>"; };
 		6F49AB2E21A56B93007EA231 /* TLGPUImageMovieFillFiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGPUImageMovieFillFiter.h; sourceTree = "<group>"; };
 		6F49AB2F21A56B93007EA231 /* GPUImageBeautifyFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageBeautifyFilter.m; sourceTree = "<group>"; };
@@ -165,6 +163,10 @@
 		6F7B0E00219BBD1700CA2BD2 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		6F7B0E02219BD5D500CA2BD2 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		6F7B0E04219BD68400CA2BD2 /* FilterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterImageView.swift; sourceTree = "<group>"; };
+		6FA4FA1222B25CD3000BB650 /* VideoEditCommond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditCommond.swift; sourceTree = "<group>"; };
+		6FA4FA1322B25CD3000BB650 /* VideoCompositionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCompositionCommand.swift; sourceTree = "<group>"; };
+		6FA4FA1522B25CD3000BB650 /* VideoWatermarkCommond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoWatermarkCommond.swift; sourceTree = "<group>"; };
+		6FA4FA1622B25CD3000BB650 /* VideoExportCommond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoExportCommond.swift; sourceTree = "<group>"; };
 		6FBBB5B3228A8F0000213FDF /* 330.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 330.MOV; sourceTree = "<group>"; };
 		6FBBB5B5228A8F8900213FDF /* MKVideoCompostionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoCompostionViewController.swift; sourceTree = "<group>"; };
 		6FC68C43219957C80073F3D2 /* 220.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 220.mp4; sourceTree = "<group>"; };
@@ -277,16 +279,6 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
-		6F49AAF021A268C2007EA231 /* VideoEdit */ = {
-			isa = PBXGroup;
-			children = (
-				6F49AAF121A268DB007EA231 /* MKVideoExportCommand.swift */,
-				6F49AAF321A26904007EA231 /* MKAddWatermarkCommand.swift */,
-				6F49AAF521A26971007EA231 /* MKVideoEditCommand.swift */,
-			);
-			path = VideoEdit;
-			sourceTree = "<group>";
-		};
 		6F49AB2C21A56B6E007EA231 /* outputTool */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +346,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6FA4FA1122B25CD3000BB650 /* VideoEdit */ = {
+			isa = PBXGroup;
+			children = (
+				6FA4FA1222B25CD3000BB650 /* VideoEditCommond.swift */,
+				6FA4FA1322B25CD3000BB650 /* VideoCompositionCommand.swift */,
+				6FA4FA1522B25CD3000BB650 /* VideoWatermarkCommond.swift */,
+				6FA4FA1622B25CD3000BB650 /* VideoExportCommond.swift */,
+			);
+			path = VideoEdit;
+			sourceTree = "<group>";
+		};
 		6FC68C40219955170073F3D2 /* VideoManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,8 +364,8 @@
 				6F7B0DFD219AE86200CA2BD2 /* FilterProtocol.swift */,
 				6F49AAE4219E7ADA007EA231 /* MKDefine.swift */,
 				6F49AAEE219EEF76007EA231 /* MKVideoManager.swift */,
-				6F49AAF021A268C2007EA231 /* VideoEdit */,
 				6F33C33A21CB378100FAE42B /* MKRefresh.swift */,
+				6FA4FA1122B25CD3000BB650 /* VideoEdit */,
 			);
 			path = VideoManager;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				6F49AAE7219EA4E5007EA231 /* MKCaptionLabel.swift in Sources */,
 				6F33C32E21CA655000FAE42B /* XRActivityRefreshFooter.swift in Sources */,
 				6F49AB3821A56B94007EA231 /* GPUImageBeautifyFilter.m in Sources */,
+				6FA4FA1822B25CD3000BB650 /* VideoCompositionCommand.swift in Sources */,
 				6F33C34721CB5AE900FAE42B /* MKRefreshFooterView.m in Sources */,
 				6F49AB3B21A56B94007EA231 /* TLGPUImageMovieFillFiter.m in Sources */,
 				6F7B0DFA219AB46700CA2BD2 /* AttributeStringExtention.swift in Sources */,
@@ -665,20 +669,18 @@
 				6FDD79F621F2011200F83604 /* MKStickerViewController.swift in Sources */,
 				6F49AAE5219E7ADA007EA231 /* MKDefine.swift in Sources */,
 				6F49AB3A21A56B94007EA231 /* GPUImageCustomLookupFilter.swift in Sources */,
-				6F49AAF221A268DB007EA231 /* MKVideoExportCommand.swift in Sources */,
 				6F3BCFC0225F4AA6003BB3F5 /* MKTextScrollView.swift in Sources */,
-				6F49AAF421A26904007EA231 /* MKAddWatermarkCommand.swift in Sources */,
 				6F3BCFCB225F5C66003BB3F5 /* DemoTableView.swift in Sources */,
 				6F33C33421CA655000FAE42B /* DispatchQueue+XRRefresh.swift in Sources */,
 				6F33C32B21CA655000FAE42B /* XRRefreshMarcos.swift in Sources */,
 				6FDD79F421F1FA0500F83604 /* MKQuestionStickerView.swift in Sources */,
 				6F3BCFC9225F5C2A003BB3F5 /* PRTween.m in Sources */,
 				6F49AB4D21A57B48007EA231 /* UIImage+ExportStory.swift in Sources */,
+				6FA4FA1A22B25CD3000BB650 /* VideoWatermarkCommond.swift in Sources */,
 				6FDD79FA21F2F5EF00F83604 /* MKMomentEditMaskView.swift in Sources */,
 				6FC68C482199618E0073F3D2 /* MKTextEdit.swift in Sources */,
 				6F49AAEB219EA83C007EA231 /* ViewExtention.swift in Sources */,
 				6F7B0DFE219AE86200CA2BD2 /* FilterProtocol.swift in Sources */,
-				6F49AAF621A26971007EA231 /* MKVideoEditCommand.swift in Sources */,
 				6F33C33721CA655900FAE42B /* MKRefreshControlViewController.swift in Sources */,
 				6F001C55219BFA8B0099602A /* MKFilterMaskView.swift in Sources */,
 				6FC68C502199751F0073F3D2 /* TextEditMaskManager.swift in Sources */,
@@ -706,9 +708,11 @@
 				6FC68C4E219971AD0073F3D2 /* TextColorInputView.swift in Sources */,
 				6F33C32F21CA655000FAE42B /* XRProvider.swift in Sources */,
 				6F33C33121CA655000FAE42B /* XRBaseRefreshFooter.swift in Sources */,
+				6FA4FA1722B25CD3000BB650 /* VideoEditCommond.swift in Sources */,
 				6F001C59219D566C0099602A /* ColorToImage.swift in Sources */,
 				6F33C34121CB42CC00FAE42B /* UIScrollView+MKRefreshScrollView.swift in Sources */,
 				6F437D462271BA620090FB17 /* MKDeleteCellTableViewController.swift in Sources */,
+				6FA4FA1B22B25CD3000BB650 /* VideoExportCommond.swift in Sources */,
 				6F33C33B21CB378100FAE42B /* MKRefresh.swift in Sources */,
 				6FDD79F821F2057400F83604 /* MKPlaceholderTextView.swift in Sources */,
 				6F3BCFC8225F5C2A003BB3F5 /* PRTweenTimingFunctions.m in Sources */,
