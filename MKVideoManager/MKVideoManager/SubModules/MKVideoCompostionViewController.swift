@@ -41,7 +41,7 @@ class MKVideoCompositionViewController: UIViewController {
 		let videoPath = Bundle.main.path(forResource: "main", ofType: "mp4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
-		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
+		let maskPath = Bundle.main.path(forResource: "220", ofType: "mp4")
 		let maskUrl = URL(fileURLWithPath: maskPath!)
 		let videoEdit = VideoEditCommand()
 		videoEdit.compositionVideoAndExport(with: nil, firstUrl: videoUrl, maskUrl: maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90), callback: {[weak self] (exportUrl) in
@@ -58,17 +58,14 @@ class MKVideoCompositionViewController: UIViewController {
 	}
 	
 	@IBAction func otherClicked(_ sender: Any) {
-		let waterImage = self.getWaterView().screenshot()
-//		let prePath = Bundle.main.path(forResource: "pre", ofType: "mp4")
-//		let preUrl = URL(fileURLWithPath: prePath!)
+//		let waterImage = self.getWaterView().screenshot()
 		
 		let videoPath = Bundle.main.path(forResource: "main", ofType: "mp4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
-		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
+		let maskPath = Bundle.main.path(forResource: "444", ofType: "mp4")
 		let maskUrl = URL(fileURLWithPath: maskPath!)
-//		let videoComposition = VideoCompositionCommand()
-		let (mixcomposition, videoComposition, audioMix) = VideoCompositionCommand.compositionStoryWithSys(videoUrl, maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90))
+		let (mixcomposition, _, _) = VideoCompositionCommand.compositionStoryWithSys(videoUrl, maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90))
 		guard let asset = mixcomposition else {
 			return
 		}
@@ -108,7 +105,7 @@ class MKVideoCompositionViewController: UIViewController {
 	
 	func compositionWithNoImage() {
 		
-		let videoPath = Bundle.main.path(forResource: "999", ofType: "MP4")
+		let videoPath = Bundle.main.path(forResource: "ariana", ofType: "mp4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
 		let videoEdit = VideoEditCommand()
@@ -126,7 +123,7 @@ class MKVideoCompositionViewController: UIViewController {
 	}
 	func compositionWithImage(type: CompositionType) {
 		let waterImage = self.getWaterView().screenshot()
-		let videoPath = Bundle.main.path(forResource: "999", ofType: "MP4")
+		let videoPath = Bundle.main.path(forResource: "ariana", ofType: "mp4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
 		let videoEdit = VideoEditCommand()
@@ -135,11 +132,7 @@ class MKVideoCompositionViewController: UIViewController {
 				return
 			}
 			self.saveVideo(with: exportUrl)
-//			guard let url = exportUrl else {
-//				return
-//			}
-//			let asset = AVURLAsset.init(url: url)
-//			self.showPlayer(asset: asset)
+//			self.playVideo(with: exportUrl)
 		}
 	}
 	
@@ -147,13 +140,11 @@ class MKVideoCompositionViewController: UIViewController {
 	
 	func compositionAndExport(type: CompositionType) {
 		let waterImage = self.getWaterView(type: type.rawValue).screenshot()
-		let prePath = Bundle.main.path(forResource: "pre", ofType: "mp4")
-		let preUrl = URL(fileURLWithPath: prePath!)
 		
 		let videoPath = Bundle.main.path(forResource: "ariana", ofType: "mp4")
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
-		let maskPath = Bundle.main.path(forResource: "999", ofType: "MP4")
+		let maskPath = Bundle.main.path(forResource: "220", ofType: "mp4")
 		let maskUrl = URL(fileURLWithPath: maskPath!)
 		let videoEdit = VideoEditCommand()
 		TimeLog.logTime(logString: "start composition")
@@ -163,11 +154,7 @@ class MKVideoCompositionViewController: UIViewController {
 				return
 			}
 			self.saveVideo(with: exportUrl)
-//			guard let url = exportUrl else {
-//				return
-//			}
-//			let asset = AVURLAsset.init(url: url)
-//			self.showPlayer(asset: asset)
+//			self.playVideo(with: exportUrl)
 		})
 		
 		switch type {
@@ -187,6 +174,14 @@ class MKVideoCompositionViewController: UIViewController {
 			break
 		}
 	}
+	
+	func playVideo(with url: URL?) {
+		guard let url = url else {
+			return
+		}
+		let asset = AVURLAsset.init(url: url)
+		self.showPlayer(asset: asset)
+	}
 }
 
 extension MKVideoCompositionViewController {
@@ -200,7 +195,10 @@ extension MKVideoCompositionViewController {
 		waterView.font = UIFont.systemFont(ofSize: 16 * scale, weight: .heavy)
 		waterView.textColor = UIColor.white
 		waterView.textAlignment = .center
-		waterView.text = "\(String(describing: type))".uppercased()
+		if let text = type {
+			waterView.text = "\(text)".uppercased()
+		}
+		
 		waterView.center = CGPoint.init(x: bgView.bounds.width / 2, y: bgView.bounds.height - 65 * scale)
 		bgView.addSubview(waterView)
 		return bgView
@@ -223,19 +221,18 @@ extension MKVideoCompositionViewController {
 			print("save to photoLibrary failed")
 		}
 //		print(asset.duration)
-//		asset.loadValuesAsynchronously(forKeys: ["duration"]) {
-//			var error: NSError? = nil
-//			// Check for success of loading the assets tracks.
-//			let status: AVKeyValueStatus = asset.statusOfValue(forKey: "duration", error: &error)
-//			if status == .loaded {
-//				print(asset.duration)
-//
-//			}
-//
-//			if status == .failed {
-//				print("save to photoLibrary failed")
-//			}
-//		}
+		asset.loadValuesAsynchronously(forKeys: ["duration"]) {
+			var error: NSError? = nil
+			// Check for success of loading the assets tracks.
+			let status: AVKeyValueStatus = asset.statusOfValue(forKey: "duration", error: &error)
+			if status == .loaded {
+				print(asset.duration)
+			}
+
+			if status == .failed {
+				print("save to photoLibrary failed")
+			}
+		}
 		
 	}
 }

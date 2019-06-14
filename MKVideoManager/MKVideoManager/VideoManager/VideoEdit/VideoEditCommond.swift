@@ -45,7 +45,7 @@ class VideoEditCommand: NSObject {
 		
 		self.configureExport(with: exporter)
 		VideoWatermarkCommond.applyViewEffectsToCompostion(videoCom, waterImage, videoCom.renderSize)
-		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, exportType: .writer, callback: callback)
+		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, exportTool: .writer, callback: callback)
 		self.exporter = exporter
 	}
 
@@ -56,12 +56,17 @@ class VideoEditCommand: NSObject {
 			callback(nil)
 			return
 		}
+		
+		if let lastExport = self.exporter, lastExport.isWriting == true {
+			TimeLog.logTime(logString: "exporter 不可用")
+			return
+		}
 
 		let exporter = VideoExportCommand(customQueue: exportType)
 		self.configureExport(with: exporter)
 
 		VideoWatermarkCommond.applyFamousToCompostion(with: videoCom, commonWaterImage: commonImage, size: videoCom.renderSize)
-		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, exportType: .writer, callback: callback)
+		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, exportTool: .writer, callback: callback)
 		self.exporter = exporter
 	}
 

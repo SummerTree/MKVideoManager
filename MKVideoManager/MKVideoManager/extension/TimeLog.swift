@@ -10,7 +10,8 @@ import Foundation
 
 class TimeLog: NSObject {
 	static func logTime(logString: String) {
-		let currentTime = Date().toString(style: .medium)
+//		let currentTime = Date().toString(style: .medium)
+		let currentTime = Date().toString(format: .isoDateTimeMilliSec)
 		print("\(currentTime) \(logString)")
 	}
 }

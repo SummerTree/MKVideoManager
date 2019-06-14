@@ -9,6 +9,12 @@
 import Foundation
 import VideoToolbox
 
+protocol VideoExportCommandDelegate: NSObjectProtocol {
+	func videoExportStart()
+	func videoExportProgress(progress: Double)
+	func videoExportCompleted(stats: VideoExportCommand.Status)
+}
+
 typealias OperationFinishHandler = (_ url: URL?) -> Void
 
 class VideoExportCommand: NSObject {
@@ -16,9 +22,21 @@ class VideoExportCommand: NSObject {
 		print("VideoExportCommand deinit")
 	}
 
-	enum ExportType: Int {
+	enum ExportTool: Int {
 		case export
 		case writer
+	}
+	
+	public enum Status : Int {
+		case unknown
+		
+		case writing
+		
+		case completed
+		
+		case failed
+		
+		case cancelled
 	}
 	
 	var videoSetting: [String: Any] = [
@@ -65,17 +83,20 @@ class VideoExportCommand: NSObject {
 	private var videoFinished: Bool = false
 	private var cancelled: Bool = false
 	private var sourceDuration: CMTime = CMTime.zero
-	
-	private var testString: String = ""
+
 	//想要并发的合成多个视频时，为export设置不同的queue name
 	var customQueueName: String?
+	
+	var isWriting: Bool {
+		return self.assetWriter?.status == AVAssetWriter.Status.writing
+	}
 
 	init(customQueue: String? = nil) {
 		self.customQueueName = customQueue
 	}
 
-	func exportVideo(with mixComposition: AVComposition, videoComposition: AVVideoComposition, audioMixTools: AVAudioMix?, exportType: ExportType, callback: OperationFinishHandler?) {
-		switch exportType {
+	func exportVideo(with mixComposition: AVComposition, videoComposition: AVVideoComposition, audioMixTools: AVAudioMix?, exportTool: ExportTool, callback: OperationFinishHandler?) {
+		switch exportTool {
 		case .export:
 			self.exportVideoSession(with: mixComposition, videoComposition: videoComposition, audioMixTools: audioMixTools, callback: callback)
 		case .writer:
@@ -119,7 +140,6 @@ extension VideoExportCommand {
 	}
 	
 	private func setupQueue(queue: String? = nil) {
-		self.testString = String(describing: queue)
 		self.mainSerializetionQueue = DispatchQueue(label: "com.monkey.writer.export\(String(describing: queue))")
 		self.videoQueue = DispatchQueue(label: "com.monkey.writer.exportVideo\(String(describing: queue))")
 		self.audioQueue = DispatchQueue(label: "com.monkey.writer.exportAudio\(String(describing: queue))")
@@ -267,7 +287,7 @@ extension VideoExportCommand {
 						let preTimeSeconds = CMTimeGetSeconds(preTime)
 						let totalTimeSeconds = CMTimeGetSeconds(self.sourceDuration)
 						let progress: Double = Double(preTimeSeconds / totalTimeSeconds)
-						TimeLog.logTime(logString: self.testString)
+						TimeLog.logTime(logString: self.customQueueName ?? "")
 						TimeLog.logTime(logString: "Finish exportProgress: \(progress)")
 					} else {
 						completedOrFailed = true
@@ -318,7 +338,7 @@ extension VideoExportCommand {
 
 		DispatchQueue.main.async {
 			// Handle any UI tasks here related to failure or success.
-			print(self.testString)
+			print(self.customQueueName)
 			TimeLog.logTime(logString: "Finish videoExport")
 			if success == true {
 				TimeLog.logTime(logString: "success videoExport")
