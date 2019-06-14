@@ -10,6 +10,7 @@ import Foundation
 import VideoToolbox
 
 typealias OperationFinishHandler = (_ url: URL?) -> Void
+
 class VideoExportCommand: NSObject {
 	deinit {
 		print("VideoExportCommand deinit")
@@ -19,7 +20,7 @@ class VideoExportCommand: NSObject {
 		case export
 		case writer
 	}
-
+	
 	var videoSetting: [String: Any] = [
 		AVVideoCodecKey: AVVideoCodecH264,
 		AVVideoWidthKey: 720,
@@ -52,14 +53,26 @@ class VideoExportCommand: NSObject {
 	private var assetWriterAudioOutput: AVAssetWriterInput?
 	private var assetWriterVideoOutput: AVAssetWriterInput?
 
-	private lazy var mainSerializetionQueue = DispatchQueue(label: "com.monkey.writer.exportQueue")
-	private lazy var videoQueue: DispatchQueue = DispatchQueue(label: "com.monkey.writer.exportVideoQueue")
-	private lazy var audioQueue: DispatchQueue = DispatchQueue(label: "com.monkey.writer.exportAudioQueue")
-	private lazy var dispatchGroup: DispatchGroup = DispatchGroup()
+//	private lazy var mainSerializetionQueue = DispatchQueue(label: "com.monkey.writer.exportQueue")
+//	private lazy var videoQueue: DispatchQueue = DispatchQueue(label: "com.monkey.writer.exportVideoQueue")
+//	private lazy var audioQueue: DispatchQueue = DispatchQueue(label: "com.monkey.writer.exportAudioQueue")
+//	private lazy var dispatchGroup: DispatchGroup = DispatchGroup()
+	private var mainSerializetionQueue = DispatchQueue(label: "com.monkey.writer.exportQueue")
+	private var videoQueue: DispatchQueue = DispatchQueue(label: "com.monkey.writer.exportVideoQueue")
+	private var audioQueue: DispatchQueue = DispatchQueue(label: "com.monkey.writer.exportAudioQueue")
+	private var dispatchGroup: DispatchGroup = DispatchGroup()
 	private var audioFinished: Bool = false
 	private var videoFinished: Bool = false
 	private var cancelled: Bool = false
 	private var sourceDuration: CMTime = CMTime.zero
+	
+	private var testString: String = ""
+	//想要并发的合成多个视频时，为export设置不同的queue name
+	var customQueueName: String?
+
+	init(customQueue: String? = nil) {
+		self.customQueueName = customQueue
+	}
 
 	func exportVideo(with mixComposition: AVComposition, videoComposition: AVVideoComposition, audioMixTools: AVAudioMix?, exportType: ExportType, callback: OperationFinishHandler?) {
 		switch exportType {
@@ -104,10 +117,22 @@ extension VideoExportCommand {
 			print(exporter.status)
 		})
 	}
+	
+	private func setupQueue(queue: String? = nil) {
+		self.testString = String(describing: queue)
+		self.mainSerializetionQueue = DispatchQueue(label: "com.monkey.writer.export\(String(describing: queue))")
+		self.videoQueue = DispatchQueue(label: "com.monkey.writer.exportVideo\(String(describing: queue))")
+		self.audioQueue = DispatchQueue(label: "com.monkey.writer.exportAudio\(String(describing: queue))")
+		self.dispatchGroup = DispatchGroup()
+		self.exportUrl = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(String(describing: queue)).mp4")
+	}
 
 	fileprivate func exportVideoWriter(with mixComposition: AVComposition, videoComposition: AVVideoComposition, audioMixTools: AVAudioMix? = nil, callback: OperationFinishHandler?) {
 		self.cancelled = false
 		self.finishedHandler = callback
+		if let customQueue = self.customQueueName {
+			self.setupQueue(queue: customQueue)
+		}
 		mixComposition.loadValuesAsynchronously(forKeys: ["tracks"]) {[weak self] in
 			guard let `self` = self else { return }
 			self.mainSerializetionQueue.async(execute: {
@@ -140,38 +165,30 @@ extension VideoExportCommand {
 	}
 
 	fileprivate func cancel() {
+		TimeLog.logTime(logString: "canceled")
 		// Handle cancellation asynchronously, but serialize it with the main queue.
 		self.mainSerializetionQueue.async {
 			// If we had audio data to reencode, we need to cancel the audio work.
 			if self.assetWriterAudioOutput != nil {
-				// Handle cancellation asynchronously again, but this time serialize it with the audio queue.
-				self.audioQueue.async {
-					// Update the Boolean property indicating the task is complete and mark the input as finished if it hasn't already been marked as such.
-					let oldFinished = self.audioFinished
+				// Update the Boolean property indicating the task is complete and mark the input as finished if it hasn't already been marked as such.
+				if self.audioFinished == false {
 					self.audioFinished = true
-					if oldFinished == false {
-						self.assetWriterAudioOutput?.markAsFinished()
-					}
-
+					self.assetWriterAudioOutput?.markAsFinished()
+					// Leave the dispatch group since the audio work is finished now.
 					self.dispatchGroup.leave()
 				}
 			}
 
-			// Handle cancellation asynchronously again, but this time serialize it with the video queue.
 			if self.assetWriterVideoOutput != nil {
-				self.videoQueue.async {
-					// Update the Boolean property indicating the task is complete and mark the input as finished if it hasn't already been marked as such.
-					let oldFinished = self.videoFinished
-					self.videoFinished = true
-					if oldFinished == false {
-						self.assetWriterVideoOutput?.markAsFinished()
-					}
+				// Update the Boolean property indicating the task is complete and mark the input as finished if it hasn't already been marked as such.
+				let oldFinished = self.videoFinished
+				self.videoFinished = true
+				if oldFinished == false {
+					self.assetWriterVideoOutput?.markAsFinished()
 					// Leave the dispatch group, since the video work is finished now.
 					self.dispatchGroup.leave()
 				}
 			}
-			// Set the cancelled Boolean property to YES to cancel any work on the main queue as well.
-			self.cancelled = true
 		}
 
 		self.cancelled = true
@@ -218,13 +235,14 @@ extension VideoExportCommand {
 						completedOrFailed = true
 					}
 				}
-				if completedOrFailed == true {
+				if completedOrFailed == true && self.cancelled == false {
 					// Mark the input as finished, but only if we haven't already done so, and then leave the dispatch group (since the audio work has finished).
 					let oldFinished: Bool = self.audioFinished
 					self.audioFinished = true
 					if oldFinished == false {
 						self.assetWriterAudioOutput?.markAsFinished()
 					}
+					
 					self.dispatchGroup.leave()
 				}
 			}
@@ -245,19 +263,17 @@ extension VideoExportCommand {
 					if let sampleBuffer: CMSampleBuffer = self.assetReaderVideoOutput?.copyNextSampleBuffer(), let success = self.assetWriterVideoOutput?.append(sampleBuffer) {
 						completedOrFailed = !success
 						let preTime = CMSampleBufferGetPresentationTimeStamp( sampleBuffer)
-//						print("preTime: \(preTime)")
-//						print("sourceDuration: \(self.sourceDuration)")
-//						let preDuration: Double = Double(preTime.value) / Double(preTime.timescale)
-//						let totalDuration: Double = Double(self.sourceDuration.value) / Double(self.sourceDuration.timescale)
+
 						let preTimeSeconds = CMTimeGetSeconds(preTime)
 						let totalTimeSeconds = CMTimeGetSeconds(self.sourceDuration)
 						let progress: Double = Double(preTimeSeconds / totalTimeSeconds)
-						print("exportProgress: \(progress)")
+						TimeLog.logTime(logString: self.testString)
+						TimeLog.logTime(logString: "Finish exportProgress: \(progress)")
 					} else {
 						completedOrFailed = true
 					}
 				}
-				if completedOrFailed == true {
+				if completedOrFailed == true && self.cancelled == false {
 					// Mark the input as finished, but only if we haven't already done so, and then leave the dispatch group (since the audio work has finished).
 					let oldFinished: Bool = self.videoFinished
 					self.videoFinished = true
@@ -270,7 +286,7 @@ extension VideoExportCommand {
 		}
 
 		// Set up the notification that the dispatch group will send when the audio and video work have both finished.
-		dispatchGroup.notify(queue: DispatchQueue.main) {
+		dispatchGroup.notify(queue: self.mainSerializetionQueue) {
 			// Check to see if the work has finished due to cancellation.
 			if self.cancelled == true {
 				self.readingAndWritingDidFinish(with: false)
@@ -302,10 +318,13 @@ extension VideoExportCommand {
 
 		DispatchQueue.main.async {
 			// Handle any UI tasks here related to failure or success.
-			print("finished")
+			print(self.testString)
+			TimeLog.logTime(logString: "Finish videoExport")
 			if success == true {
+				TimeLog.logTime(logString: "success videoExport")
 				self.finishedHandler?(self.exportUrl)
 			} else {
+				TimeLog.logTime(logString: "failed videoExport")
 				self.finishedHandler?(nil)
 			}
 			self.finishedHandler = nil

@@ -65,6 +65,9 @@
 		6FA4FA1822B25CD3000BB650 /* VideoCompositionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1322B25CD3000BB650 /* VideoCompositionCommand.swift */; };
 		6FA4FA1A22B25CD3000BB650 /* VideoWatermarkCommond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1522B25CD3000BB650 /* VideoWatermarkCommond.swift */; };
 		6FA4FA1B22B25CD3000BB650 /* VideoExportCommond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1622B25CD3000BB650 /* VideoExportCommond.swift */; };
+		6FA4FA1D22B27864000BB650 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1C22B27864000BB650 /* Date+Extension.swift */; };
+		6FA4FA2122B33CCF000BB650 /* TimeLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA2022B33CCF000BB650 /* TimeLog.swift */; };
+		6FA4FA2322B34492000BB650 /* ariana.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6FA4FA2222B34492000BB650 /* ariana.mp4 */; };
 		6FBBB5B4228A8F0100213FDF /* 330.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 6FBBB5B3228A8F0000213FDF /* 330.MOV */; };
 		6FBBB5B6228A8F8900213FDF /* MKVideoCompostionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBBB5B5228A8F8900213FDF /* MKVideoCompostionViewController.swift */; };
 		6FC68C44219957C80073F3D2 /* 220.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6FC68C43219957C80073F3D2 /* 220.mp4 */; };
@@ -167,6 +170,9 @@
 		6FA4FA1322B25CD3000BB650 /* VideoCompositionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCompositionCommand.swift; sourceTree = "<group>"; };
 		6FA4FA1522B25CD3000BB650 /* VideoWatermarkCommond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoWatermarkCommond.swift; sourceTree = "<group>"; };
 		6FA4FA1622B25CD3000BB650 /* VideoExportCommond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoExportCommond.swift; sourceTree = "<group>"; };
+		6FA4FA1C22B27864000BB650 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		6FA4FA2022B33CCF000BB650 /* TimeLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLog.swift; sourceTree = "<group>"; };
+		6FA4FA2222B34492000BB650 /* ariana.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ariana.mp4; sourceTree = "<group>"; };
 		6FBBB5B3228A8F0000213FDF /* 330.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 330.MOV; sourceTree = "<group>"; };
 		6FBBB5B5228A8F8900213FDF /* MKVideoCompostionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoCompostionViewController.swift; sourceTree = "<group>"; };
 		6FC68C43219957C80073F3D2 /* 220.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 220.mp4; sourceTree = "<group>"; };
@@ -408,6 +414,7 @@
 				6FF1C9A0228D8806007E8583 /* IMG_0543.MOV */,
 				6FF1C9A2228E51F5007E8583 /* pre.mp4 */,
 				6FF1C9A4228E52AB007E8583 /* main.mp4 */,
+				6FA4FA2222B34492000BB650 /* ariana.mp4 */,
 			);
 			path = MP4;
 			sourceTree = "<group>";
@@ -418,7 +425,9 @@
 				6FC68C4A21996F480073F3D2 /* MKViewToImageViewController.swift */,
 				6F7B0DF9219AB46700CA2BD2 /* AttributeStringExtention.swift */,
 				6F001C58219D566C0099602A /* ColorToImage.swift */,
+				6FA4FA1C22B27864000BB650 /* Date+Extension.swift */,
 				6F49AAEA219EA83C007EA231 /* ViewExtention.swift */,
+				6FA4FA2022B33CCF000BB650 /* TimeLog.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -567,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FF1C98F228D5A39007E8583 /* 444.mp4 in Resources */,
+				6FA4FA2322B34492000BB650 /* ariana.mp4 in Resources */,
 				6FF1C993228D5D15007E8583 /* 666.MOV in Resources */,
 				6FDE326521991B77008CB0E9 /* LaunchScreen.storyboard in Resources */,
 				6FF1C997228D6332007E8583 /* 999.MP4 in Resources */,
@@ -665,6 +675,7 @@
 				6F33C33521CA655000FAE42B /* UIView+XRExtension.swift in Sources */,
 				6F7B0DFC219ACC1100CA2BD2 /* GestureViewController.swift in Sources */,
 				6F49AAF821A2E823007EA231 /* MKChooseTreeViewController.swift in Sources */,
+				6FA4FA2122B33CCF000BB650 /* TimeLog.swift in Sources */,
 				6F0A9E2521AE64560069C587 /* TLStoryTextLayoutManager.m in Sources */,
 				6FDD79F621F2011200F83604 /* MKStickerViewController.swift in Sources */,
 				6F49AAE5219E7ADA007EA231 /* MKDefine.swift in Sources */,
@@ -697,6 +708,7 @@
 				6F3BCFC2225F5019003BB3F5 /* MKScrollTextTimerViewController.swift in Sources */,
 				6F3BCFBA225F2111003BB3F5 /* MKScrollTableViewController.swift in Sources */,
 				6F001C5B219D9D710099602A /* MKVideoCoverSlider.swift in Sources */,
+				6FA4FA1D22B27864000BB650 /* Date+Extension.swift in Sources */,
 				6F7B0E05219BD68400CA2BD2 /* FilterImageView.swift in Sources */,
 				6F49AB4221A56BA3007EA231 /* MKStoryOutput.swift in Sources */,
 				6F33C33221CA655000FAE42B /* UIScrollView+XRRefresh.swift in Sources */,
