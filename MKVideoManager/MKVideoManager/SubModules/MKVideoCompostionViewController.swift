@@ -14,12 +14,23 @@ let ScreenHeight: CGFloat = UIScreen.main.bounds.height
 let ScreenWidth: CGFloat = UIScreen.main.bounds.width
 
 class MKVideoCompositionViewController: UIViewController {
+	@IBOutlet weak var progressViewSave: UIProgressView!
+	
+	@IBOutlet weak var progressViewSnp: UIProgressView!
+	
+	@IBOutlet weak var progressViewIns: UIProgressView!
+	@IBOutlet weak var progressViewSaveNoImage: UIProgressView!
+	@IBOutlet weak var progressViewMomentShare: UIProgressView!
+	@IBOutlet weak var progressViewMomentSave: UIProgressView!
+	
+	
 	var test1Edit: VideoEditCommand?
 	var test2Edit: VideoEditCommand?
 	var test3Edit: VideoEditCommand?
 	var test4Edit: VideoEditCommand?
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.resetProgressView()
 	}
 	
 	deinit {
@@ -30,11 +41,11 @@ class MKVideoCompositionViewController: UIViewController {
 		self.compositionWithNoImage()
 	}
 	@IBAction func compositionWithImage(_ sender: Any) {
-		self.compositionWithImage(type: .MomentShareInstagram)
+		self.compositionWithImage(type: .MomentSaveWithWaterImage)
 	}
 	
 	@IBAction func compositionAndExport(_ sender: Any) {
-		self.compositionAndExport(type: .MomentShareSnapChat)
+		self.compositionAndExport(type: .FamousShareSnapChat)
 	}
 	
 	@IBAction func compositionToPlay(_ sender: Any) {
@@ -76,9 +87,12 @@ class MKVideoCompositionViewController: UIViewController {
 	
 	@IBAction func compositionVideosClicked(_ sender: Any) {
 		//同时合成多个视频并存储到本地
+		self.compositionAndExport(type: .Save)
 		self.compositionAndExport(type: .FamousShareSnapChat)
-		self.compositionAndExport(type: .FamousShareInstagram)
-		self.compositionAndExport(type: .FamousShareWhatsApp)
+//		self.compositionAndExport(type: .FamousShareInstagramAndWhatsApp)
+//		self.compositionAndExport(type: .MomentSaveWithNoWaterImage)
+//		self.compositionAndExport(type: .MomentSaveWithWaterImage)
+//		self.compositionAndExport(type: .MomentShareSnapChat)
 	}
 	
 	@IBAction func cancelClicked(_ sender: Any) {
@@ -87,6 +101,16 @@ class MKVideoCompositionViewController: UIViewController {
 		self.test2Edit?.cancel()
 		self.test4Edit?.cancel()
 	}
+	
+	func resetProgressView() {
+		self.progressViewSave.setProgress(0, animated: false)
+		self.progressViewSnp.setProgress(0, animated: false)
+		self.progressViewIns.setProgress(0, animated: false)
+		self.progressViewSaveNoImage.setProgress(0, animated: false)
+		self.progressViewMomentSave.setProgress(0, animated: false)
+		self.progressViewMomentShare.setProgress(0, animated: false)
+	}
+	
 	func showPlayer(asset: AVAsset) {
 		print(asset.duration)
 		if asset.isPlayable == false {
@@ -127,7 +151,7 @@ class MKVideoCompositionViewController: UIViewController {
 		let videoUrl = URL(fileURLWithPath: videoPath!)
 		
 		let videoEdit = VideoEditCommand()
-		videoEdit.compositionVideoAndExport(with: videoUrl, waterImage: waterImage, exportType: type.rawValue) {[weak self] (exportUrl) in
+		videoEdit.compositionVideoAndExport(with: videoUrl, waterImage: waterImage, compositionType: type) {[weak self] (exportUrl) in
 			guard let `self` = self else {
 				return
 			}
@@ -135,10 +159,9 @@ class MKVideoCompositionViewController: UIViewController {
 //			self.playVideo(with: exportUrl)
 		}
 	}
-	
-	
-	
+
 	func compositionAndExport(type: CompositionType) {
+		self.resetProgressView()
 		let waterImage = self.getWaterView(type: type.rawValue).screenshot()
 		
 		let videoPath = Bundle.main.path(forResource: "ariana", ofType: "mp4")
@@ -147,8 +170,9 @@ class MKVideoCompositionViewController: UIViewController {
 		let maskPath = Bundle.main.path(forResource: "220", ofType: "mp4")
 		let maskUrl = URL(fileURLWithPath: maskPath!)
 		let videoEdit = VideoEditCommand()
+		videoEdit.videoEditDelegate = self
 		TimeLog.logTime(logString: "start composition")
-		videoEdit.compositionVideoAndExport(with: waterImage, firstUrl: videoUrl, maskUrl: maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90), exportType: type.rawValue, callback: {[weak self] (exportUrl) in
+		videoEdit.compositionVideoAndExport(with: waterImage, firstUrl: videoUrl, maskUrl: maskUrl, maskScale: 0.25, maskOffset: CGPoint.init(x: 20, y: 90), compositionType: type, callback: {[weak self] (exportUrl) in
 			TimeLog.logTime(logString: "finish composition")
 			guard let `self` = self else {
 				return
@@ -158,17 +182,14 @@ class MKVideoCompositionViewController: UIViewController {
 		})
 		
 		switch type {
-		case .MomentShareSnapChat:
+		case .Save:
 			self.test1Edit = videoEdit
 			break
 		case .FamousShareSnapChat:
 			self.test2Edit = videoEdit
 			break
-		case .FamousShareInstagram:
+		case .FamousShareInstagramAndWhatsApp:
 			self.test3Edit = videoEdit
-			break
-		case .FamousShareWhatsApp:
-			self.test4Edit = videoEdit
 			break
 		default:
 			break
@@ -233,6 +254,38 @@ extension MKVideoCompositionViewController {
 				print("save to photoLibrary failed")
 			}
 		}
+	}
+}
+
+extension MKVideoCompositionViewController: VideoEditCommandDelegate {
+	func videoEdit(wit progress: Double, compositionType: CompositionType) {
+		switch compositionType {
+		case .Save:
+			self.progressViewSave.setProgress(Float(progress), animated: true)
+			break
+		case .FamousShareSnapChat:
+			self.progressViewSnp.setProgress(Float(progress), animated: true)
+			break
+		case .FamousShareInstagramAndWhatsApp:
+			self.progressViewIns.setProgress(Float(progress), animated: true)
+			break
+		case .MomentSaveWithNoWaterImage:
+			self.progressViewSaveNoImage.setProgress(Float(progress), animated: true)
+			break
+		case .MomentSaveWithWaterImage:
+			self.progressViewMomentSave.setProgress(Float(progress), animated: true)
+			break
+		case .MomentShareSnapChat:
+			self.progressViewMomentShare.setProgress(Float(progress), animated: true)
+			break
+		default:
+			break
+		}
+	}
+	
+	func videoEdit(wit status: VideoExportCommand.FinishStatus, compositionType: CompositionType) {
 		
 	}
+	
+	
 }

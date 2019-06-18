@@ -7,17 +7,23 @@
 //
 
 import Foundation
-
 import AVFoundation
 
 enum CompositionType: String {
 	case Save
+	case MomentSaveWithNoWaterImage
+	case MomentSaveWithWaterImage
 	case MomentShareSnapChat
-	case MomentShareInstagram
-	case MomentShareWhatsApp
+	case MomentShareInstagramWhatsApp
+	case FamousSaveWithNoWaterImage
+	case FomousSaveWithWaterImage
 	case FamousShareSnapChat
-	case FamousShareInstagram
-	case FamousShareWhatsApp
+	case FamousShareInstagramAndWhatsApp
+}
+
+protocol VideoEditCommandDelegate: NSObjectProtocol {
+	func videoEdit(wit progress: Double, compositionType: CompositionType)
+	func videoEdit(wit status: VideoExportCommand.FinishStatus, compositionType: CompositionType)
 }
 
 class VideoEditCommand: NSObject {
@@ -34,22 +40,28 @@ class VideoEditCommand: NSObject {
 	var exportFileType: AVFileType?
 	
 	var exporter: VideoExportCommand?
+	
+	var compositionType: CompositionType = .Save
 
-	func compositionVideoAndExport(with localUrl: URL, waterImage: UIImage? = nil, exportType: String? = nil, callback: @escaping OperationFinishHandler) {
+	weak var videoEditDelegate: VideoEditCommandDelegate?
+
+	func compositionVideoAndExport(with localUrl: URL, waterImage: UIImage? = nil, compositionType: CompositionType = .Save, callback: @escaping OperationFinishHandler) {
 		let (mixcomposition, videoComposition, audioMix) = VideoCompositionCommand.compostionVideo(videoUrl: localUrl, waterImage: waterImage)
 		guard let mixCom = mixcomposition, let videoCom = videoComposition else {
 			callback(nil)
 			return
 		}
-		let exporter = VideoExportCommand(customQueue: exportType)
-		
+	
+		self.compositionType = compositionType
+		let exporter = VideoExportCommand(customQueue: self.compositionType.rawValue)
+		exporter.exportDelegate = self
 		self.configureExport(with: exporter)
 		VideoWatermarkCommond.applyViewEffectsToCompostion(videoCom, waterImage, videoCom.renderSize)
-		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, exportTool: .writer, callback: callback)
+		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, callback: callback)
 		self.exporter = exporter
 	}
 
-	func compositionVideoAndExport(with commonImage: UIImage?, firstUrl: URL, maskUrl: URL, maskScale: CGFloat, maskOffset: CGPoint, exportType: String? = nil, callback: @escaping OperationFinishHandler) {
+	func compositionVideoAndExport(with commonImage: UIImage?, firstUrl: URL, maskUrl: URL, maskScale: CGFloat, maskOffset: CGPoint, compositionType: CompositionType = .Save, callback: @escaping OperationFinishHandler) {
 		let (mixcomposition, videoComposition, audioMix) = VideoCompositionCommand.compositionStoryWithSys(firstUrl, maskUrl, maskScale: maskScale, maskOffset: maskOffset)
 
 		guard let mixCom = mixcomposition, let videoCom = videoComposition else {
@@ -58,16 +70,22 @@ class VideoEditCommand: NSObject {
 		}
 		
 		if let lastExport = self.exporter, lastExport.isWriting == true {
-			TimeLog.logTime(logString: "exporter 不可用")
+			TimeLog.logTime(logString: "exporter is writing, wait please")
 			return
 		}
-
-		let exporter = VideoExportCommand(customQueue: exportType)
+		
+		self.compositionType = compositionType
+		
+		let exporter = VideoExportCommand(customQueue: self.compositionType.rawValue)
 		self.configureExport(with: exporter)
-
+		exporter.exportDelegate = self
 		VideoWatermarkCommond.applyFamousToCompostion(with: videoCom, commonWaterImage: commonImage, size: videoCom.renderSize)
-		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, exportTool: .writer, callback: callback)
+		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, callback: callback)
 		self.exporter = exporter
+	}
+	
+	func cancel() {
+		self.exporter?.cancelWriterProgress()
 	}
 
 	fileprivate func configureExport(with exporter: VideoExportCommand) {
@@ -93,8 +111,18 @@ class VideoEditCommand: NSObject {
 		let seconds = Double(asset.duration.value) / Double(asset.duration.timescale)
 		return seconds
 	}
+}
+
+extension VideoEditCommand: VideoExportCommandDelegate {
+	func videoExportProgress(videoExporter: VideoExportCommand, progress: Double) {
+		DispatchQueue.main.async {
+			self.videoEditDelegate?.videoEdit(wit: progress, compositionType: self.compositionType)
+//			TimeLog.logTime(logString: "Video exportProgress: \(progress)")
+		}
+	}
 	
-	func cancel() {
-		self.exporter?.cancelWriterProgress()
+	func videoExportCompleted(videoExporter: VideoExportCommand, status: VideoExportCommand.FinishStatus) {
+		TimeLog.logTime(logString: "Finish videoExport status: \(status.rawValue)")
+		self.videoEditDelegate?.videoEdit(wit: status, compositionType: self.compositionType)
 	}
 }
