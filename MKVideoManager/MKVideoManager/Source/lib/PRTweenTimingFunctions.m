@@ -27,22 +27,22 @@ CGFloat PRTweenTimingFunctionLinear (CGFloat time, CGFloat begin, CGFloat change
     return change * time / duration + begin;
 }
 
-CGFloat PRTweenTimingFunctionBackOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    CGFloat s = 1.70158;
-    return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
-}
-
-CGFloat PRTweenTimingFunctionBackIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    CGFloat s = 1.70158;
-    return c*(t/=d)*t*((s+1)*t - s) + b;
-}
-
-CGFloat PRTweenTimingFunctionBackInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    CGFloat s = 1.70158; 
-    if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
-    return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
-}
-
+//CGFloat PRTweenTimingFunctionBackOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    CGFloat s = 1.70158;
+//    return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionBackIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    CGFloat s = 1.70158;
+//    return c*(t/=d)*t*((s+1)*t - s) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionBackInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    CGFloat s = 1.70158;
+//    if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+//    return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+//}
+//
 CGFloat PRTweenTimingFunctionBounceOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
     if ((t/=d) < (1/2.75)) {
         return c*(7.5625*t*t) + b;
@@ -64,59 +64,59 @@ CGFloat PRTweenTimingFunctionBounceInOut (CGFloat t, CGFloat b, CGFloat c, CGFlo
     else return PRTweenTimingFunctionBounceOut(t*2-d, 0, c, d) * .5 + c*.5 + b;
 }
 
-CGFloat PRTweenTimingFunctionCircOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return c * sqrt(1 - (t=t/d-1)*t) + b;
-}
+//CGFloat PRTweenTimingFunctionCircOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return c * sqrt(1 - (t=t/d-1)*t) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionCircIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return -c * (sqrt(1 - (t/=d)*t) - 1) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionCircInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    if ((t/=d/2) < 1) return -c/2 * (sqrt(1 - t*t) - 1) + b;
+//    return c/2 * (sqrt(1 - (t-=2)*t) + 1) + b;
+//}
 
-CGFloat PRTweenTimingFunctionCircIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return -c * (sqrt(1 - (t/=d)*t) - 1) + b;
-}
-
-CGFloat PRTweenTimingFunctionCircInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    if ((t/=d/2) < 1) return -c/2 * (sqrt(1 - t*t) - 1) + b;
-    return c/2 * (sqrt(1 - (t-=2)*t) + 1) + b;
-}
-
-CGFloat PRTweenTimingFunctionCubicOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return c*((t=t/d-1)*t*t + 1) + b;
-}
-
-CGFloat PRTweenTimingFunctionCubicIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return c*(t/=d)*t*t + b;
-}
-
-CGFloat PRTweenTimingFunctionCubicInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    if ((t/=d/2) < 1) return c/2*t*t*t + b;
-    return c/2*((t-=2)*t*t + 2) + b;
-}
-
-CGFloat PRTweenTimingFunctionElasticOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    CGFloat p = d*.3;
-    CGFloat s, a;
-    if (t==0) return b;  if ((t/=d)==1) return b+c;
-    if (!a || a < ABS(c)) { a=c; s=p/4; }
-    else s = p/(2*M_PI) * asin (c/a);
-    return (a*pow(2,-10*t) * sin( (t*d-s)*(2*M_PI)/p ) + c + b);
-}
-
-CGFloat PRTweenTimingFunctionElasticIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    CGFloat p = d*.3;
-    CGFloat s, a;
-    if (t==0) return b;  if ((t/=d)==1) return b+c;
-    if (!a || a < ABS(c)) { a=c; s=p/4; }
-    else s = p/(2*M_PI) * asin (c/a);
-    return -(a*pow(2,10*(t-=1)) * sin( (t*d-s)*(2*M_PI)/p )) + b;
-}
-
-CGFloat PRTweenTimingFunctionElasticInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    CGFloat p = d*(.3*1.5);
-    CGFloat s, a;
-    if (t==0) return b;  if ((t/=d/2)==2) return b+c;
-    if (!a || a < ABS(c)) { a=c; s=p/4; }
-    else s = p/(2*M_PI) * asin (c/a);
-    if (t < 1) return -.5*(a*pow(2,10*(t-=1)) * sin( (t*d-s)*(2*M_PI)/p )) + b;
-    return a*pow(2,-10*(t-=1)) * sin( (t*d-s)*(2*M_PI)/p )*.5 + c + b;
-}
+//CGFloat PRTweenTimingFunctionCubicOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return c*((t=t/d-1)*t*t + 1) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionCubicIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return c*(t/=d)*t*t + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionCubicInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    if ((t/=d/2) < 1) return c/2*t*t*t + b;
+//    return c/2*((t-=2)*t*t + 2) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionElasticOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    CGFloat p = d*.3;
+//    CGFloat s, a;
+//    if (t==0) return b;  if ((t/=d)==1) return b+c;
+//    if (!a || a < ABS(c)) { a=c; s=p/4; }
+//    else s = p/(2*M_PI) * asin (c/a);
+//    return (a*pow(2,-10*t) * sin( (t*d-s)*(2*M_PI)/p ) + c + b);
+//}
+//
+//CGFloat PRTweenTimingFunctionElasticIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    CGFloat p = d*.3;
+//    CGFloat s, a;
+//    if (t==0) return b;  if ((t/=d)==1) return b+c;
+//    if (!a || a < ABS(c)) { a=c; s=p/4; }
+//    else s = p/(2*M_PI) * asin (c/a);
+//    return -(a*pow(2,10*(t-=1)) * sin( (t*d-s)*(2*M_PI)/p )) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionElasticInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    CGFloat p = d*(.3*1.5);
+//    CGFloat s, a;
+//    if (t==0) return b;  if ((t/=d/2)==2) return b+c;
+//    if (!a || a < ABS(c)) { a=c; s=p/4; }
+//    else s = p/(2*M_PI) * asin (c/a);
+//    if (t < 1) return -.5*(a*pow(2,10*(t-=1)) * sin( (t*d-s)*(2*M_PI)/p )) + b;
+//    return a*pow(2,-10*(t-=1)) * sin( (t*d-s)*(2*M_PI)/p )*.5 + c + b;
+//}
 
 CGFloat PRTweenTimingFunctionExpoOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
     return (t==d) ? b+c : c * (-pow(2, -10 * t/d) + 1) + b;
@@ -133,44 +133,44 @@ CGFloat PRTweenTimingFunctionExpoInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat
     return c/2 * (-pow(2, -10 * --t) + 2) + b;
 }
 
-CGFloat PRTweenTimingFunctionQuadOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return -c *(t/=d)*(t-2) + b;
-}
-
-CGFloat PRTweenTimingFunctionQuadIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return c*(t/=d)*t + b;
-}
+//CGFloat PRTweenTimingFunctionQuadOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return -c *(t/=d)*(t-2) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionQuadIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return c*(t/=d)*t + b;
+//}
 
 CGFloat PRTweenTimingFunctionQuadInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
     if ((t/=d/2) < 1) return c/2*t*t + b;
     return -c/2 * ((--t)*(t-2) - 1) + b;
 }
 
-CGFloat PRTweenTimingFunctionQuartOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return -c * ((t=t/d-1)*t*t*t - 1) + b;
-}
-
-CGFloat PRTweenTimingFunctionQuartIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return c*(t/=d)*t*t*t + b;
-}
-
-CGFloat PRTweenTimingFunctionQuartInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
-    return -c/2 * ((t-=2)*t*t*t - 2) + b;
-}
-
-CGFloat PRTweenTimingFunctionQuintOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return c*(t/=d)*t*t*t*t + b;
-}
-
-CGFloat PRTweenTimingFunctionQuintIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    return c*((t=t/d-1)*t*t*t*t + 1) + b;
-}
-
-CGFloat PRTweenTimingFunctionQuintInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
-    if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
-    return c/2*((t-=2)*t*t*t*t + 2) + b;
-}
+//CGFloat PRTweenTimingFunctionQuartOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return -c * ((t=t/d-1)*t*t*t - 1) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionQuartIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return c*(t/=d)*t*t*t + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionQuartInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
+//    return -c/2 * ((t-=2)*t*t*t - 2) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionQuintOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return c*(t/=d)*t*t*t*t + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionQuintIn (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    return c*((t=t/d-1)*t*t*t*t + 1) + b;
+//}
+//
+//CGFloat PRTweenTimingFunctionQuintInOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
+//    if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
+//    return c/2*((t-=2)*t*t*t*t + 2) + b;
+//}
 
 CGFloat PRTweenTimingFunctionSineOut (CGFloat t, CGFloat b, CGFloat c, CGFloat d) {
     return c * sin(t/d * (M_PI/2)) + b;

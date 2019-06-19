@@ -6,7 +6,7 @@ target 'MKVideoManager' do
   use_frameworks!
 
   # Pods for MKVideoManager
-  pod 'SnapKit', '~> 4.0.0'
+  pod 'SnapKit'
   pod 'Hero'
   pod 'GPUImage'
 #pod 'GPUImage', :git => 'https://github.com/holla-world/GPUImage.git', :tag => '0.1.73'

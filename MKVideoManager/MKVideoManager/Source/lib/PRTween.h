@@ -7,7 +7,7 @@ typedef CGFloat(*PRTweenTimingFunction)(CGFloat, CGFloat, CGFloat, CGFloat);
 #if NS_BLOCKS_AVAILABLE
 @class PRTweenPeriod;
 typedef void (^PRTweenUpdateBlock)(PRTweenPeriod *period);
-typedef void (^PRTweenCompleteBlock)();
+typedef void (^PRTweenCompleteBlock)(void);
 #endif
 
 @interface PRTweenPeriod : NSObject {

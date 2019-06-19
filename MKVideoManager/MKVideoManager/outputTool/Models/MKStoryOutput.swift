@@ -170,7 +170,7 @@ class TLStoryOutput: NSObject {
         
         let progressFilter = filterNamed == "" ? GPUImageFilter.init() : GPUImageCustomLookupFilter.init(lookupImageNamed: filterNamed)
         
-        movieFillFilter.addTarget(progressFilter as! GPUImageInput)
+        movieFillFilter.addTarget(progressFilter as? GPUImageInput)
         progressFilter.addTarget(landBlendFilter)
         uielement?.addTarget(landBlendFilter)
         landBlendFilter.addTarget(movieWriter!)

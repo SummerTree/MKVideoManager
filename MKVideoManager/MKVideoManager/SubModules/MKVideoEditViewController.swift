@@ -327,9 +327,7 @@ extension MKVideoEditViewController{
             case .completed:
                 let photos = PHPhotoLibrary.shared()
                 photos.performChanges({
-                    let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: exportUrl)
-                    var placeholder = PHObjectPlaceholder.init()
-                    placeholder = (request?.placeholderForCreatedAsset)!
+
                 }, completionHandler: { (finish, error) in
                     
                 })
@@ -344,7 +342,9 @@ extension MKVideoEditViewController{
                 break
             case .cancelled:
                 break
-            }
+			@unknown default:
+				break
+			}
         })
         
     }

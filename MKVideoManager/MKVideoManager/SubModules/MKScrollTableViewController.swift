@@ -26,7 +26,7 @@ class MKScrollTableViewController: UIViewController {
 			let indexString = "\(index)"
 			datas.append(indexString)
 		}
-		if let random = datas.randomElement(), let randomIndex = datas.index(of: random) {
+		if let random = datas.randomElement(), let randomIndex = datas.firstIndex(of: random) {
 			print("randomString: \(random)， randomIndex: \(randomIndex)")
 			datas.remove(at: randomIndex)
 			datas.insert(random, at: datas.count)
@@ -47,14 +47,14 @@ class MKScrollTableViewController: UIViewController {
 	}
 	
 	fileprivate func resetDatas() {
-		if datas.contains(self.optionString), let optionIndex = datas.index(of: self.optionString) {
+		if datas.contains(self.optionString), let optionIndex = datas.firstIndex(of: self.optionString) {
 			datas.remove(at: optionIndex)
 		}
-		if let selectedString: String = datas.last, let firstString: String = datas.first {
+		if let selectedString: String = datas.last, let _ = datas.first {
 //			swap(&datas[], &<#T##b: T##T#>)
 			datas.remove(at: datas.count - 1)
 			datas.insert(selectedString, at: 0)
-			if let random = datas.randomElement(), let randomIndex = datas.index(of: random) {
+			if let random = datas.randomElement(), let randomIndex = datas.firstIndex(of: random) {
 				print("randomString: \(random)， randomIndex: \(randomIndex)")
 				datas.remove(at: randomIndex)
 				datas.insert(random, at: datas.count)

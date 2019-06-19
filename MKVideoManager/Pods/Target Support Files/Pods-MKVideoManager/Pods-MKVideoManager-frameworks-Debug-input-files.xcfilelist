@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-MKVideoManager/Pods-MKVideoManager-frameworks.sh
+${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework
+${BUILT_PRODUCTS_DIR}/Hero/Hero.framework
+${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework
+${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework

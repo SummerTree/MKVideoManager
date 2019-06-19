@@ -202,7 +202,7 @@ class MKVideoCoverViewController: UIViewController {
     
 	@objc func doneAction() {
         //get cover
-        let image = self.getImageWithTime(self.currentProgress)
+//        let image = self.getImageWithTime(self.currentProgress)
         //输出 封面
     }
 }

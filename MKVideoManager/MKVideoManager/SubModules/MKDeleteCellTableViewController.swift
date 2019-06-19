@@ -138,10 +138,10 @@ extension MKDeleteCellTableViewController {
 			existTwo = Int.random(in: 0 ... 4)
 		}
 		var indexArray: [Int] = [0, 1, 2, 3, 4]
-		if let index = indexArray.index(of: existOne) {
+		if let index = indexArray.firstIndex(of: existOne) {
 			indexArray.remove(at: index)
 		}
-		if let index = indexArray.index(of: existTwo) {
+		if let index = indexArray.firstIndex(of: existTwo) {
 			indexArray.remove(at: index)
 		}
 		let oneView = itemViews[indexArray[0]]
@@ -151,15 +151,15 @@ extension MKDeleteCellTableViewController {
 		oneView.alpha = 0
 		twoView.alpha = 0
 		threeView.alpha = 0
-		if let index = itemViews.index(of: oneView) {
+		if let index = itemViews.firstIndex(of: oneView) {
 			itemViews.remove(at: index)
 		}
 		
-		if let index = itemViews.index(of: twoView) {
+		if let index = itemViews.firstIndex(of: twoView) {
 			itemViews.remove(at: index)
 		}
 		
-		if let index = itemViews.index(of: threeView) {
+		if let index = itemViews.firstIndex(of: threeView) {
 			itemViews.remove(at: index)
 		}
 		

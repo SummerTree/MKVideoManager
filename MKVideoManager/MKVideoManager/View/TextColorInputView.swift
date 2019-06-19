@@ -111,7 +111,7 @@ extension ColorsInputView : UICollectionViewDelegate, UICollectionViewDataSource
         let color = self.colors[indexPath.row]
         print("color: \(String(describing: color))")
         if self.delegate != nil {
-            self.delegate?.didSelectedColor(color ?? UIColor.white)
+			self.delegate?.didSelectedColor(color)
             self.delegate?.didSelectedIndex(self.selectedColorIndex!)
         }
     }
