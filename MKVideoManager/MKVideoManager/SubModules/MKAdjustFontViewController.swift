@@ -70,7 +70,7 @@ extension UIFont {
 	
 }
 
-fileprivate extension String {
+extension String {
 	
 	func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
 		let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)

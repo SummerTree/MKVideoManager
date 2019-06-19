@@ -31,7 +31,7 @@ extension UIScrollView {
             var inset: UIEdgeInsets = self.contentInset
             inset.bottom = newValue
             if #available(iOS 11.0, *) {
-                inset.bottom = inset.bottom - (self.adjustedContentInset.bottom - self.contentInset.bottom)
+                inset.bottom -= (self.adjustedContentInset.bottom - self.contentInset.bottom)
             }
             self.contentInset = inset
         }
@@ -46,7 +46,7 @@ extension UIScrollView {
             var inset: UIEdgeInsets = self.contentInset
             inset.top = newValue
             if #available(iOS 11.0, *) {
-                inset.top = inset.top - (self.adjustedContentInset.top - self.contentInset.top)
+                inset.top -= (self.adjustedContentInset.top - self.contentInset.top)
             }
             self.contentInset = inset
         }

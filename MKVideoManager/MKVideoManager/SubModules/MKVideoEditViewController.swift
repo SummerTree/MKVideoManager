@@ -277,7 +277,11 @@ extension MKVideoEditViewController{
        //video composition Track
 		let videoCompositionTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)
         //insert video track
-		try! videoCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: assetVideoTrack, at: CMTime.zero)
+		do {
+			try videoCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: assetVideoTrack, at: CMTime.zero)
+		} catch {
+			print(error.localizedDescription)
+		}
         //
         let mutableVideoComposition = AVMutableVideoComposition()
 		mutableVideoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)//30fps

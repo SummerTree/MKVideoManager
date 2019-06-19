@@ -246,7 +246,7 @@ class TextEditMaskManager: NSObject {
 extension TextEditMaskManager: UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView){
         if textView.text.count % 20  == 0{
-            textView.text = textView.text + "\n"
+            textView.text += "\n"
         }
         
         let currentString = NSMutableAttributedString.getAttributeString(textView.text, self.filterModel.textColor!, UIColor.clear)

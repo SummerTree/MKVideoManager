@@ -1,0 +1,366 @@
+
+included: # 执行 linting 时包含的路径。如果出现这个 `--path` 会被忽略。
+- MKVideoManager
+
+excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。
+- Pods
+
+disabled_rules: # 禁用指定的规则
+
+- closure_body_length # defalut no
+
+- convenience_type # defalut no autocorrection no
+
+- discouraged_optional_collection # defalut no autocorrection no Prefer empty collection over optional collection.
+
+- empty_count # defalut no autocorrection no Prefer checking isEmpty over comparing count to zero.
+
+- explicit_acl # defalut no autocorrection no All declarations should specify Access Control Level keywords explicitly.
+
+- explicit_enum_raw_value # defalut no autocorrection no
+
+- explicit_top_level_acl # defalut no autocorrection no Top-level declarations should specify Access Control Level keywords explicitly.
+
+- explicit_type_interface # defalut no autocorrection no Properties should have a type interface
+
+- extension_access_modifier # defalut no autocorrection no Prefer not to use extension access modifiers
+
+- fallthrough # defalut no no autocorrection Fallthrough should be avoided.
+
+- file_header # defalut no autocorrection no
+
+- file_name # defalut no autocorrection no
+
+- file_types_order # defalut no autocorrection no
+
+- force_unwrapping # defalut no autocorrection no Force unwrapping should be avoided.
+
+- file_length # defalut no autocorrection no
+
+- function_default_parameter_at_end # defalut no autocorrection no
+
+- implicitly_unwrapped_optional # defalut no autocorrection no
+
+- legacy_random # defalut no autocorrection no
+
+- missing_docs # defalut no autocorrection no
+
+- multiline_arguments_brackets # defalut no autocorrection no
+
+- multiline_function_chains # defalut no autocorrection no
+
+- multiline_parameters_brackets # defalut no autocorrection no
+
+- no_grouping_extension # defalut no autocorrection no
+
+- nslocalizedstring_key # defalut no autocorrection no
+
+- nslocalizedstring_require_bundle # defalut no autocorrection no
+
+- number_separator # defalut no autocorrection yes
+
+- object_literal # defalut no autocorrection no
+
+- override_in_extension # defalut no autocorrection no
+
+- pattern_matching_keywords # defalut no autocorrection no
+
+- private_action # defalut no autocorrection no
+
+- private_outlet # defalut no autocorrection no
+
+- prohibited_interface_builder # defalut no autocorrection no
+
+- quick_discouraged_focused_test # defalut no autocorrection no
+
+- quick_discouraged_pending_test # defalut no autocorrection no
+
+- redundant_type_annotation # defalut no autocorrection yes
+
+- required_deinit # defalut no autocorrection no
+
+- single_test_class # defalut no autocorrection no
+
+- static_operator # defalut no autocorrection no
+
+- strict_fileprivate # defalut no autocorrection no
+
+- strong_iboutlet # defalut no autocorrection no
+
+- switch_case_on_newline # defalut no autocorrection no
+
+- toggle_bool # defalut no autocorrection no
+
+- type_contents_order # defalut no autocorrection no
+
+- trailing_closure # defalut no autocorrection no
+
+- unavailable_function # defalut no autocorrection no
+
+- unneeded_parentheses_in_closure_argument # defalut no autocorrection yes Parentheses are not needed when declaring closure arguments.
+
+- vertical_parameter_alignment_on_call # defalut no autocorrection no
+
+- vertical_whitespace_between_cases # defalut no autocorrection yes
+
+- xct_specific_matcher # defalut no
+
+- sorted_imports # defalut no autocorrection yes
+
+- attributes # defalut no autocorrection no
+
+# 没有加的默认规则
+
+- conditional_returns_on_newline # defalut yes autocorrection no guard的return要新起一行
+
+- cyclomatic_complexity # defalut yes autocorrection no 圈复杂度
+
+- function_body_length # defalut yes autocorrection no 超过40行警告 超过100行报错
+
+- function_parameter_count # defalut yes autocorrection no 不能超过五个参数
+
+- force_cast # defalut yes autocorrection no 不推荐使用！
+
+- identifier_name # defalut yes autocorrection no 变量名称开头不应以大写字母开头 命名至少三个字母 enum Foo { case ↓MyEnum } ❌
+
+- multiple_closures_with_trailing_closure # defalut yes autocorrection no ↓{ _ in } ❌
+
+- nesting # defalut yes autocorrection no enum A { enum B { ↓enum C {} } } ❌
+
+- line_length # defalut yes autocorrection no
+
+- notification_center_detachment # defalut yes autocorrection no 推荐只在deinit里移除
+
+- no_fallthrough_only # defalut yes autocorrection no Fallthroughs can only be used if the case contains at least one other statement.
+
+- superfluous_disable_command # defalut yes autocorrection no 当禁用规则不会在禁用区域触发违规时 没有必要写 swiftlint:disable
+
+- type_body_length # defalut yes autocorrection no
+
+opt_in_rules: # 启用指定的规则
+
+- block_based_kvo # defalut yes autocorrection no
+
+- class_delegate_protocol # defalut yes autocorrection no
+
+- closing_brace # defalut yes autocorrection yes
+
+- closure_parameter_position # defalut yes autocorrection no
+
+- colon # defalut yes autocorrection yes
+
+- comma # defalut yes autocorrection yes
+
+- compiler_protocol_init # defalut yes autocorrection no
+
+- deployment_target # defalut yes autocorrection no
+
+- discarded_notification_center_observer # defalut yes autocorrection no
+
+- discouraged_direct_init # defalut yes autocorrection no
+
+- empty_enum_arguments # defalut yes autocorrection yes
+
+- empty_parameters # defalut yes autocorrection yes
+
+- empty_parentheses_with_trailing_closure # defalut yes autocorrection yes
+
+- duplicate_imports # defalut yes autocorrection no
+
+- dynamic_inline # defalut yes autocorrection no
+
+- for_where # defalut yes autocorrection no
+
+- force_try # defalut yes autocorrection no
+
+- generic_type_name # defalut yes autocorrection no
+
+- implicit_getter # defalut yes autocorrection no
+
+- leading_whitespace # defalut yes autocorrection yes
+
+- legacy_cggeometry_functions # defalut yes autocorrection yes
+
+- legacy_constant # defalut yes autocorrection yes
+
+- legacy_constructor # defalut yes autocorrection yes
+
+- legacy_hashing # defalut yes autocorrection no
+
+- legacy_nsgeometry_functions # defalut yes autocorrection yes
+
+- mark # defalut yes autocorrection yes
+
+- nsobject_prefer_isequal # defalut yes autocorrection no
+
+- xctfail_message # defalut yes autocorrection no
+
+- opening_brace # defalut yes autocorrection yes
+
+- operator_whitespace # defalut yes autocorrection no
+
+- private_over_fileprivate # defalut yes autocorrection yes
+
+- private_unit_test # defalut yes autocorrection no
+
+- protocol_property_accessors_order # defalut yes autocorrection yes
+
+- reduce_boolean # defalut yes autocorrection no
+
+- redundant_discardable_let # defalut yes autocorrection yes
+
+- redundant_objc_attribute # defalut yes autocorrection yes
+
+- redundant_optional_initialization # defalut yes autocorrection yes
+
+- redundant_set_access_control # defalut yes autocorrection no
+
+- redundant_string_enum_value # defalut yes autocorrection no
+
+- redundant_void_return # defalut yes autocorrection yes
+
+- return_arrow_whitespace # defalut yes autocorrection yes
+
+- shorthand_operator # defalut yes autocorrection no
+
+- switch_case_alignment # defalut yes autocorrection no
+
+- syntactic_sugar # defalut yes autocorrection no
+
+- todo # defalut yes autocorrection no
+
+- unused_capture_list # defalut yes autocorrection no
+
+- unused_closure_parameter # defalut yes autocorrection yes
+
+- unused_control_flow_label # defalut yes autocorrection yes
+
+- unused_enumerated # defalut yes autocorrection no
+
+- statement_position # defalut yes autocorrection yes
+
+- trailing_comma # defalut yes autocorrection yes
+
+- trailing_newline # defalut yes autocorrection yes
+
+- trailing_semicolon # defalut yes autocorrection yes
+
+- trailing_whitespace # defalut yes autocorrection yes
+
+- unneeded_break_in_switch # defalut yes autocorrection no
+
+- unused_optional_binding # defalut yes autocorrection no
+
+- unused_setter_value # defalut yes autocorrection no
+
+- valid_ibinspectable # defalut yes autocorrection no
+
+- vertical_parameter_alignment # defalut yes autocorrection no
+
+- void_return # defalut yes autocorrection yes
+
+# - weak_computed_property # defalut yes autocorrection yes
+
+- vertical_whitespace # defalut yes autocorrection yes
+
+- inert_defer # defalut yes autocorrection no
+
+- is_disjoint # defalut yes autocorrection no
+
+- large_tuple # defalut yes autocorrection no
+
+- anyobject_protocol # defalut no autocorrection yes
+
+- array_init # defalut no autocorrection no
+
+- closure_end_indentation # defalut no autocorrection yes
+
+- closure_spacing # defalut no autocorrection yes
+
+- collection_alignment # defalut no autocorrection no
+
+- contains_over_first_not_nil # defalut no autocorrection no
+
+- control_statement # defalut no autocorrection no
+
+- custom_rules # defalut no autocorrection no autocorrection no
+
+- discouraged_object_literal # defalut no autocorrection no
+
+- discouraged_optional_boolean # defalut no autocorrection no
+
+- empty_string # defalut no autocorrection no
+
+- empty_xctest_method # defalut no autocorrection no
+
+- explicit_init # defalut no autocorrection yes
+
+- explicit_self # defalut no autocorrection yes
+
+- fatal_error_message # defalut no autocorrection no
+
+- first_where # defalut no autocorrection no
+
+- identical_operands # defalut no autocorrection no
+
+- implicit_return # defalut no autocorrection yes
+
+- joined_default_parameter # defalut no autocorrection yes
+
+- last_where # defalut no autocorrection no
+
+- let_var_whitespace # defalut no autocorrection no
+
+- literal_expression_end_indentation # defalut no autocorrection yes
+
+- lower_acl_than_parent # defalut no autocorrection no
+
+- modifier_order # defalut no autocorrection yes
+
+- multiline_arguments # defalut no autocorrection no
+
+- multiline_literal_brackets # defalut no autocorrection no
+
+- multiline_parameters # defalut no autocorrection no
+
+- nimble_operator # defalut no autocorrection yes
+
+- no_extension_access_modifier # defalut no autocorrection no
+
+- operator_usage_whitespace # defalut no autocorrection yes
+
+- overridden_super_call # defalut no autocorrection no
+
+- prefixed_toplevel_constant # defalut no autocorrection no
+
+- prohibited_super_call # defalut no autocorrection no
+
+- quick_discouraged_call # defalut no autocorrection no
+
+- reduce_into # defalut no autocorrection no
+
+- redundant_nil_coalescing # defalut no autocorrection yes
+
+- required_enum_case # defalut no autocorrection no
+
+- sorted_first_last # defalut no autocorrection no
+
+- type_name # defalut no autocorrection no
+
+- untyped_error_in_catch # defalut no autocorrection yes
+
+- unused_import # defalut no autocorrection yes
+
+- unused_private_declaration # defalut no autocorrection no
+
+- vertical_whitespace_closing_braces # defalut no autocorrection yes
+
+- vertical_whitespace_opening_braces # defalut no autocorrection yes
+
+- weak_delegate # defalut no autocorrection no
+
+- yoda_condition # defalut no autocorrection no
+
+# 可配置的规则可以通过这个配置文件来自定义
+indentation: tabs # 缩进
+reporter: "xcode" # 报告类型 (xcode, json, csv, checkstyle, junit, html, emoji)

@@ -281,9 +281,14 @@ extension MKVideoCoverViewController{
         print("progress: \(progress)")
         let timeSelect: Float = self.seconds! * Float(progress)
 		let imgTime: CMTime = CMTimeMakeWithSeconds(Float64(timeSelect), preferredTimescale: (self.time?.timescale)!);
-        
-        let img: CGImage = try! self.generator!.copyCGImage(at: imgTime, actualTime: nil)
-        let frameImg: UIImage = UIImage(cgImage: img)
+		var img: CGImage?
+		do {
+			img = try self.generator!.copyCGImage(at: imgTime, actualTime: nil)
+		} catch {
+			print(error)
+		}
+
+		let frameImg: UIImage = UIImage(cgImage: img!)
         return frameImg
     }
 }

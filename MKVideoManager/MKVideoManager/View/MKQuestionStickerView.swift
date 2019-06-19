@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum stickerAction {
+enum MKQuestionStickerAction {
 	case editQuestion
 	case editAnswer
 	case editUnable
@@ -21,7 +21,7 @@ class MKQuestionStickerView: UIView {
 	var answerContentView: UIView!
 	var answerTextView: MKPlaceholderTextView!
 	var sendButton: UIButton!
-	var editAction: stickerAction = .editUnable {
+	var editAction: MKQuestionStickerAction = .editUnable {
 		didSet {
 			switch editAction {
 			case .editQuestion:

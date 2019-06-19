@@ -55,7 +55,7 @@ extension UIScrollView {
 }
 
 // MARK: - Provider for UIScrollView.
-public extension XR where Base: UIScrollView {
+extension XR where Base: UIScrollView {
     
     /// MARK: - Pull to refreshing
     // heightForFooter: 真正的refreshHeaderView显示的高度
@@ -153,7 +153,7 @@ public extension XR where Base: UIScrollView {
 }
 
 // MARK: - Provider for WKWebView
-public extension XR where Base: WKWebView {
+extension XR where Base: WKWebView {
     
     /// MARK: - Pull to refreshing
     // heightForFooter: 真正的refreshHeaderView显示的高度
