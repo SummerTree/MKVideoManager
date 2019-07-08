@@ -61,6 +61,7 @@
 		6F7B0E01219BBD1700CA2BD2 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0E00219BBD1700CA2BD2 /* FilterModel.swift */; };
 		6F7B0E03219BD5D500CA2BD2 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0E02219BD5D500CA2BD2 /* FilterView.swift */; };
 		6F7B0E05219BD68400CA2BD2 /* FilterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B0E04219BD68400CA2BD2 /* FilterImageView.swift */; };
+		6F8A270A22C0A5D7002B8E2D /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A270922C0A5D7002B8E2D /* ShareManager.swift */; };
 		6FA4FA1722B25CD3000BB650 /* VideoEditCommond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1222B25CD3000BB650 /* VideoEditCommond.swift */; };
 		6FA4FA1822B25CD3000BB650 /* VideoCompositionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1322B25CD3000BB650 /* VideoCompositionCommand.swift */; };
 		6FA4FA1A22B25CD3000BB650 /* VideoWatermarkCommond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4FA1522B25CD3000BB650 /* VideoWatermarkCommond.swift */; };
@@ -156,6 +157,7 @@
 		6F7B0E00219BBD1700CA2BD2 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		6F7B0E02219BD5D500CA2BD2 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		6F7B0E04219BD68400CA2BD2 /* FilterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterImageView.swift; sourceTree = "<group>"; };
+		6F8A270922C0A5D7002B8E2D /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		6FA4FA1222B25CD3000BB650 /* VideoEditCommond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditCommond.swift; sourceTree = "<group>"; };
 		6FA4FA1322B25CD3000BB650 /* VideoCompositionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCompositionCommand.swift; sourceTree = "<group>"; };
 		6FA4FA1522B25CD3000BB650 /* VideoWatermarkCommond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoWatermarkCommond.swift; sourceTree = "<group>"; };
@@ -332,6 +334,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6F8A270822C0A5C5002B8E2D /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6F8A270922C0A5D7002B8E2D /* ShareManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		6FA4FA1122B25CD3000BB650 /* VideoEdit */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,8 +468,9 @@
 				6FC68C42219957AF0073F3D2 /* MP4 */,
 				6FC68C412199552B0073F3D2 /* SubModules */,
 				6FC68C40219955170073F3D2 /* VideoManager */,
-				6FDE325A21991B74008CB0E9 /* AppDelegate.swift */,
+				6F8A270822C0A5C5002B8E2D /* Manager */,
 				6FDE325C21991B75008CB0E9 /* ViewController.swift */,
+				6FDE325A21991B74008CB0E9 /* AppDelegate.swift */,
 				6F49AB5221A57EA8007EA231 /* Bridge.h */,
 				6FDE326121991B77008CB0E9 /* Assets.xcassets */,
 				6FDE326321991B77008CB0E9 /* LaunchScreen.storyboard */,
@@ -631,6 +642,7 @@
 				6F33C34421CB50D500FAE42B /* MKRefreshHeaderView.m in Sources */,
 				6F49AAEF219EEF76007EA231 /* MKVideoManager.swift in Sources */,
 				6F7B0E01219BBD1700CA2BD2 /* FilterModel.swift in Sources */,
+				6F8A270A22C0A5D7002B8E2D /* ShareManager.swift in Sources */,
 				6F49AAE7219EA4E5007EA231 /* MKCaptionLabel.swift in Sources */,
 				6F33C32E21CA655000FAE42B /* XRActivityRefreshFooter.swift in Sources */,
 				6F49AB3821A56B94007EA231 /* GPUImageBeautifyFilter.m in Sources */,
