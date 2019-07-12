@@ -40,6 +40,11 @@
 		6F3BCFC9225F5C2A003BB3F5 /* PRTween.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3BCFC7225F5C2A003BB3F5 /* PRTween.m */; };
 		6F3BCFCB225F5C66003BB3F5 /* DemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3BCFCA225F5C66003BB3F5 /* DemoTableView.swift */; };
 		6F437D462271BA620090FB17 /* MKDeleteCellTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F437D452271BA620090FB17 /* MKDeleteCellTableViewController.swift */; };
+		6F48B46F22D3311700CCDA50 /* GiphyUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48B46E22D3311600CCDA50 /* GiphyUIViewController.swift */; };
+		6F48B47122D5836400CCDA50 /* TenorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48B47022D5836400CCDA50 /* TenorViewController.swift */; };
+		6F48B47422D58D9E00CCDA50 /* tenor(1).gif in Resources */ = {isa = PBXBuildFile; fileRef = 6F48B47222D58D9E00CCDA50 /* tenor(1).gif */; };
+		6F48B47522D58D9E00CCDA50 /* tenor.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6F48B47322D58D9E00CCDA50 /* tenor.gif */; };
+		6F48B47722D58FB000CCDA50 /* WatermarkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48B47622D58FB000CCDA50 /* WatermarkEngine.swift */; };
 		6F49AAE5219E7ADA007EA231 /* MKDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAE4219E7ADA007EA231 /* MKDefine.swift */; };
 		6F49AAE7219EA4E5007EA231 /* MKCaptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAE6219EA4E5007EA231 /* MKCaptionLabel.swift */; };
 		6F49AAEB219EA83C007EA231 /* ViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49AAEA219EA83C007EA231 /* ViewExtention.swift */; };
@@ -132,6 +137,11 @@
 		6F3BCFC7225F5C2A003BB3F5 /* PRTween.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRTween.m; sourceTree = "<group>"; };
 		6F3BCFCA225F5C66003BB3F5 /* DemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTableView.swift; sourceTree = "<group>"; };
 		6F437D452271BA620090FB17 /* MKDeleteCellTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKDeleteCellTableViewController.swift; sourceTree = "<group>"; };
+		6F48B46E22D3311600CCDA50 /* GiphyUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiphyUIViewController.swift; sourceTree = "<group>"; };
+		6F48B47022D5836400CCDA50 /* TenorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenorViewController.swift; sourceTree = "<group>"; };
+		6F48B47222D58D9E00CCDA50 /* tenor(1).gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "tenor(1).gif"; sourceTree = "<group>"; };
+		6F48B47322D58D9E00CCDA50 /* tenor.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tenor.gif; sourceTree = "<group>"; };
+		6F48B47622D58FB000CCDA50 /* WatermarkEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatermarkEngine.swift; sourceTree = "<group>"; };
 		6F49AAE4219E7ADA007EA231 /* MKDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKDefine.swift; sourceTree = "<group>"; };
 		6F49AAE6219EA4E5007EA231 /* MKCaptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCaptionLabel.swift; sourceTree = "<group>"; };
 		6F49AAEA219EA83C007EA231 /* ViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtention.swift; sourceTree = "<group>"; };
@@ -349,6 +359,7 @@
 				6FA4FA1322B25CD3000BB650 /* VideoCompositionCommand.swift */,
 				6FA4FA1522B25CD3000BB650 /* VideoWatermarkCommond.swift */,
 				6FA4FA1622B25CD3000BB650 /* VideoExportCommond.swift */,
+				6F48B47622D58FB000CCDA50 /* WatermarkEngine.swift */,
 			);
 			path = VideoEdit;
 			sourceTree = "<group>";
@@ -382,6 +393,8 @@
 				6F3BCFC1225F5019003BB3F5 /* MKScrollTextTimerViewController.swift */,
 				6F437D452271BA620090FB17 /* MKDeleteCellTableViewController.swift */,
 				6FBBB5B5228A8F8900213FDF /* MKVideoCompostionViewController.swift */,
+				6F48B46E22D3311600CCDA50 /* GiphyUIViewController.swift */,
+				6F48B47022D5836400CCDA50 /* TenorViewController.swift */,
 				6F3BCFBB225F212C003BB3F5 /* MKStory.storyboard */,
 			);
 			path = SubModules;
@@ -395,6 +408,8 @@
 				6FF1C9A2228E51F5007E8583 /* pre.mp4 */,
 				6FF1C9A4228E52AB007E8583 /* main.mp4 */,
 				6FA4FA2222B34492000BB650 /* ariana.mp4 */,
+				6F48B47322D58D9E00CCDA50 /* tenor.gif */,
+				6F48B47222D58D9E00CCDA50 /* tenor(1).gif */,
 			);
 			path = MP4;
 			sourceTree = "<group>";
@@ -509,6 +524,7 @@
 				6FDE325521991B74008CB0E9 /* Resources */,
 				EC348CC2B184BA8029FFF7EB /* [CP] Embed Pods Frameworks */,
 				6FA7BA0722BA3E1B007309F4 /* ShellScript */,
+				00415F61EAA40D9866C58173 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -559,11 +575,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FF1C98F228D5A39007E8583 /* 444.mp4 in Resources */,
+				6F48B47422D58D9E00CCDA50 /* tenor(1).gif in Resources */,
 				6FA4FA2322B34492000BB650 /* ariana.mp4 in Resources */,
 				6FDE326521991B77008CB0E9 /* LaunchScreen.storyboard in Resources */,
 				6FDE326221991B77008CB0E9 /* Assets.xcassets in Resources */,
 				6F3BCFBC225F212C003BB3F5 /* MKStory.storyboard in Resources */,
 				6FF1C9A3228E51F5007E8583 /* pre.mp4 in Resources */,
+				6F48B47522D58D9E00CCDA50 /* tenor.gif in Resources */,
 				6FC68C44219957C80073F3D2 /* 220.mp4 in Resources */,
 				6FF1C9A5228E52AB007E8583 /* main.mp4 in Resources */,
 			);
@@ -572,6 +590,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		00415F61EAA40D9866C58173 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MKVideoManager/Pods-MKVideoManager-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MKVideoManager/Pods-MKVideoManager-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MKVideoManager/Pods-MKVideoManager-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		69D0BEDCEB33F319725AEB0E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -649,6 +684,7 @@
 				6FA4FA1822B25CD3000BB650 /* VideoCompositionCommand.swift in Sources */,
 				6F33C34721CB5AE900FAE42B /* MKRefreshFooterView.m in Sources */,
 				6F49AB3B21A56B94007EA231 /* TLGPUImageMovieFillFiter.m in Sources */,
+				6F48B47122D5836400CCDA50 /* TenorViewController.swift in Sources */,
 				6F7B0DFA219AB46700CA2BD2 /* AttributeStringExtention.swift in Sources */,
 				6F33C33521CA655000FAE42B /* UIView+XRExtension.swift in Sources */,
 				6F7B0DFC219ACC1100CA2BD2 /* GestureViewController.swift in Sources */,
@@ -694,6 +730,7 @@
 				6F33C32D21CA655000FAE42B /* XRActivityRefreshHeader.swift in Sources */,
 				6F33C33321CA655000FAE42B /* UIScrollView+XRExtension.swift in Sources */,
 				6F7B0DF8219A730800CA2BD2 /* ColorsCollectionCell.swift in Sources */,
+				6F48B47722D58FB000CCDA50 /* WatermarkEngine.swift in Sources */,
 				6F001C57219C52620099602A /* MKVideoCoverViewController.swift in Sources */,
 				6FC68C4E219971AD0073F3D2 /* TextColorInputView.swift in Sources */,
 				6F33C32F21CA655000FAE42B /* XRProvider.swift in Sources */,
@@ -705,6 +742,7 @@
 				6FA4FA1B22B25CD3000BB650 /* VideoExportCommond.swift in Sources */,
 				6F33C33B21CB378100FAE42B /* MKRefresh.swift in Sources */,
 				6FDD79F821F2057400F83604 /* MKPlaceholderTextView.swift in Sources */,
+				6F48B46F22D3311700CCDA50 /* GiphyUIViewController.swift in Sources */,
 				6F3BCFC8225F5C2A003BB3F5 /* PRTweenTimingFunctions.m in Sources */,
 				6FDE325B21991B74008CB0E9 /* AppDelegate.swift in Sources */,
 				6F0A9E2821AE649A0069C587 /* MKStoryTextLayoutManager.m in Sources */,
@@ -849,6 +887,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = Q3VZHMHCPE;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MKVideoManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -871,6 +910,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = Q3VZHMHCPE;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MKVideoManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

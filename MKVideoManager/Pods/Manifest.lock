@@ -1,11 +1,42 @@
 PODS:
+  - DeepDiff (2.2.0)
+  - Giphy (1.0):
+    - DeepDiff (~> 2.2.0)
+    - libwebp
+    - PINCache
   - GPUImage (0.1.7)
   - Hero (1.4.0)
+  - libwebp (1.0.2):
+    - libwebp/core (= 1.0.2)
+    - libwebp/dec (= 1.0.2)
+    - libwebp/demux (= 1.0.2)
+    - libwebp/dsp (= 1.0.2)
+    - libwebp/enc (= 1.0.2)
+    - libwebp/mux (= 1.0.2)
+    - libwebp/utils (= 1.0.2)
+    - libwebp/webp (= 1.0.2)
+  - libwebp/core (1.0.2):
+    - libwebp/webp
+  - libwebp/dec (1.0.2):
+    - libwebp/core
+  - libwebp/demux (1.0.2):
+    - libwebp/core
+  - libwebp/dsp (1.0.2):
+    - libwebp/core
+  - libwebp/enc (1.0.2):
+    - libwebp/core
+  - libwebp/mux (1.0.2):
+    - libwebp/core
+  - libwebp/utils (1.0.2):
+    - libwebp/core
+  - libwebp/webp (1.0.2)
   - MBProgressHUD (1.1.0)
   - MJRefresh (3.2.0)
+  - PINCache (2.3)
   - SnapKit (5.0.0)
 
 DEPENDENCIES:
+  - Giphy
   - GPUImage
   - Hero
   - MBProgressHUD
@@ -14,19 +45,27 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DeepDiff
+    - Giphy
     - GPUImage
     - Hero
+    - libwebp
     - MBProgressHUD
     - MJRefresh
+    - PINCache
     - SnapKit
 
 SPEC CHECKSUMS:
+  DeepDiff: e329bc46dd14ca788d8ec08d34420799ba1d77f2
+  Giphy: 976029d54b1fa1926ffeda884519f9129e490044
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
+  libwebp: b068a3bd7c45f7460f6715be7bed1a18fd5d6b48
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
 
-PODFILE CHECKSUM: 362cd3a20ea5ccab141a014ba2346467b969fb0f
+PODFILE CHECKSUM: b8c7682f739d9622984973340f3c2107be64972f
 
 COCOAPODS: 1.7.2

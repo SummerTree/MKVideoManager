@@ -48,7 +48,6 @@ extension MKAdjustFontViewController: UITextViewDelegate {
 }
 
 extension UIFont {
-	
 	/**
 	Will return the best approximated font size which will fit in the bounds.
 	If no font with name `fontName` could be found, nil is returned.
@@ -67,11 +66,9 @@ extension UIFont {
 		
 		return floor(bestFitFontSize)
 	}
-	
 }
 
 extension String {
-	
 	func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
 		let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
 		let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)

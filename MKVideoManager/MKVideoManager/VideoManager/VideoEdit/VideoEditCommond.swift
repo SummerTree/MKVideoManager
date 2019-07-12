@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import GiphyUISDK
 
 enum CompositionType: String {
 	case Save
@@ -80,6 +81,22 @@ class VideoEditCommand: NSObject {
 		self.configureExport(with: exporter)
 		exporter.exportDelegate = self
 		VideoWatermarkCommond.applyFamousToCompostion(with: videoCom, commonWaterImage: commonImage, size: videoCom.renderSize)
+		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, callback: callback)
+		self.exporter = exporter
+	}
+
+	func compositionVideoAndExport(with localUrl: URL, gifImageView: GPHMediaView? = nil, compositionType: CompositionType = .Save, callback: @escaping OperationFinishHandler) {
+		let (mixcomposition, videoComposition, audioMix) = VideoCompositionCommand.compostionVideo(videoUrl: localUrl, waterImage: nil)
+		guard let mixCom = mixcomposition, let videoCom = videoComposition else {
+			callback(nil)
+			return
+		}
+
+		self.compositionType = compositionType
+		let exporter = VideoExportCommand(customQueue: self.compositionType.rawValue)
+		exporter.exportDelegate = self
+		self.configureExport(with: exporter)
+		VideoWatermarkCommond.applyViewEffectsToCompostion(videoCom, gifImageView, videoCom.renderSize)
 		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, callback: callback)
 		self.exporter = exporter
 	}
