@@ -64,7 +64,6 @@ extension UIImage {
         if x == 1.0 {
             return self
         }
-        
         let newSize = CGSize(width: self.size.width * x, height: self.size.height * x)
         UIGraphicsBeginImageContext(newSize)
         self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))

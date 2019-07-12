@@ -74,8 +74,7 @@ class TenorViewController: UIViewController {
 	*/
 	func tenorSearchHandler(response: [String: AnyObject]){
 		// Parse the json response
-		let responseGifs = response["results"]!
-
+//		let responseGifs = response["results"]!
 		// Load the GIFs into your view
 		print("Result GIFS: (responseGifs)")
 	}
@@ -83,7 +82,7 @@ class TenorViewController: UIViewController {
 	/**
 	Web response handler for anonymous id -- for first time users
 	*/
-	func tenorAnonymousIDHandler(response: [String:AnyObject]){
+	func tenorAnonymousIDHandler(response: [String:AnyObject]) {
 		// Read the anonymous id for the user
 		let anonymousID = response["anon_id"] as! String
 
@@ -94,7 +93,6 @@ class TenorViewController: UIViewController {
 		requestData(anonymousID: anonymousID)
 	}
 
-	
 	@IBAction func startclicked(_ sender: Any) {
 	}
 }

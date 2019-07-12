@@ -112,7 +112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uM3-fm-nLF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="56.799999999999997" y="27.436281859070466"/>
+            <point key="canvasLocation" x="471" y="-252"/>
         </scene>
         <!--Scroll Text View Controller-->
         <scene sceneID="344-Pa-KRn">
@@ -185,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G0i-ni-8oa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="56.799999999999997" y="27.436281859070466"/>
+            <point key="canvasLocation" x="-231" y="-252"/>
         </scene>
         <!--Scroll Text Timer View Controller-->
         <scene sceneID="Eca-9g-pMY">
@@ -245,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1mC-Zr-unY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="56.799999999999997" y="27.436281859070466"/>
+            <point key="canvasLocation" x="1190" y="-252"/>
         </scene>
         <!--Delete Cell Table View Controller-->
         <scene sceneID="yMV-Qa-lbH">
@@ -320,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5c-sQ-TZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079" y="-90"/>
+            <point key="canvasLocation" x="1190" y="448"/>
         </scene>
         <!--Video Composition View Controller-->
         <scene sceneID="N9n-LL-bUg">
@@ -461,7 +461,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4u-5l-el6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="992.79999999999995" y="575.26236881559225"/>
+            <point key="canvasLocation" x="470" y="448"/>
         </scene>
         <!--Share-->
         <scene sceneID="DJD-gc-mg2">
@@ -541,7 +541,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYb-P1-LGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="41" y="532"/>
+            <point key="canvasLocation" x="-231" y="449"/>
         </scene>
         <!--GiphyUI View Controller-->
         <scene sceneID="jXk-hd-xnI">
@@ -566,7 +566,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oUO-cd-by5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1917.5999999999999" y="-3.1484257871064472"/>
+            <point key="canvasLocation" x="1950" y="-239"/>
+        </scene>
+        <!--Pop Tip View Controller-->
+        <scene sceneID="cPP-Ih-yA5">
+            <objects>
+                <viewController storyboardIdentifier="popTipVC" id="UZB-Ep-W6b" customClass="PopTipViewController" customModule="MKVideoManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Doy-VS-ZjE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MST-fa-9xY">
+                                <rect key="frame" x="55" y="216" width="54" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="PopTip1"/>
+                                <connections>
+                                    <action selector="popTip1Clicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="ZiZ-o0-gMo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fb2-Jx-m2N">
+                                <rect key="frame" x="240" y="147" width="56" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="PopTip2"/>
+                                <connections>
+                                    <action selector="popTip2Clicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="6Bh-Oo-WBv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qmu-Dl-l8E">
+                                <rect key="frame" x="54" y="463" width="56" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="PopTip3"/>
+                                <connections>
+                                    <action selector="popTip3Clicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="PW8-k6-KDk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="popTipVC" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vtd-KZ-Whv">
+                                <rect key="frame" x="239" y="463" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="PopTip4"/>
+                                <connections>
+                                    <action selector="popTip4Clicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="pN9-f3-ctg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4e0-nN-iom"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="awD-wW-9LF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2673" y="-240"/>
         </scene>
         <!--Tenor View Controller-->
         <scene sceneID="tpB-Uc-Cpj">
@@ -591,6 +640,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R2r-N0-7mV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1951" y="448"/>
         </scene>
     </scenes>
 </document>

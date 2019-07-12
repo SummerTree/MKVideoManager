@@ -14,6 +14,7 @@
 		6F001C5B219D9D710099602A /* MKVideoCoverSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C5A219D9D710099602A /* MKVideoCoverSlider.swift */; };
 		6F0A9E2521AE64560069C587 /* TLStoryTextLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A9E2321AE64560069C587 /* TLStoryTextLayoutManager.m */; };
 		6F0A9E2821AE649A0069C587 /* MKStoryTextLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A9E2721AE649A0069C587 /* MKStoryTextLayoutManager.m */; };
+		6F23627B22D87C2900AE7B77 /* PopTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F23627A22D87C2900AE7B77 /* PopTipViewController.swift */; };
 		6F33C32B21CA655000FAE42B /* XRRefreshMarcos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C31D21CA655000FAE42B /* XRRefreshMarcos.swift */; };
 		6F33C32C21CA655000FAE42B /* XRRefreshControlSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C31E21CA655000FAE42B /* XRRefreshControlSettings.swift */; };
 		6F33C32D21CA655000FAE42B /* XRActivityRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33C32021CA655000FAE42B /* XRActivityRefreshHeader.swift */; };
@@ -107,6 +108,7 @@
 		6F0A9E2421AE64560069C587 /* TLStoryTextLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLStoryTextLayoutManager.h; sourceTree = "<group>"; };
 		6F0A9E2621AE649A0069C587 /* MKStoryTextLayoutManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKStoryTextLayoutManager.h; sourceTree = "<group>"; };
 		6F0A9E2721AE649A0069C587 /* MKStoryTextLayoutManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MKStoryTextLayoutManager.m; sourceTree = "<group>"; };
+		6F23627A22D87C2900AE7B77 /* PopTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopTipViewController.swift; sourceTree = "<group>"; };
 		6F33C31D21CA655000FAE42B /* XRRefreshMarcos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XRRefreshMarcos.swift; sourceTree = "<group>"; };
 		6F33C31E21CA655000FAE42B /* XRRefreshControlSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XRRefreshControlSettings.swift; sourceTree = "<group>"; };
 		6F33C32021CA655000FAE42B /* XRActivityRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XRActivityRefreshHeader.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				6FBBB5B5228A8F8900213FDF /* MKVideoCompostionViewController.swift */,
 				6F48B46E22D3311600CCDA50 /* GiphyUIViewController.swift */,
 				6F48B47022D5836400CCDA50 /* TenorViewController.swift */,
+				6F23627A22D87C2900AE7B77 /* PopTipViewController.swift */,
 				6F3BCFBB225F212C003BB3F5 /* MKStory.storyboard */,
 			);
 			path = SubModules;
@@ -722,6 +725,7 @@
 				6F3BCFC2225F5019003BB3F5 /* MKScrollTextTimerViewController.swift in Sources */,
 				6F3BCFBA225F2111003BB3F5 /* MKScrollTableViewController.swift in Sources */,
 				6F001C5B219D9D710099602A /* MKVideoCoverSlider.swift in Sources */,
+				6F23627B22D87C2900AE7B77 /* PopTipViewController.swift in Sources */,
 				6FA4FA1D22B27864000BB650 /* Date+Extension.swift in Sources */,
 				6F7B0E05219BD68400CA2BD2 /* FilterImageView.swift in Sources */,
 				6F49AB4221A56BA3007EA231 /* MKStoryOutput.swift in Sources */,
