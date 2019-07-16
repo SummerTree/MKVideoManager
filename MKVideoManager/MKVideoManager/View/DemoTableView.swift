@@ -32,5 +32,4 @@ class DemoTableView: UITableView {
 	@objc func finish() {
 		self.demoDelegate?.animationFinished()
 	}
-	
 }

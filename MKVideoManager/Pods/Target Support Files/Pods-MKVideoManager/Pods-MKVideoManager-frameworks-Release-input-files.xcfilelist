@@ -1,10 +1,13 @@
 ${PODS_ROOT}/Target Support Files/Pods-MKVideoManager/Pods-MKVideoManager-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework
+${BUILT_PRODUCTS_DIR}/DPScrollNumberLabel/DPScrollNumberLabel.framework
 ${BUILT_PRODUCTS_DIR}/DeepDiff/DeepDiff.framework
 ${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework
 ${BUILT_PRODUCTS_DIR}/Hero/Hero.framework
+${BUILT_PRODUCTS_DIR}/JTNumberScrollAnimatedView/JTNumberScrollAnimatedView.framework
 ${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework
+${BUILT_PRODUCTS_DIR}/NumberScrollAnimatedView/NumberScrollAnimatedView.framework
 ${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework

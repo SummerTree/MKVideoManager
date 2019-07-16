@@ -14,6 +14,8 @@ class PopTipViewController: UIViewController {
 	var popTip2: PopTip?
 	var popTip3: PopTip?
 	var popTip4: PopTip?
+	var tipView: GoodsTipView?
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
@@ -22,11 +24,23 @@ class PopTipViewController: UIViewController {
 		super.viewWillAppear(animated)
 	}
 
+	func initailAppearance() {
+		let tip = GoodsTipView()
+//		self.
+	}
+
 	@IBAction func popTip1Clicked(_ sender: UIButton) {
 		let popTip: PopTip = PopTip()
-		popTip.show(text: "Hi, text", direction: .down, maxWidth: 200, in: self.view, from: sender.frame)
-		popTip.actionAnimation = .bounce(6)
-		popTip.padding = 20
+//		popTip.show(text: "Hi, text", direction: .down, maxWidth: 200, in: self.view, from: sender.frame)
+//		popTip.actionAnimation = .bounce(6)
+//		popTip.padding = 20
+		let tipView = Bundle.main.loadNibNamed("GoodTipView", owner: nil, options: nil)?.first as! GoodsTipView
+		popTip.show(customView: tipView, direction: .down, in: self.view, from: sender.frame)
+		popTip.bubbleColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+//		popTip.alpha = 0.75
+		popTip.shouldDismissOnTap = false
+		popTip.cornerRadius = 10
+		self.tipView = tipView
 		self.popTip1 = popTip
 	}
 	@IBAction func popTip2Clicked(_ sender: UIButton) {
@@ -49,4 +63,9 @@ class PopTipViewController: UIViewController {
 //		popTip.shouldDismissOnSwipeOutside = true
 		self.popTip4 = popTip
 	}
+
+	@IBAction func changeClicked(_ sender: Any) {
+
+	}
 }
+

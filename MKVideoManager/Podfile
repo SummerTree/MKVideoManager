@@ -16,4 +16,7 @@ platform :ios, '10.0'
   pod 'MJRefresh'
 	pod 'Giphy'
 	pod 'AMPopTip'
+	pod 'DPScrollNumberLabel', :git => 'git@github.com:xiao-xi/DPScrollNumberLabel.git', :commit => 'af5d927'
+	pod 'NumberScrollAnimatedView'
+	pod 'JTNumberScrollAnimatedView', '~> 1.0'
 end

@@ -10,9 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     var tableView: UITableView!
-    let modules: [String] = ["文字编辑与UI生成图片", "给视频打水印", "UI交互操作", "取视频封面", "下拉刷新", "Sticker", "adjustTextFont", "滚动动画", "滚动动画2", "滚动动画3", "cell 删除动画", "视频合成、水印、导出、压缩", "Giphy UI", "Tenor gif", "PopTip"]
+    let modules: [String] = ["文字编辑与UI生成图片", "给视频打水印", "UI交互操作", "取视频封面", "下拉刷新", "Sticker", "adjustTextFont", "滚动动画", "滚动动画2", "滚动动画3", "cell 删除动画", "视频合成、水印、导出、压缩", "Giphy UI", "Tenor gif", "PopTip", "numberLabel"]
 
-    let controllers: [UIViewController.Type] = [MKViewToImageViewController.self, MKVideoEditViewController.self, GestureViewController.self, MKVideoCoverViewController.self, MKRefreshControlViewController.self, MKStickerViewController.self, MKAdjustFontViewController.self, MKScrollTableViewController.self, MKScrollTextViewController.self, MKScrollTextTimerViewController.self, MKDeleteCellTableViewController.self, MKVideoCompositionViewController.self, GiphyUIViewController.self, TenorViewController.self, PopTipViewController.self]
+    let controllers: [UIViewController.Type] = [MKViewToImageViewController.self, MKVideoEditViewController.self, GestureViewController.self, MKVideoCoverViewController.self, MKRefreshControlViewController.self, MKStickerViewController.self, MKAdjustFontViewController.self, MKScrollTableViewController.self, MKScrollTextViewController.self, MKScrollTextTimerViewController.self, MKDeleteCellTableViewController.self, MKVideoCompositionViewController.self, GiphyUIViewController.self, TenorViewController.self, PopTipViewController.self, ScrollNumberViewController.self]
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +67,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 			vc = UIStoryboard.init(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "giphyVC") as! GiphyUIViewController
 		} else if indexPath.row == 14 {
 			vc = UIStoryboard(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "popTipVC") as! PopTipViewController
+		} else if indexPath.row == 15 {
+			vc = UIStoryboard(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "numberLabelVC") as! ScrollNumberViewController
 		} else {
 			vc = self.controllers[indexPath.row].init()
 		}

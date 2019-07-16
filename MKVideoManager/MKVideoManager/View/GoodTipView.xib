@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GoodsTipView" customModule="MKVideoManager" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="238" height="120"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Then your goods are exhausted, please buy again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4M-LT-6XC">
+                    <rect key="frame" x="14" y="14" width="210" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="s94-Gk-tz1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBD-1i-Oip">
+                    <rect key="frame" x="20" y="64" width="198" height="40"/>
+                    <color key="backgroundColor" red="1" green="0.98823529409999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="yDy-uT-b9G"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                    <state key="normal" title="Renew">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="renewClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="U1I-Fi-nko"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="K4M-LT-6XC" secondAttribute="trailing" constant="14" id="Cdw-CX-onH"/>
+                <constraint firstItem="TBD-1i-Oip" firstAttribute="top" secondItem="K4M-LT-6XC" secondAttribute="bottom" constant="14" id="GnJ-l9-Oit"/>
+                <constraint firstItem="K4M-LT-6XC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="SD0-Pm-Dvb"/>
+                <constraint firstItem="TBD-1i-Oip" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="lsC-1v-dIn"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TBD-1i-Oip" secondAttribute="trailing" constant="20" id="mAW-rJ-a3F"/>
+                <constraint firstItem="K4M-LT-6XC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="14" id="wQG-NS-6vn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="renewButton" destination="TBD-1i-Oip" id="Scm-fZ-Lan"/>
+                <outlet property="tipLabel" destination="K4M-LT-6XC" id="ob8-6W-bl0"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="145.98214285714286"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GoodsTimeTipView" customModule="MKVideoManager" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="193" height="70"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👩 Girls Only" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8u-p6-VF7">
+                    <rect key="frame" x="44" y="8" width="105" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="coh-S4-9FO"/>
+                        <constraint firstAttribute="width" constant="105" id="xAQ-H7-Wgp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="59:40 Remaining" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrH-z0-2rv">
+                    <rect key="frame" x="0.0" y="46" width="193" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="WlI-K0-TJP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="zrH-z0-2rv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0el-Ap-9E7"/>
+                <constraint firstItem="k8u-p6-VF7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="A5a-5B-1Rl"/>
+                <constraint firstItem="zrH-z0-2rv" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="2" id="Tk1-8t-Gf4"/>
+                <constraint firstItem="zrH-z0-2rv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Vfe-lo-N7c"/>
+                <constraint firstAttribute="trailing" secondItem="zrH-z0-2rv" secondAttribute="trailing" id="dt6-mO-ryY"/>
+                <constraint firstItem="k8u-p6-VF7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="t7F-kV-rc6"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="timeLabel" destination="zrH-z0-2rv" id="0ee-l9-B19"/>
+            </connections>
+        </view>
+    </objects>
+</document>
