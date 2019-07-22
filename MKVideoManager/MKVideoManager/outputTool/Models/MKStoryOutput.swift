@@ -22,7 +22,7 @@ class TLStoryOutput: NSObject {
 	var audioEnable: Bool = true
     var movieFile: GPUImageMovie?
     var movieWriter: GPUImageMovieWriter?
-    
+
     func output(filterNamed: String, container: UIImage, callback:@escaping ((URL?, MKStoryType) -> Void)) {
         if type! == .video {
             self.outputVideo(filterNamed: filterNamed, container: container, audioEnable: audioEnable, callback: callback)
@@ -30,7 +30,7 @@ class TLStoryOutput: NSObject {
             self.outputImage(filterNamed: filterNamed, container: container, callback: callback)
         }
     }
-    
+
     func saveToAlbum(filterNamed: String, container: UIImage, callback:@escaping ((Bool) -> Void)) {
         if type! == .video {
             self.outputVideoToAlbum(filterNamed: filterNamed, container: container, audioEnable: audioEnable, callback: callback)
@@ -38,7 +38,7 @@ class TLStoryOutput: NSObject {
             self.outputImageToAlbum(filterNamed: filterNamed, container: container, callback: callback)
         }
     }
-    
+
     fileprivate func outputImageToAlbum(filterNamed: String, container: UIImage, callback:@escaping ((Bool) -> Void)) {
         self.outputImage(filterNamed: filterNamed, container: container) { (u, _) in
             if u == nil {
@@ -57,7 +57,7 @@ class TLStoryOutput: NSObject {
             })
         }
     }
-    
+
     fileprivate func outputVideoToAlbum(filterNamed: String, container: UIImage, audioEnable: Bool, callback:@escaping ((Bool) -> Void)) {
         self.outputVideo(filterNamed: filterNamed, container: container, audioEnable: audioEnable) { (u, _) in
             if u == nil {
@@ -76,7 +76,7 @@ class TLStoryOutput: NSObject {
             })
         }
     }
-    
+
     fileprivate func outputImage(filterNamed: String, container: UIImage, callback:@escaping ((URL?, MKStoryType) -> Void)) {
 //        MKProgressHUD.showWatting()
         DispatchQueue.global().async {
@@ -119,17 +119,17 @@ class TLStoryOutput: NSObject {
             })
         }
     }
-    
+
     fileprivate func outputVideo(filterNamed: String, container: UIImage, audioEnable: Bool, callback:@escaping ((URL?, MKStoryType) -> Void)){
         guard let url = url else {
             return
         }
-        
-        let asset = AVAsset.init(url: url)
-        movieFile = GPUImageMovie.init(asset: asset)
+
+        let asset = AVAsset(url: url)
+        movieFile = GPUImageMovie(asset: asset)
         movieFile?.runBenchmark = false
-        
-        let movieFillFilter = TLGPUImageMovieFillFiter.init()
+
+        let movieFillFilter = TLGPUImageMovieFillFiter()
         movieFillFilter.fillMode = .preserveAspectRatio
         movieFile?.addTarget(movieFillFilter)
 
@@ -137,9 +137,9 @@ class TLStoryOutput: NSObject {
             callback(nil, .video)
             return
         }
-        
+
         movieWriter = GPUImageMovieWriter(movieURL: exportUrl, size: MKExportStoryConfiguration.outputVideoSize)
-        
+
         if audioEnable {
             movieWriter?.shouldPassthroughAudio = audioEnable
             movieFile?.audioEncodingTarget = movieWriter
@@ -150,9 +150,8 @@ class TLStoryOutput: NSObject {
 
         let uielement = GPUImageUIElement(view: imgview)
 
-        let landBlendFilter = TLGPUImageAlphaBlendFilter.init()
+        let landBlendFilter = TLGPUImageAlphaBlendFilter()
         landBlendFilter.mix = 1
-        
         let progressFilter = filterNamed.isEmpty ? GPUImageFilter() : GPUImageCustomLookupFilter(lookupImageNamed: filterNamed)
 
         movieFillFilter.addTarget(progressFilter as? GPUImageInput)

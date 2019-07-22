@@ -8,8 +8,8 @@
 
 import Foundation
 import UIKit
-class FilterModel: NSObject{
 
+class FilterModel: NSObject{
     var transform: CGAffineTransform?
 
     var rotation: CGFloat = 0
@@ -22,7 +22,7 @@ class FilterModel: NSObject{
 
     var size: CGSize?
 
-    var userEnable: Bool?
+    var userEnable: Bool = false
 
     var text: String?
 

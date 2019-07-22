@@ -17,24 +17,21 @@ protocol VideoExportCommandDelegate: NSObjectProtocol {
 typealias OperationFinishHandler = (_ url: URL?) -> Void
 
 class VideoExportCommand: NSObject {
-	
 	deinit {
 		print("VideoExportCommand deinit")
 	}
-	
-	
+
 	/// export status when finish
 	///
 	/// - completed: success
 	/// - failed: failed
 	/// - cancelled: cancelled
-	public enum FinishStatus: Int {
+	enum FinishStatus: Int {
 		case completed
 		case failed
 		case cancelled
 	}
-	
-	
+
 	/// default video setting unless you set it
 	var videoSetting: [String: Any] = [
 		AVVideoCodecKey: AVVideoCodecH264,
@@ -48,7 +45,6 @@ class VideoExportCommand: NSObject {
 		]
 	]
 
-	
 	/// default audio setting unless you set it
 	var audioSetting: [String: Any] = [
 		AVFormatIDKey: kAudioFormatMPEG4AAC,
@@ -57,36 +53,31 @@ class VideoExportCommand: NSObject {
 		AVEncoderBitRateKey: 64000
 	]
 
-	
 	/// default export file type
 	var exportFileType: AVFileType = .mp4
 
-	
 	/// default export local path and file name
 	var exportUrl: URL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("export_commond_temp.mp4")
-	
+
 	//exporter is in writing status
 	var isWriting: Bool {
 		return self.assetWriter?.status == AVAssetWriter.Status.writing
 	}
-	
+
 	/// AVAssetWriter status
 	var assetWriterStatus: AVAssetWriter.Status {
 		return self.assetWriter?.status ?? AVAssetWriter.Status.unknown
 	}
-	
+
 	/// delegate
 	weak var exportDelegate: VideoExportCommandDelegate?
-
 	private var finishedHandler: OperationFinishHandler?
 	private var assetReader: AVAssetReader?
 	private var assetWriter: AVAssetWriter?
-
 	private var assetReaderAudioOutput: AVAssetReaderAudioMixOutput?
 	private var assetReaderVideoOutput: AVAssetReaderVideoCompositionOutput?
 	private var assetWriterAudioOutput: AVAssetWriterInput?
 	private var assetWriterVideoOutput: AVAssetWriterInput?
-
 	private var mainSerializetionQueue = DispatchQueue(label: "com.monkey.writer.exportQueue")
 	private var videoQueue: DispatchQueue = DispatchQueue(label: "com.monkey.writer.exportVideoQueue")
 	private var audioQueue: DispatchQueue = DispatchQueue(label: "com.monkey.writer.exportAudioQueue")
@@ -95,7 +86,6 @@ class VideoExportCommand: NSObject {
 	private var videoFinished: Bool = false
 	private var cancelled: Bool = false
 	private var sourceDuration: CMTime = CMTime.zero
-
 	//想要并发的合成多个视频时，为export设置不同的queue name, 目前最大支持3个
 	private var customQueueName: String?
 
@@ -103,7 +93,7 @@ class VideoExportCommand: NSObject {
 	init(customQueue: String? = nil) {
 		self.customQueueName = customQueue
 	}
-	
+
 	/// exportVideo with parameters
 	///
 	/// - Parameters:
@@ -115,7 +105,7 @@ class VideoExportCommand: NSObject {
 	func exportVideo(with mixComposition: AVComposition, videoComposition: AVVideoComposition, audioMixTools: AVAudioMix?, callback: OperationFinishHandler?) {
 		self.exportVideoWriter(with: mixComposition, videoComposition: videoComposition, audioMixTools: audioMixTools, callback: callback)
 	}
-
+	
 	func cancelWriterProgress() {
 		if self.isWriting {
 			self.cancel()

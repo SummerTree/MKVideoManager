@@ -24,50 +24,37 @@
 import Foundation
 import UIKit
 
-final public class XRRefreshMarcos {
-    
-    public static let xr_StatusBarHeight: CGFloat = {
+final class XRRefreshMarcos {
+	static let xr_StatusBarHeight: CGFloat = {
         if iSiPhoneXSerries() {
             return 44
         }
         return 20
     }()
-    
-    public static let xr_BottomIndicatorHeight: CGFloat = {
+
+	static let xr_BottomIndicatorHeight: CGFloat = {
         if iSiPhoneXSerries() {
             return 34
         }
         return 0
     }()
-    
-    public static let xr_navigationBarHeight: CGFloat = {
-        return 44
-    }()
-    
-    //MARK: - 屏幕尺寸
-    // iPhoneX, XS
+
+	static let xr_navigationBarHeight: CGFloat = 44
+	// iPhoneX, XS
     static func iSiPhoneX_XS() -> Bool {
-        
         return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.currentMode)) ? __CGSizeEqualToSize(UIScreen.main.currentMode!.size, CGSize(width: 1125, height: 2436)) : false) || (UIScreen.instancesRespond(to: #selector(getter: UIScreen.currentMode)) ? __CGSizeEqualToSize(UIScreen.main.currentMode!.size, CGSize(width: 2436, height: 1125)) : false)
     }
-    
     // iPhoneXR
     static func iSiPhoneXR() -> Bool {
-        
         return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.currentMode)) ? __CGSizeEqualToSize(UIScreen.main.currentMode!.size, CGSize(width: 828, height: 1792)) : false) || (UIScreen.instancesRespond(to: #selector(getter: UIScreen.currentMode)) ? __CGSizeEqualToSize(UIScreen.main.currentMode!.size, CGSize(width: 1792, height: 828)) : false)
     }
-    
     // iPhoneXS_Max
     static func iSiPhoneXS_Max() -> Bool {
-        
         return (UIScreen.instancesRespond(to: #selector(getter: UIScreen.currentMode)) ? __CGSizeEqualToSize(UIScreen.main.currentMode!.size, CGSize(width: 1242, height: 2688)) : false) || (UIScreen.instancesRespond(to: #selector(getter: UIScreen.currentMode)) ? __CGSizeEqualToSize(UIScreen.main.currentMode!.size, CGSize(width: 2688, height: 1242)) : false)
     }
-    
     // 是否有齐刘海和虚拟指示器
     static func iSiPhoneXSerries() -> Bool {
-        
         var isiPhoneXSerries: Bool = false
-        
         if UIDevice.current.userInterfaceIdiom != .phone {
             isiPhoneXSerries = false
         }
@@ -79,10 +66,7 @@ final public class XRRefreshMarcos {
                 }
             }
         }
-        
         isiPhoneXSerries = iSiPhoneX_XS() || iSiPhoneXR() || iSiPhoneXS_Max()
-        
         return isiPhoneXSerries
     }
-    
 }

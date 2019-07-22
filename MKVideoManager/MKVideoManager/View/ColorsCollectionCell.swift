@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 
 class ColorCollectionCell: UICollectionViewCell {
-    
-    var normalContentView: UIView? = nil
-    var selectedContentView: UIView? = nil
+    var normalContentView: UIView?
+    var selectedContentView: UIView?
     var contentColor: UIColor?
     var selectedLabel: UILabel?
     
@@ -20,12 +19,12 @@ class ColorCollectionCell: UICollectionViewCell {
         super.init(frame: frame)
         self.initUI()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initUI()
     }
-    
+
     func initUI() {
         if self.selectedContentView == nil {
             self.selectedContentView = UIView()
@@ -36,7 +35,7 @@ class ColorCollectionCell: UICollectionViewCell {
             self.contentView.addSubview(self.selectedContentView!)
             self.selectedContentView?.snp.makeConstraints({ (make) in
                 make.center.equalToSuperview()
-                make.size.equalTo(CGSize.init(width: 32, height: 32))
+                make.size.equalTo(CGSize(width: 32, height: 32))
             })
         }
         
@@ -47,22 +46,18 @@ class ColorCollectionCell: UICollectionViewCell {
             self.contentView.addSubview(self.normalContentView!)
             self.normalContentView?.snp.makeConstraints({ (make) in
                 make.center.equalToSuperview()
-                make.size.equalTo(CGSize.init(width: 28, height: 28))
+                make.size.equalTo(CGSize(width: 28, height: 28))
             })
         }
-        
-        
     }
-    
-    override var isSelected: Bool{
+
+    override var isSelected: Bool {
         didSet {
             if self.isSelected {
                 self.selectedContentView?.isHidden = false
-            }else{
+            } else {
                 self.selectedContentView?.isHidden = true
             }
         }
     }
-    
-    
 }

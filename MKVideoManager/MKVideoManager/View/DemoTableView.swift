@@ -14,7 +14,8 @@ protocol DemoTableViewDelegate: NSObjectProtocol {
 
 class DemoTableView: UITableView {
 	var activeTweenOperation: PRTweenOperation?
-	var demoDelegate: DemoTableViewDelegate?
+	weak var demoDelegate: DemoTableViewDelegate?
+
 	override init(frame: CGRect, style: UITableView.Style) {
 		super.init(frame: frame, style: style)
 	}
@@ -22,13 +23,13 @@ class DemoTableView: UITableView {
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
-	
+
 	func doAnimationScrollTo(point: CGPoint) {
 		let offset = self.contentOffset
 		self.activeTweenOperation = PRTweenCGPointLerp.lerp(self, property: "contentOffset", from: offset, to: point, duration: 2, timing: nil, target: self, complete: #selector(finish))
 //			PRTweenCGPointLerp.lerp(self, property: "contentOffset", from: offset, to: point, duration: 3)
 	}
-	
+
 	@objc func finish() {
 		self.demoDelegate?.animationFinished()
 	}

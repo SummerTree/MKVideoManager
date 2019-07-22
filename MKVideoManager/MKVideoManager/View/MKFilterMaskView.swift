@@ -9,12 +9,11 @@
 import Foundation
 import UIKit
 
-protocol MKFilterMaskViewDelegate {
+protocol MKFilterMaskViewDelegate: NSObjectProtocol {
     func maskViewDidHide(_ outputModel: FilterModel)
 }
 
 class MKFilterMaskView: UIView {
-    
     //view
     var headerView: UIView!
     var colorTypeButton: UIButton!
@@ -24,9 +23,8 @@ class MKFilterMaskView: UIView {
     var editTextView: EditTextView!
     //colorsView
     var colorsInputView: ColorsInputView!
-    
-    weak var delegate : TextEditMaskManagerDelegate?
-    
+    weak var delegate: TextEditMaskManagerDelegate?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -37,24 +35,18 @@ class MKFilterMaskView: UIView {
     
     func setSubViews() {
         self.frame = UIScreen.main.bounds
-        self.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
     }
-    
-    func setHeaderView()  {
-        
+
+    func setHeaderView() {
     }
     
     func setTextEditView() {
-        
     }
     
     func setTextColorView() {
-        
     }
-    
+
     func setData(_ input: FilterModel) {
-        
     }
-    
-    
 }

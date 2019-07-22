@@ -576,44 +576,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fb2-Jx-m2N">
-                                <rect key="frame" x="240" y="147" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fb2-Jx-m2N">
+                                <rect key="frame" x="159.5" y="215" width="56" height="30"/>
+                                <color key="backgroundColor" red="0.69411764710000001" green="0.64313725489999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="68X-PB-7WD"/>
+                                    <constraint firstAttribute="width" constant="56" id="xHf-Eg-FO8"/>
+                                </constraints>
                                 <state key="normal" title="PopTip2"/>
                                 <connections>
                                     <action selector="popTip2Clicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="6Bh-Oo-WBv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qmu-Dl-l8E">
-                                <rect key="frame" x="54" y="463" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qmu-Dl-l8E">
+                                <rect key="frame" x="159.5" y="346" width="56" height="30"/>
+                                <color key="backgroundColor" red="0.69411764710000001" green="0.64313725489999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3SK-12-Zre"/>
+                                    <constraint firstAttribute="width" constant="56" id="YOc-lB-dKc"/>
+                                </constraints>
                                 <state key="normal" title="PopTip3"/>
                                 <connections>
                                     <action selector="popTip3Clicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="PW8-k6-KDk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="popTipVC" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vtd-KZ-Whv">
-                                <rect key="frame" x="239" y="463" width="57" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="popTipVC" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vtd-KZ-Whv">
+                                <rect key="frame" x="159" y="468" width="57" height="30"/>
+                                <color key="backgroundColor" red="0.69411764710000001" green="0.64313725489999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="hqm-OQ-meI"/>
+                                    <constraint firstAttribute="width" constant="57" id="qaM-UQ-zHL"/>
+                                </constraints>
                                 <state key="normal" title="PopTip4"/>
                                 <connections>
                                     <action selector="popTip4Clicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="pN9-f3-ctg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4W-md-7QN">
-                                <rect key="frame" x="162" y="575" width="51" height="30"/>
+                                <rect key="frame" x="281" y="468" width="51" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="51" id="beS-SX-5U3"/>
-                                    <constraint firstAttribute="height" constant="30" id="jb7-3K-xf6"/>
+                                    <constraint firstAttribute="width" constant="51" id="Hex-zg-deq"/>
+                                    <constraint firstAttribute="height" constant="30" id="xzp-1G-zff"/>
                                 </constraints>
                                 <state key="normal" title="change"/>
                                 <connections>
                                     <action selector="changeClicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="Dew-4E-EVf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MST-fa-9xY">
-                                <rect key="frame" x="160" y="217" width="54" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAT-2S-vTc">
+                                <rect key="frame" x="276" y="346" width="51" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="51" id="601-9k-0As"/>
+                                    <constraint firstAttribute="height" constant="30" id="dSc-rc-sjI"/>
+                                </constraints>
+                                <state key="normal" title="change"/>
+                                <connections>
+                                    <action selector="changePop3Clicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="Ise-p0-sNy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MST-fa-9xY">
+                                <rect key="frame" x="159" y="168" width="54" height="30"/>
+                                <color key="backgroundColor" red="0.69411764710000001" green="0.64313725489999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="8v4-4w-g7d"/>
+                                    <constraint firstAttribute="height" constant="30" id="Zcg-6l-8yG"/>
+                                </constraints>
                                 <state key="normal" title="PopTip1"/>
                                 <connections>
                                     <action selector="popTip1Clicked:" destination="UZB-Ep-W6b" eventType="touchUpInside" id="ZiZ-o0-gMo"/>
@@ -622,8 +649,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="S4W-md-7QN" firstAttribute="centerX" secondItem="Doy-VS-ZjE" secondAttribute="centerX" id="BRo-GJ-sQr"/>
-                            <constraint firstItem="4e0-nN-iom" firstAttribute="bottom" secondItem="S4W-md-7QN" secondAttribute="bottom" constant="62" id="z71-uP-A79"/>
+                            <constraint firstItem="4e0-nN-iom" firstAttribute="trailing" secondItem="S4W-md-7QN" secondAttribute="trailing" constant="43" id="46J-bF-UTN"/>
+                            <constraint firstItem="Vtd-KZ-Whv" firstAttribute="centerX" secondItem="Doy-VS-ZjE" secondAttribute="centerX" id="FBy-uH-rB4"/>
+                            <constraint firstItem="Vtd-KZ-Whv" firstAttribute="top" secondItem="Qmu-Dl-l8E" secondAttribute="bottom" constant="92" id="HdZ-El-HW2"/>
+                            <constraint firstItem="MST-fa-9xY" firstAttribute="top" secondItem="4e0-nN-iom" secondAttribute="top" constant="148" id="MJ7-I7-Za0"/>
+                            <constraint firstItem="Fb2-Jx-m2N" firstAttribute="top" secondItem="MST-fa-9xY" secondAttribute="bottom" constant="17" id="Mcr-5v-uhk"/>
+                            <constraint firstItem="dAT-2S-vTc" firstAttribute="leading" secondItem="Qmu-Dl-l8E" secondAttribute="trailing" constant="60.5" id="O15-KV-fgi"/>
+                            <constraint firstItem="dAT-2S-vTc" firstAttribute="centerY" secondItem="Qmu-Dl-l8E" secondAttribute="centerY" id="RWx-oJ-vwz"/>
+                            <constraint firstItem="MST-fa-9xY" firstAttribute="centerX" secondItem="Doy-VS-ZjE" secondAttribute="centerX" constant="-1.5" id="VoF-bb-5ZM"/>
+                            <constraint firstItem="Fb2-Jx-m2N" firstAttribute="centerX" secondItem="Doy-VS-ZjE" secondAttribute="centerX" id="atz-K6-a5T"/>
+                            <constraint firstItem="Qmu-Dl-l8E" firstAttribute="top" secondItem="Fb2-Jx-m2N" secondAttribute="bottom" constant="101" id="hiC-eH-CL9"/>
+                            <constraint firstItem="Qmu-Dl-l8E" firstAttribute="centerX" secondItem="Doy-VS-ZjE" secondAttribute="centerX" id="u2K-Ud-Y3z"/>
+                            <constraint firstItem="S4W-md-7QN" firstAttribute="centerY" secondItem="Vtd-KZ-Whv" secondAttribute="centerY" id="w09-Pt-51n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4e0-nN-iom"/>
                     </view>
