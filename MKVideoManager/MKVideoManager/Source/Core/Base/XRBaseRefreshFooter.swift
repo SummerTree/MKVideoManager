@@ -28,12 +28,11 @@ private let keyPathForContentOffset: String = "contentOffset"
 private let keyPathForContentSize: String = "contentSize"
 
 open class XRBaseRefreshFooter: UIView {
-    
     private var scroller: UIScrollView?
-    
+
     // 底部忽略的高度
     public var ignoreBottomHeight: CGFloat = 0
-    
+
     public var refreshState: XRPullRefreshState = .idle {
         didSet {
             if refreshState != oldValue {
@@ -42,14 +41,14 @@ open class XRBaseRefreshFooter: UIView {
                         self.refreshingClosure!()
                     }
                 }
-                
+
                 DispatchQueue.main.async {
                     self.refreshStateChanged()
                 }
             }
         }
     }
-    
+
     public var progress: Double = 0.0 {
         didSet {
             DispatchQueue.main.async {
@@ -57,52 +56,50 @@ open class XRBaseRefreshFooter: UIView {
             }
         }
     }
-    
+
     var refreshingClosure: (() -> Swift.Void)?
-    
-    
+
     // MARK: - init
     public init() {
         super.init(frame: CGRect.zero)
-        
+
         self.prepareForRefresh()
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override open func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        
+
         if let scroller = newSuperview as? UIScrollView {
             scroller.xr_contentInsetBottom += self.xr_height
             self.xr_y = scroller.xr_contentHeight
             self.scroller = scroller
         }
     }
-    
+
     override open func didMoveToSuperview() {
         super.didMoveToSuperview()
-        
+
         if let scroller = self.superview as? UIScrollView {
             scroller.addObserver(self, forKeyPath: keyPathForContentOffset, options: NSKeyValueObservingOptions.new, context: nil)
             scroller.addObserver(self, forKeyPath: keyPathForContentSize, options: NSKeyValueObservingOptions.new, context: nil)
-            
+
             self.scroller = scroller
-            
+
             if (scroller.contentOffset.y + scroller.xr_height) > scroller.xr_contentHeight {
                 if self.refreshState == .refreshing {
                     return
                 }
-                
+
                 self.beginRefreshing()
             }
         }
     }
-    
+
     override open func removeFromSuperview() {
-        
         if let scroller = self.superview as? UIScrollView {
             scroller.removeObserver(self, forKeyPath: keyPathForContentOffset, context: nil)
             scroller.removeObserver(self, forKeyPath: keyPathForContentSize, context: nil)
@@ -111,89 +108,78 @@ open class XRBaseRefreshFooter: UIView {
         }
         super.removeFromSuperview()
     }
-    
+
     // MARK: - Override Methods
     open func prepareForRefresh() {
-        
         self.refreshState = .idle
         self.backgroundColor = UIColor.clear
     }
-    
+
     open func refreshStateChanged() {
-        
     }
-    
+
     open func pullProgressValueChanged() {
-        
     }
-    
+
     public func beginRefreshing() {
-        
         self.refreshState = .refreshing
     }
-    
+
     public func endRefreshing() {
-        
         if self.refreshState == .refreshing {
             self.refreshState = .idle
         }
     }
-    
+
     public func endRefreshingWithNoMoreData() {
-        
         if self.refreshState == .refreshing || self.refreshState == .idle {
             self.refreshState = .noMoreData
         }
     }
-    
+
     public func endRefreshingWithLoadingFailure() {
-        
         if self.refreshState == .refreshing || self.refreshState == .idle {
             self.refreshState = .loadingFailure
         }
     }
-    
+
     public func removeLoadMoreRefreshing() {
-        
         self.refreshState = .idle
         self.removeFromSuperview()
     }
-    
+
     func scrollViewContentOffsetChanged(scrollView: UIScrollView) {
-        
         let contentOffset = scrollView.contentOffset
         let contentSize = scrollView.contentSize
-        
+
         var fullDisplayOffsetY = contentSize.height + scrollView.xr_contentInsetBottom + ignoreBottomHeight
-        
+
         if XRRefreshControlSettings.sharedSetting.pullLoadingMoreMode == .ignorePullReleaseFast {
             fullDisplayOffsetY = contentSize.height + scrollView.xr_contentInsetBottom - self.xr_height
         }
-        
+
         let halfDisplayOffsetY = contentSize.height + scrollView.xr_contentInsetBottom + ignoreBottomHeight - self.xr_height * 0.5
         let changeOffsetY = contentOffset.y + scrollView.xr_height
-        
+
         if contentOffset.y < scrollView.contentInset.top {
             return
         }
-        
+
         if refreshState == .refreshing || refreshState == .noMoreData || refreshState == .loadingFailure {
             return
         }
-        
+
         if XRRefreshControlSettings.sharedSetting.pullLoadingMoreMode == .ignorePullReleaseFast {
-            
             if changeOffsetY > contentSize.height && changeOffsetY < halfDisplayOffsetY {
                 self.refreshState = .pulling
-            }
-            else if changeOffsetY >= fullDisplayOffsetY {
+            } else if changeOffsetY >= fullDisplayOffsetY {
                 self.refreshState = .pullFulling
             }
-            
+
             if self.refreshState == .pullFulling {
                 self.beginRefreshing()
             }
-            
+
             if contentOffset.y > contentSize.height {
                 let distance = abs(contentOffset.y)
                 let absFullHeight = abs(fullDisplayOffsetY)
@@ -202,22 +188,19 @@ open class XRBaseRefreshFooter: UIView {
                 progress = progress > 1 ? 1 : progress
                 self.progress = Double(progress)
             }
-        }
-        else if XRRefreshControlSettings.sharedSetting.pullLoadingMoreMode == .ignorePullRelease {
+        } else if XRRefreshControlSettings.sharedSetting.pullLoadingMoreMode == .ignorePullRelease {
             if changeOffsetY > contentSize.height && changeOffsetY < halfDisplayOffsetY {
                 self.refreshState = .pulling
-            }
-            else if changeOffsetY >= halfDisplayOffsetY && changeOffsetY < fullDisplayOffsetY {
+            } else if changeOffsetY >= halfDisplayOffsetY && changeOffsetY < fullDisplayOffsetY {
                 self.refreshState = .pullHalfing
-            }
-            else if changeOffsetY >= fullDisplayOffsetY {
+            } else if changeOffsetY >= fullDisplayOffsetY {
                 self.refreshState = .pullFulling
             }
-            
+
             if self.refreshState == .pullFulling {
                 self.beginRefreshing()
             }
-            
+
             if contentOffset.y > contentSize.height {
                 let distance = abs(contentOffset.y)
                 let absFullHeight = abs(fullDisplayOffsetY)
@@ -226,19 +209,16 @@ open class XRBaseRefreshFooter: UIView {
                 progress = progress > 1 ? 1 : progress
                 self.progress = Double(progress)
             }
-        }
-        else {
+        } else {
             if scrollView.isDragging {
                 if changeOffsetY > contentSize.height && changeOffsetY < halfDisplayOffsetY {
                     self.refreshState = .pulling
-                }
-                else if changeOffsetY >= halfDisplayOffsetY && changeOffsetY < fullDisplayOffsetY {
+                } else if changeOffsetY >= halfDisplayOffsetY && changeOffsetY < fullDisplayOffsetY {
                     self.refreshState = .pullHalfing
-                }
-                else if changeOffsetY >= fullDisplayOffsetY {
+                } else if changeOffsetY >= fullDisplayOffsetY {
                     self.refreshState = .pullFulling
                 }
-                
+
                 if contentOffset.y > contentSize.height {
                     let distance = abs(contentOffset.y)
                     let absFullHeight = abs(fullDisplayOffsetY)
@@ -247,18 +227,16 @@ open class XRBaseRefreshFooter: UIView {
                     progress = progress > 1 ? 1 : progress
                     self.progress = Double(progress)
                 }
-            }
-            else {
+            } else {
                 if self.refreshState == .pullFulling {
                     self.beginRefreshing()
                 }
             }
         }
     }
-    
+
     // MARK: - Observe Lisener
-    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if let keyPath_ = keyPath {
             if keyPath_ == keyPathForContentSize {
                 if let changeDict = change {
@@ -267,13 +245,11 @@ open class XRBaseRefreshFooter: UIView {
                         self.xr_y = contentSize.height
                     }
                 }
-            }
-            else if keyPath_ == keyPathForContentOffset {
-                if let _ = change , let scroller = object as? UIScrollView {
+            } else if keyPath_ == keyPathForContentOffset {
+                if let _ = change, let scroller = object as? UIScrollView {
                     self.scrollViewContentOffsetChanged(scrollView: scroller)
                 }
             }
         }
     }
-
 }

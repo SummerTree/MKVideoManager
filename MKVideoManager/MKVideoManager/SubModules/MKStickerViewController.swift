@@ -9,16 +9,15 @@
 import Foundation
 
 class MKStickerViewController: UIViewController {
-	
 	var questionSticker: MKQuestionStickerView!
 	var maskView: MKMomentEditMaskView!
 	override func viewDidLoad() {
 		self.view.backgroundColor = UIColor.gray
 		self.setSubViews()
 	}
-	
+
 	func setSubViews() {
-		questionSticker = MKQuestionStickerView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width / 2, height: 94))
+		questionSticker = MKQuestionStickerView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width / 2, height: 94))
 		self.view.addSubview(questionSticker)
 		let stickerWidth: CGFloat = 278
 //		let stickerHeight: CGFloat = 114
@@ -28,14 +27,14 @@ class MKStickerViewController: UIViewController {
 			make.width.equalTo(stickerWidth)
 //			make.height.equalTo(stickerHeight)
 		}
-		let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(tap))
+		let tapGes = UITapGestureRecognizer(target: self, action: #selector(tap))
 		questionSticker.addGestureRecognizer(tapGes)
-		
-		maskView = MKMomentEditMaskView.init(frame: UIScreen.main.bounds)
-		
+
+		maskView = MKMomentEditMaskView(frame: UIScreen.main.bounds)
+
 		maskView.delegate = self
 	}
-	
+
 	@objc func tap() {
 //		self.animationGroup(with: self.questionSticker)
 		questionSticker.alpha = 0
@@ -53,51 +52,50 @@ class MKStickerViewController: UIViewController {
 //			self.view.layoutIfNeeded()
 //		}
 	}
-	
+
 	func animationGroup(with view: UIView) {
-		
-		let scaleAnimation1: CABasicAnimation = CABasicAnimation.init(keyPath: "transform.scale")
-		scaleAnimation1.fromValue = NSNumber.init(value: 1)
-		scaleAnimation1.toValue = NSNumber.init(value: 1.15)
+		let scaleAnimation1: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+		scaleAnimation1.fromValue = NSNumber(value: 1)
+		scaleAnimation1.toValue = NSNumber(value: 1.15)
 		scaleAnimation1.beginTime = 0
 		scaleAnimation1.duration = 0.2
-		
-		let scaleAnimation2: CABasicAnimation = CABasicAnimation.init(keyPath: "transform.scale")
-		scaleAnimation2.fromValue = NSNumber.init(value: 1.15)
-		scaleAnimation2.toValue = NSNumber.init(value: 0.91)
+
+		let scaleAnimation2: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+		scaleAnimation2.fromValue = NSNumber(value: 1.15)
+		scaleAnimation2.toValue = NSNumber(value: 0.91)
 		scaleAnimation2.beginTime = 0.2
 		scaleAnimation2.duration = 0.2
-		
-		let scaleAnimation3: CABasicAnimation = CABasicAnimation.init(keyPath: "transform.scale")
-		scaleAnimation3.fromValue = NSNumber.init(value: 0.91)
-		scaleAnimation3.toValue = NSNumber.init(value: 1)
+
+		let scaleAnimation3: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+		scaleAnimation3.fromValue = NSNumber(value: 0.91)
+		scaleAnimation3.toValue = NSNumber(value: 1)
 		scaleAnimation3.beginTime = 0.4
 		scaleAnimation3.duration = 0.1
-		
-		let positonAnimation1:CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "position")
+
+		let positonAnimation1: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "position")
 		let viewCenterX = view.center.x
 		let viewCeneerY = view.center.y
 		positonAnimation1.values = [
-			CGPoint.init(x: viewCenterX - 8, y: viewCeneerY),
-			CGPoint.init(x: viewCenterX + 8, y: viewCeneerY),
-			CGPoint.init(x: viewCenterX - 6, y: viewCeneerY),
-			CGPoint.init(x: viewCenterX + 6, y: viewCeneerY),
-			CGPoint.init(x: viewCenterX, y: viewCeneerY)
+			CGPoint(x: viewCenterX - 8, y: viewCeneerY),
+			CGPoint(x: viewCenterX + 8, y: viewCeneerY),
+			CGPoint(x: viewCenterX - 6, y: viewCeneerY),
+			CGPoint(x: viewCenterX + 6, y: viewCeneerY),
+			CGPoint(x: viewCenterX, y: viewCeneerY)
 		]
 		positonAnimation1.duration = 0.5
 		positonAnimation1.beginTime = 1.5
-		
-		let positonAnimation2:CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "position")
+
+		let positonAnimation2: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "position")
 		positonAnimation2.values = [
-			CGPoint.init(x: viewCenterX - 8, y: viewCeneerY),
-			CGPoint.init(x: viewCenterX + 8, y: viewCeneerY),
-			CGPoint.init(x: viewCenterX - 6, y: viewCeneerY),
-			CGPoint.init(x: viewCenterX + 6, y: viewCeneerY),
-			CGPoint.init(x: viewCenterX, y: viewCeneerY)
+			CGPoint(x: viewCenterX - 8, y: viewCeneerY),
+			CGPoint(x: viewCenterX + 8, y: viewCeneerY),
+			CGPoint(x: viewCenterX - 6, y: viewCeneerY),
+			CGPoint(x: viewCenterX + 6, y: viewCeneerY),
+			CGPoint(x: viewCenterX, y: viewCeneerY)
 		]
 		positonAnimation2.duration = 0.5
 		positonAnimation2.beginTime = 4.5
-		
+
 		let group: CAAnimationGroup = CAAnimationGroup()
 		group.animations = [
 			scaleAnimation1,
@@ -111,27 +109,27 @@ class MKStickerViewController: UIViewController {
 		group.fillMode = CAMediaTimingFillMode.forwards
 		view.layer.add(group, forKey: nil)
 	}
-	
+
 	func animationAlpha(with view: UIView, beginTime: CFTimeInterval, duration: CFTimeInterval) {
 		let animation = CABasicAnimation(keyPath: "opacity")
 		animation.fromValue = 0
 		animation.toValue = 1
 		animation.duration = 2
 		animation.beginTime = 0
-		
+
 		let animation2 = CABasicAnimation(keyPath: "opacity")
 		animation2.fromValue = 1
 		animation2.toValue = 1
 		animation2.duration = 2.5
 		animation2.beginTime = 2
-		
+
 		let group: CAAnimationGroup = CAAnimationGroup()
 		group.animations = [
 			animation,
 			animation2
 		]
 		group.duration = 4.5
-		
+
 		view.layer.add(group, forKey: "view-opacity")
 		view.alpha = 0
 	}
@@ -139,13 +137,11 @@ class MKStickerViewController: UIViewController {
 
 extension MKStickerViewController: MKMomentEditMaskViewDelegate {
 	func cancelButtonClicked() {
-		
 	}
-	
+
 	func doneButtonClicked() {
-		
 	}
-	
+
 	func maskViewTaped() {
 		questionSticker.snp.updateConstraints { (make) in
 			make.top.equalToSuperview().offset(300)
@@ -155,10 +151,8 @@ extension MKStickerViewController: MKMomentEditMaskViewDelegate {
 			self.maskView.alpha = 0
 			self.questionSticker.sendButton.alpha = 0
 			self.view.layoutIfNeeded()
-		}) { (complete) in
+		}) { (_) in
 			self.maskView.removeFromSuperview()
 		}
 	}
-	
-	
 }

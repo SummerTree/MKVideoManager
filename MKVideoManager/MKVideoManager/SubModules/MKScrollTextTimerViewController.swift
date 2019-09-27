@@ -18,37 +18,32 @@ class MKScrollTextTimerViewController: UIViewController {
 		self.setupData()
 		self.setup()
 	}
-	
+
 	fileprivate func setup() {
 		self.textScrollView.dataSource = self
 		self.textScrollView.setTableViewColor()
 	}
-	
+
 	func setupData() {
 		for _ in 0...19 {
 			datas.append(optionString)
 		}
 	}
-	
+
 	@IBAction func startAction(_ sender: Any) {
 		self.textScrollView.startScroll()
 	}
-	
+
 	@IBAction func stopAction(_ sender: Any) {
-		
 	}
-	
-	
 }
 
 extension MKScrollTextTimerViewController: MKTextScrollViewDataSource {
 	func sourceData() -> [String]? {
 		return datas
 	}
-	
+
 	func heightForRow(row: Int) -> CGFloat {
 		return self.cellHeight
 	}
-	
-	
 }

@@ -11,22 +11,21 @@ import UIKit
 
 // MARK: - Extension for contentInset
 extension UIScrollView {
-    
     var xr_contentInset: UIEdgeInsets {
         get {
             return self.contentInset
         }
-        
+
         set {
             self.contentInset = newValue
         }
     }
-    
+
     var xr_contentInsetBottom: CGFloat {
         get {
             return self.contentInset.bottom
         }
-        
+
         set {
             var inset: UIEdgeInsets = self.contentInset
             inset.bottom = newValue
@@ -36,12 +35,12 @@ extension UIScrollView {
             self.contentInset = inset
         }
     }
-    
+
     var xr_contentInsetTop: CGFloat {
         get {
             return self.contentInset.top
         }
-        
+
         set {
             var inset: UIEdgeInsets = self.contentInset
             inset.top = newValue
@@ -51,29 +50,28 @@ extension UIScrollView {
             self.contentInset = inset
         }
     }
-    
+
     var xr_contentHeight: CGFloat {
         get {
             return self.contentSize.height
         }
-        
+
         set {
             var contentSize = self.contentSize
             contentSize.height = newValue
             self.contentSize = contentSize
         }
     }
-    
+
     var xr_contentOffsetY: CGFloat {
         get {
             return self.contentOffset.y
         }
-        
+
         set {
             var contentOffSet_ = self.contentOffset
             contentOffSet_.y = newValue
             self.contentOffset = contentOffSet_
         }
     }
-    
 }

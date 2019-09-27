@@ -58,7 +58,7 @@ final class XRRefreshMarcos {
         if UIDevice.current.userInterfaceIdiom != .phone {
             isiPhoneXSerries = false
         }
-        
+
         if #available(iOS 11.0, *) {
             if let mainWindow = UIApplication.shared.delegate?.window {
                 if mainWindow!.safeAreaInsets.bottom > 0 {

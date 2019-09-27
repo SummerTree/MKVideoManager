@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIView{
+extension UIView {
     private struct AssociatedKeys {
         static var filterModelKey = "filterModelKey"
     }
@@ -17,7 +17,7 @@ extension UIView{
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.filterModelKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
-        
+
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.filterModelKey) as? FilterModel
         }

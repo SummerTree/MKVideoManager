@@ -24,22 +24,20 @@ import Foundation
 import UIKit
 import WebKit
 
-public protocol XRExtensionProvider: class {
+public protocol XRExtensionProvider: AnyObject {
     associatedtype ProviderType
     var xr: ProviderType { get }
 }
 
 extension XRExtensionProvider {
-    
     public var xr: XR<Self> {
         return XR(self)
     }
 }
 
 public struct XR<Base> {
-    
     public let base: Base
-    
+
     fileprivate init(_ base_: Base) {
         self.base = base_
     }
@@ -56,4 +54,3 @@ extension WKWebView: XRExtensionProvider {
 // MARK: - Provider for UIWebView
 extension UIWebView: XRExtensionProvider {
 }
-

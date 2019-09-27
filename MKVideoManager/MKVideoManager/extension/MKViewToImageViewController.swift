@@ -19,11 +19,10 @@ extension UIView {
             }
         } else {
             // Fallback on earlier versions
-            return UIImage.init()
+            return UIImage()
         }
-        
     }
-    
+
     func copyView() -> UIView {
         let data = NSKeyedArchiver.archivedData(withRootObject: self)
         return NSKeyedUnarchiver.unarchiveObject(with: data) as! UIView

@@ -10,11 +10,11 @@ import Foundation
 
 import UIKit
 
-extension UIImage{
-    static func getImageWithColor(_ color:UIColor)->UIImage{
-        return self.getImageWith(color, CGSize.init(width: 1, height: 1))
+extension UIImage {
+    static func getImageWithColor(_ color: UIColor) -> UIImage {
+        return self.getImageWith(color, CGSize(width: 1, height: 1))
     }
-    static func getImageWith(_ color:UIColor, _ size: CGSize)->UIImage{
+    static func getImageWith(_ color: UIColor, _ size: CGSize) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
@@ -24,16 +24,14 @@ extension UIImage{
         UIGraphicsEndImageContext()
         return image!
     }
-    
+
     func imageMontage() -> UIImage {
-        
         UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
 
-        self.draw(in: CGRect.init(x: 0, y: 0, width: self.size.width, height: self.size.height), blendMode: CGBlendMode.normal, alpha: 1.0)
-        
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height), blendMode: CGBlendMode.normal, alpha: 1.0)
+
         let result = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return result!
     }
-    
 }

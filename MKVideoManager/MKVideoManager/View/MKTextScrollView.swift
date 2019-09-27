@@ -23,14 +23,14 @@ class MKTextScrollView: UIView {
 		super.init(frame: frame)
 		self.setupUI()
 	}
-	
+
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		self.setupUI()
 	}
 
 	fileprivate func setupUI() {
-		self.tableView =  UITableView(frame: CGRect.zero, style: .plain)
+		self.tableView = UITableView(frame: CGRect.zero, style: .plain)
 		self.tableView.dataSource = self
 		self.tableView.delegate = self
 		self.tableView.isScrollEnabled = false
@@ -40,12 +40,12 @@ class MKTextScrollView: UIView {
 			make.edges.equalTo(self).inset(UIEdgeInsets.zero)
 		}
 	}
-	
+
 	func setTableViewColor() {
 		self.tableView.backgroundColor = UIColor.clear
 		self.tableView.separatorColor = UIColor.clear
 	}
-	
+
 	func startScroll() {
 		offsetY = 0
 		timer = Timer.scheduledTimer(withTimeInterval: self.timeInterval, repeats: true, block: { (_) in

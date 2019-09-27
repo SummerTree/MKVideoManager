@@ -17,7 +17,7 @@ class MKVideoManager: NSObject {
     private var progressFilter: GPUImageBrightnessFilter?
     private var inputElement: GPUImageUIElement?
 	var exportUrl: URL = {
-        return URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("story_capture_edit_end_temp.mp4")
+        URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("story_capture_edit_end_temp.mp4")
     }()
 
     func exportWaterImageVideo(_ watermarkImage: UIImage, _ videoUrl: URL) {
@@ -30,7 +30,7 @@ class MKVideoManager: NSObject {
         movieFilter = GPUImageMovie(asset: asset)
         movieFilter?.runBenchmark = false
         //        movieFilter?.playAtActualSpeed = false
-        
+
         let imageView = UIImageView()
         imageView.image = watermarkImage.imageMontage()
         imageView.bounds = CGRect(origin: CGPoint.zero, size: movieSize)

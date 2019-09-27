@@ -16,7 +16,7 @@ extension UIScrollView {
         }
         self.mj_header = headerView
     }
-    
+
     func addRefreshFooterAction(footerAction:@escaping (() -> Void )) {
         let footerView: MKRefreshFooterView = MKRefreshFooterView {
             footerAction()

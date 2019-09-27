@@ -18,7 +18,7 @@ class MKMomentEditMaskView: UIView {
 	weak var delegate: MKMomentEditMaskViewDelegate?
 	fileprivate var cancelButton: UIButton!
 	fileprivate var doneButton: UIButton!
-	
+
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		self.customInit()
@@ -28,7 +28,7 @@ class MKMomentEditMaskView: UIView {
 		super.init(coder: aDecoder)
 		self.customInit()
 	}
-	
+
 	func customInit() {
 		self.alpha = 0
 		self.backgroundColor = UIColor(white: 0, alpha: 0.5)

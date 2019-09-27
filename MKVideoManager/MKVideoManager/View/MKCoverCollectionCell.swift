@@ -12,7 +12,7 @@ import UIKit
 
 class MKCoverCollectionCell: UICollectionViewCell {
     var imageView: UIImageView!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initUI()

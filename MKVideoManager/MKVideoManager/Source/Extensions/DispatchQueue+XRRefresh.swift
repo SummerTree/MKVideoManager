@@ -24,14 +24,11 @@
 import Foundation
 
 extension DispatchQueue {
-    
-    class func xr_dispatch_after_in_main(_ afTime: TimeInterval,block: @escaping ()->()) {
-        
+    class func xr_dispatch_after_in_main(_ afTime: TimeInterval, block: @escaping () -> Void) {
         let popTime = DispatchTime.now() + Double(Int64(afTime * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC) // 1s * popTime
-        
+
         if popTime > DispatchTime(uptimeNanoseconds: 0) {
             DispatchQueue.main.asyncAfter(deadline: popTime, execute: block)
         }
     }
 }
-

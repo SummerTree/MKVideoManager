@@ -40,29 +40,29 @@ final class MKPlaceholderTextView: UITextView {
 		super.init(frame: frame, textContainer: textContainer)
 		self.customInit()
 	}
-	
+
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		self.customInit()
 	}
-	
+
 	func customInit() {
 		self.delegate = self
 		NotificationCenter.default.addObserver(self, selector: #selector(textDidChangeHandler(notification:)), name: UITextView.textDidChangeNotification, object: nil)
-		
+
 		placeholderLabel = UILabel()
 		placeholderLabel?.textColor = placeholderColor
 		placeholderLabel?.text = placeholder
 		placeholderLabel?.textAlignment = .left
 		placeholderLabel?.numberOfLines = 0
 	}
-	
+
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		placeholderLabel?.font = placeholderFont
 		var height: CGFloat = placeholderFont.lineHeight
 		if let data = placeholderLabel?.text {
-			let expectedDefaultWidth:CGFloat = bounds.size.width
+			let expectedDefaultWidth: CGFloat = bounds.size.width
 			let fontSize: CGFloat = placeholderFont.pointSize
 			let textView = UITextView()
 			textView.text = data
@@ -70,7 +70,7 @@ final class MKPlaceholderTextView: UITextView {
 			let sizeForTextView = textView.sizeThatFits(CGSize(width: expectedDefaultWidth,
 															   height: CGFloat.greatestFiniteMagnitude))
 			let expectedTextViewHeight = sizeForTextView.height
-			
+
 			if expectedTextViewHeight > height {
 				height = expectedTextViewHeight
 			}
@@ -78,7 +78,7 @@ final class MKPlaceholderTextView: UITextView {
 		let xRatio: CGFloat = 5
 		let holderWidth: CGFloat = bounds.size.width - 16
 		let yRatio: CGFloat = 0
-		
+
 		placeholderLabel?.frame = CGRect(x: xRatio, y: yRatio, width: holderWidth, height: height)
 
 		if text.isEmpty {

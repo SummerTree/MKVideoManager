@@ -14,7 +14,7 @@ class ColorCollectionCell: UICollectionViewCell {
     var selectedContentView: UIView?
     var contentColor: UIColor?
     var selectedLabel: UILabel?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initUI()
@@ -38,7 +38,7 @@ class ColorCollectionCell: UICollectionViewCell {
                 make.size.equalTo(CGSize(width: 32, height: 32))
             })
         }
-        
+
         if self.normalContentView == nil {
             self.normalContentView = UIView()
             self.normalContentView?.backgroundColor = UIColor.white

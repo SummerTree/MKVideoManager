@@ -120,7 +120,7 @@ class TLStoryOutput: NSObject {
         }
     }
 
-    fileprivate func outputVideo(filterNamed: String, container: UIImage, audioEnable: Bool, callback:@escaping ((URL?, MKStoryType) -> Void)){
+    fileprivate func outputVideo(filterNamed: String, container: UIImage, audioEnable: Bool, callback:@escaping ((URL?, MKStoryType) -> Void)) {
         guard let url = url else {
             return
         }

@@ -547,7 +547,7 @@ public enum DateComponentType {
 
 // The type of date that can be used for the dateFor function.
 public enum DateForType {
-    case startOfDay, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth, tomorrow, yesterday, nearestMinute(minute:Int), nearestHour(hour:Int)
+    case startOfDay, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth, tomorrow, yesterday, nearestMinute(minute: Int), nearestHour(hour: Int)
 }
 
 // Convenience types for date to string conversion

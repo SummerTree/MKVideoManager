@@ -13,11 +13,11 @@ class MKVideoCoverSlider: UISlider {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
 //    override func thumbRect(forBounds bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
 //        print("bounds: \(bounds)")
 //        print("rect: \(rect)")

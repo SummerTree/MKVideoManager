@@ -23,7 +23,7 @@ class MKRefreshCollectionViewCell: UICollectionViewCell {
     }
 
     func setSubViews() {
-        imageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: CGSize.init(width: 60, height: 60)))
+        imageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 60, height: 60)))
         imageView.backgroundColor = UIColor.purple
         self.contentView.addSubview(imageView)
     }

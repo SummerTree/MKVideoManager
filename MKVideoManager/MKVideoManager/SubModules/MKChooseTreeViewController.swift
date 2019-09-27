@@ -11,11 +11,11 @@ import Foundation
 import UIKit
 
 class MKChooseTreeVIewController: UIViewController {
-    var image : UIImage?
+    var image: UIImage?
     var imageView: UIImageView?
-    
+
     override func viewDidLoad() {
-        imageView = UIImageView.init(frame: MKDefine.screenBounds)
+        imageView = UIImageView(frame: MKDefine.screenBounds)
         imageView!.backgroundColor = UIColor.white
         imageView?.image = self.image
         self.view.addSubview(imageView!)

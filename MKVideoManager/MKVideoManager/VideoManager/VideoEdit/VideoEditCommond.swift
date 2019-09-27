@@ -39,9 +39,9 @@ class VideoEditCommand: NSObject {
 	var exportUrl: URL?
 
 	var exportFileType: AVFileType?
-	
+
 	var exporter: VideoExportCommand?
-	
+
 	var compositionType: CompositionType = .Save
 
 	weak var videoEditDelegate: VideoEditCommandDelegate?
@@ -52,7 +52,7 @@ class VideoEditCommand: NSObject {
 			callback(nil)
 			return
 		}
-	
+
 		self.compositionType = compositionType
 		let exporter = VideoExportCommand(customQueue: self.compositionType.rawValue)
 		exporter.exportDelegate = self
@@ -69,14 +69,14 @@ class VideoEditCommand: NSObject {
 			callback(nil)
 			return
 		}
-		
+
 		if let lastExport = self.exporter, lastExport.isWriting == true {
 			TimeLog.logTime(logString: "exporter is writing, wait please")
 			return
 		}
-		
+
 		self.compositionType = compositionType
-		
+
 		let exporter = VideoExportCommand(customQueue: self.compositionType.rawValue)
 		self.configureExport(with: exporter)
 		exporter.exportDelegate = self
@@ -100,7 +100,7 @@ class VideoEditCommand: NSObject {
 		exporter.exportVideo(with: mixCom, videoComposition: videoCom, audioMixTools: audioMix, callback: callback)
 		self.exporter = exporter
 	}
-	
+
 	func cancel() {
 		self.exporter?.cancelWriterProgress()
 	}
@@ -137,7 +137,7 @@ extension VideoEditCommand: VideoExportCommandDelegate {
 //			TimeLog.logTime(logString: "Video exportProgress: \(progress)")
 		}
 	}
-	
+
 	func videoExportCompleted(videoExporter: VideoExportCommand, status: VideoExportCommand.FinishStatus) {
 		TimeLog.logTime(logString: "Finish videoExport status: \(status.rawValue)")
 		self.videoEditDelegate?.videoEdit(wit: status, compositionType: self.compositionType)

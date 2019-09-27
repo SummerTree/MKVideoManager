@@ -28,11 +28,11 @@ class MKFilterMaskView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     func setSubViews() {
         self.frame = UIScreen.main.bounds
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
@@ -40,10 +40,10 @@ class MKFilterMaskView: UIView {
 
     func setHeaderView() {
     }
-    
+
     func setTextEditView() {
     }
-    
+
     func setTextColorView() {
     }
 

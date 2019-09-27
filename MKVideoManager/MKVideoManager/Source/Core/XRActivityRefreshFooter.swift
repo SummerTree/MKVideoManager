@@ -24,43 +24,41 @@
 import UIKit
 
 public class XRActivityRefreshFooter: XRBaseRefreshFooter {
-    
 	lazy var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
     lazy var statusLbl: UILabel = UILabel(frame: CGRect.zero)
-    
+
     override public init() {
         super.init()
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override open func layoutSubviews() {
         super.layoutSubviews()
-        
+
         if self.refreshState == .noMoreData || self.refreshState == .loadingFailure {
             statusLbl.frame = CGRect(x: (self.bounds.size.width - statusLbl.bounds.size.width) * 0.5, y: (self.bounds.size.height - 35 - ignoreBottomHeight) * 0.5, width: statusLbl.bounds.size.width, height: 35)
-        }
-        else {
+        } else {
             statusLbl.frame = CGRect(x: (self.bounds.size.width - statusLbl.bounds.size.width) * 0.5 + 35 * 0.5, y: (self.bounds.size.height - 35 - ignoreBottomHeight) * 0.5, width: statusLbl.bounds.size.width, height: 35)
         }
-        
+
         activityIndicator.frame = CGRect(x: statusLbl.frame.origin.x - 35, y: statusLbl.frame.origin.y, width: 35, height: 35)
     }
-    
+
     override public func prepareForRefresh() {
         super.prepareForRefresh()
-        
+
         self.backgroundColor = UIColor.blue
         activityIndicator.hidesWhenStopped = true
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
         activityIndicator.center = CGPoint(x: self.frame.size.width * 0.5, y: 55)
         self.addSubview(activityIndicator)
-        
+
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = XRRefreshControlSettings.sharedSetting.refreshStatusLblTextColor
-        
+
         statusLbl.isHidden = true
         statusLbl.textColor = XRRefreshControlSettings.sharedSetting.refreshStatusLblTextColor
         statusLbl.textAlignment = .center
@@ -69,23 +67,21 @@ public class XRActivityRefreshFooter: XRBaseRefreshFooter {
         statusLbl.center = CGPoint(x: activityIndicator.center.x, y: activityIndicator.center.y)
         self.addSubview(statusLbl)
         statusLbl.isUserInteractionEnabled = true
-        
+
         let statusLblTapGestrue = UITapGestureRecognizer(target: self, action: #selector(self.reloadingWithLoadingFailureAction))
         statusLblTapGestrue.numberOfTapsRequired = 1
         statusLbl.addGestureRecognizer(statusLblTapGestrue)
-        
+
         if self.refreshState == .noMoreData || self.refreshState == .loadingFailure {
             statusLbl.frame = CGRect(x: (self.bounds.size.width - statusLbl.bounds.size.width) * 0.5, y: (self.bounds.size.height - 35 - ignoreBottomHeight) * 0.5, width: statusLbl.bounds.size.width, height: 35)
-        }
-        else {
+        } else {
             statusLbl.frame = CGRect(x: (self.bounds.size.width - statusLbl.bounds.size.width) * 0.5 + 35 * 0.5, y: (self.bounds.size.height - 35 - ignoreBottomHeight) * 0.5, width: statusLbl.bounds.size.width, height: 35)
         }
-        
+
         activityIndicator.frame = CGRect(x: statusLbl.frame.origin.x - 35, y: statusLbl.frame.origin.y, width: 35, height: 35)
     }
-    
+
     override public func refreshStateChanged() {
-        
         switch refreshState {
         case .idle:
             activityIndicator.stopAnimating()
@@ -120,23 +116,20 @@ public class XRActivityRefreshFooter: XRBaseRefreshFooter {
 //            statusLbl.text = "加载失败了，点击重新加载"
             break
         }
-        
+
         statusLbl.sizeToFit()
         statusLbl.superview?.setNeedsLayout()
         statusLbl.superview?.layoutIfNeeded()
     }
-    
+
     // pull progress changed
     override public func pullProgressValueChanged() {
-        
     }
-    
+
     // 加载失败了，重新加载
     @objc func reloadingWithLoadingFailureAction() {
-        
         if self.refreshState == .loadingFailure {
             self.beginRefreshing()
         }
     }
-    
 }

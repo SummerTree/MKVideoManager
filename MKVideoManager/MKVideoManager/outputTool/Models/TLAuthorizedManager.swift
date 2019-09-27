@@ -18,8 +18,8 @@ class TLAuthorizedManager: NSObject {
         case camera
         case album
     }
-    
-    public static func requestAuthorization(with type:AuthorizedType, callback:@escaping AuthorizedCallback) {
+
+    public static func requestAuthorization(with type: AuthorizedType, callback:@escaping AuthorizedCallback) {
         if type == .mic {
             self.requestMicAuthorizationStatus(callback)
         }
@@ -30,8 +30,8 @@ class TLAuthorizedManager: NSObject {
             self.requestAlbumAuthorizationStatus(callback)
         }
     }
-    
-    public static func checkAuthorization(with type:AuthorizedType) -> Bool {
+
+    public static func checkAuthorization(with type: AuthorizedType) -> Bool {
         if type == .mic {
             return AVAudioSession.sharedInstance().recordPermission() == .granted
         }
@@ -43,27 +43,27 @@ class TLAuthorizedManager: NSObject {
         }
         return false
     }
-    
+
     public static func openAuthorizationSetting() {
         if #available(iOS 10.0, *) {
-            UIApplication.shared.open(URL.init(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
         } else {
-            UIApplication.shared.openURL(URL.init(string: UIApplicationOpenSettingsURLString)!)
+            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
         }
     }
-    
+
     fileprivate static func requestMicAuthorizationStatus(_ callabck:@escaping AuthorizedCallback) {
         let status = AVAudioSession.sharedInstance().recordPermission()
         if status == .granted {
             DispatchQueue.main.async {
                 callabck(.mic, true)
             }
-        }else if status == .denied {
+        } else if status == .denied {
             DispatchQueue.main.async {
                 callabck(.mic, false)
             }
             self.openAuthorizationSetting()
-        }else{
+        } else {
             AVAudioSession.sharedInstance().requestRecordPermission({ granted in
                 DispatchQueue.main.async {
                     callabck(.mic, granted)
@@ -71,40 +71,40 @@ class TLAuthorizedManager: NSObject {
             })
         }
     }
-    
+
     fileprivate static func requestCameraAuthorizationStatus(_ callabck:@escaping AuthorizedCallback) {
         let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         if status == .authorized {
             DispatchQueue.main.async {
                 callabck(.camera, true)
             }
-        }else if status == .notDetermined {
+        } else if status == .notDetermined {
             AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { granted in
                 DispatchQueue.main.async {
                     callabck(.camera, granted)
                 }
             })
-        }else if (status == .denied) {
+        } else if (status == .denied) {
             DispatchQueue.main.async {
                 callabck(.camera, false)
                 self.openAuthorizationSetting()
             }
         }
     }
-    
+
     fileprivate static func requestAlbumAuthorizationStatus(_ callabck:@escaping AuthorizedCallback) {
         let status = PHPhotoLibrary.authorizationStatus()
         if status == .authorized {
             DispatchQueue.main.async {
                 callabck(.album, true)
             }
-        }else if status == .notDetermined {
+        } else if status == .notDetermined {
             PHPhotoLibrary.requestAuthorization({ (granted) in
                 DispatchQueue.main.async {
                     callabck(.album, granted == .authorized)
                 }
             })
-        }else if status == .denied || status == .restricted {
+        } else if status == .denied || status == .restricted {
             DispatchQueue.main.async {
                 callabck(.album, false)
             }

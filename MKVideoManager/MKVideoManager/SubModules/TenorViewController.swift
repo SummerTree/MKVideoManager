@@ -32,7 +32,7 @@ class TenorViewController: UIViewController {
 	/**
 	Execute web request to retrieve the top GIFs returned(in batches of 8) for the given search term.
 	*/
-	func requestData(anonymousID: String){
+	func requestData(anonymousID: String) {
 		// the test search term
 		let searchTerm = "excited"
 
@@ -54,11 +54,11 @@ class TenorViewController: UIViewController {
 	/**
 	Async URL requesting function.
 	*/
-	func makeWebRequest(urlRequest: URLRequest, callback: @escaping ([String:AnyObject]) -> ()){
+	func makeWebRequest(urlRequest: URLRequest, callback: @escaping ([String: AnyObject]) -> Void) {
 		// Make the async request and pass the resulting json object to the callback
-		let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+		let task = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
 			do {
-				if let jsonResult = try JSONSerialization.jsonObject(with: data!, options: []) as? [String:AnyObject] {
+				if let jsonResult = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: AnyObject] {
 					// Push the results to our callback
 					callback(jsonResult)
 				}
@@ -72,7 +72,7 @@ class TenorViewController: UIViewController {
 	/**
 	Web response handler for search requests.
 	*/
-	func tenorSearchHandler(response: [String: AnyObject]){
+	func tenorSearchHandler(response: [String: AnyObject]) {
 		// Parse the json response
 //		let responseGifs = response["results"]!
 		// Load the GIFs into your view
@@ -82,7 +82,7 @@ class TenorViewController: UIViewController {
 	/**
 	Web response handler for anonymous id -- for first time users
 	*/
-	func tenorAnonymousIDHandler(response: [String:AnyObject]) {
+	func tenorAnonymousIDHandler(response: [String: AnyObject]) {
 		// Read the anonymous id for the user
 		let anonymousID = response["anon_id"] as! String
 

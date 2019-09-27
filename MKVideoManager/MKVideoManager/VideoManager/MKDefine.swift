@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class MKDefine: NSObject {
-    static let statusBarHeight:CGFloat = UIApplication.shared.statusBarFrame.height
+    static let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
     static let screenBounds: CGRect = UIScreen.main.bounds
     static let screenWidth: CGFloat = screenBounds.width
     static let screenHeight: CGFloat = screenBounds.height

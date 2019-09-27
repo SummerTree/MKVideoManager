@@ -105,7 +105,7 @@ class VideoExportCommand: NSObject {
 	func exportVideo(with mixComposition: AVComposition, videoComposition: AVVideoComposition, audioMixTools: AVAudioMix?, callback: OperationFinishHandler?) {
 		self.exportVideoWriter(with: mixComposition, videoComposition: videoComposition, audioMixTools: audioMixTools, callback: callback)
 	}
-	
+
 	func cancelWriterProgress() {
 		if self.isWriting {
 			self.cancel()
@@ -231,7 +231,6 @@ extension VideoExportCommand {
 						self.audioFinished = !success
 					} else {
 						self.audioFinished = true
-					
 					}
 					if self.audioFinished == true {
 						// Mark the input as finished, but only if we haven't already done so, and then leave the dispatch group (since the audio work has finished).
@@ -242,7 +241,6 @@ extension VideoExportCommand {
 						self.dispatchGroup.leave()
 					}
 				}
-				
 			}
 		}
 
@@ -268,7 +266,6 @@ extension VideoExportCommand {
 						self.dispatchGroup.leave()
 					}
 				}
-				
 			}
 		}
 
@@ -299,14 +296,14 @@ extension VideoExportCommand {
 		}
 		return startSuccess
 	}
-	
+
 	fileprivate func resetWriter() {
 		// Reencoding was finish, reset booleans.
 		self.cancelled = false
 		self.videoFinished = false
 		self.audioFinished = false
 	}
-	
+
 	fileprivate func progressForReader(with sampleBuffer: CMSampleBuffer) {
 		let preTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
 		let preTimeSeconds = CMTimeGetSeconds(preTime)
@@ -378,7 +375,7 @@ extension VideoExportCommand {
 				self.assetReaderAudioOutput = audioMixOutput
 			}
 		}
-		
+
 		self.assetReader = assetReader
 		return assetReader
 	}

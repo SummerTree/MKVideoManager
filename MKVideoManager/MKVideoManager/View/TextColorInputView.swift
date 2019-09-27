@@ -18,15 +18,15 @@ class ColorsInputView: UIView {
     weak var delegate: ColorsInputViewDelegate?
     var collectionView: UICollectionView!
 	var colors: [UIColor] = [
-		UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
-		UIColor(red: 246/255, green: 66/255, blue: 52/255, alpha: 1),
-		UIColor(red: 246/255, green: 153/255, blue: 52/255, alpha: 1),
-		UIColor(red: 246/255, green: 221/255, blue: 52/255, alpha: 1),
-		UIColor(red: 89/255, green: 227/255, blue: 40/255, alpha: 1),
-		UIColor(red: 40/255, green: 227/255, blue: 219/255, alpha: 1),
-		UIColor(red: 40/255, green: 105/255, blue: 227/255, alpha: 1),
-		UIColor(red: 100/255, green: 74/255, blue: 241/255, alpha: 1),
-		UIColor(red: 197/255, green: 70/255, blue: 239/255, alpha: 1),
+		UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1),
+		UIColor(red: 246 / 255, green: 66 / 255, blue: 52 / 255, alpha: 1),
+		UIColor(red: 246 / 255, green: 153 / 255, blue: 52 / 255, alpha: 1),
+		UIColor(red: 246 / 255, green: 221 / 255, blue: 52 / 255, alpha: 1),
+		UIColor(red: 89 / 255, green: 227 / 255, blue: 40 / 255, alpha: 1),
+		UIColor(red: 40 / 255, green: 227 / 255, blue: 219 / 255, alpha: 1),
+		UIColor(red: 40 / 255, green: 105 / 255, blue: 227 / 255, alpha: 1),
+		UIColor(red: 100 / 255, green: 74 / 255, blue: 241 / 255, alpha: 1),
+		UIColor(red: 197 / 255, green: 70 / 255, blue: 239 / 255, alpha: 1),
 		UIColor(red: 0, green: 0, blue: 0, alpha: 1)]
 
     var selectedColorIndex: Int = 0 {
@@ -43,7 +43,7 @@ class ColorsInputView: UIView {
         selectedColorIndex = 0
         self.setSubViews()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -89,7 +89,7 @@ extension ColorsInputView: UICollectionViewDelegate, UICollectionViewDataSource 
         } else {
             cell.isSelected = false
         }
-        
+
         cell.normalContentView?.backgroundColor = self.colors[indexPath.row]
         return cell
     }

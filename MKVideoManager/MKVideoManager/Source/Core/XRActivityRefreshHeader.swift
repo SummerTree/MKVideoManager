@@ -24,31 +24,30 @@
 import UIKit
 
 public class XRActivityRefreshHeader: XRBaseRefreshHeader {
-
 	lazy var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
     lazy var statusLbl: UILabel = UILabel(frame: CGRect.zero)
-    
+
     override public init() {
         super.init()
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override public func layoutSubviews() {
         super.layoutSubviews()
-        
+
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityIndicator.center = CGPoint(x: self.frame.size.width * 0.5, y: ignoreTopHeight + (self.frame.size.height - ignoreTopHeight) * 0.5)
-        
+
         statusLbl.frame = CGRect(x: 0, y: 0, width: 200, height: 16)
         statusLbl.center = CGPoint(x: activityIndicator.center.x, y: activityIndicator.center.y + 25)
     }
-    
-    public override func prepareForRefresh() {
+
+    override public func prepareForRefresh() {
         super.prepareForRefresh()
-        
+
         self.backgroundColor = UIColor.purple
         activityIndicator.hidesWhenStopped = true
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
@@ -63,9 +62,8 @@ public class XRActivityRefreshHeader: XRBaseRefreshHeader {
         statusLbl.center = CGPoint(x: activityIndicator.center.x, y: activityIndicator.center.y + 25)
         self.addSubview(statusLbl)
     }
-    
+
     override public func refreshStateChanged() {
-        
         switch refreshState {
         case .idle:
             activityIndicator.stopAnimating()
@@ -95,10 +93,8 @@ public class XRActivityRefreshHeader: XRBaseRefreshHeader {
             break
         }
     }
-    
+
     // pull progress changed
     override public func pullProgressValueChanged() {
-        
     }
-
 }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FilterModel: NSObject{
+class FilterModel: NSObject {
     var transform: CGAffineTransform?
 
     var rotation: CGFloat = 0
@@ -17,7 +17,7 @@ class FilterModel: NSObject{
     var scale: CGFloat! = 1
 
     var rect: CGRect?
-    
+
     var center: CGPoint?
 
     var size: CGSize?

@@ -52,24 +52,23 @@ public enum XRRefreshFooterPullLoadingMode {
 }
 
 public class XRRefreshControlSettings: NSObject {
-    
     public var screenSize: CGSize = UIScreen.main.bounds.size
     public var animateTimeForAdjustContentInSetTop: TimeInterval = 0.6
     public var animateTimeForEndRefreshContentInSetTop: TimeInterval = 0.5
     public var afterDelayTimeForEndInsetTopRefreshing: TimeInterval = 0.5
-    
+
     public var pullLoadingMoreMode: XRRefreshFooterPullLoadingMode = .ignorePullReleaseFast
     public var refreshStatusLblTextColor: UIColor = XRRefreshControlSettings.colorFromRGB(hexRGB: 0x333333)
     public var refreshStatusLblTextFont: UIFont = UIFont.systemFont(ofSize: 13)
-    
+
     public var isTriggerRefreshPullHalfingHeaderMaxHeight: CGFloat = 200
-    
+
     public static let sharedSetting: XRRefreshControlSettings = XRRefreshControlSettings()
-    
-    private override init() {
+
+    override private init() {
         super.init()
     }
-    
+
     /**
      * @brief 全局配置刷新控件
      *
@@ -87,28 +86,26 @@ public class XRRefreshControlSettings: NSObject {
                         refreshStatusLblTextColor: UIColor? = nil,
                         refreshStatusLblTextFont: UIFont? = nil,
                         isTriggerRefreshPullHalfingHeaderMaxHeight: CGFloat = 200) {
-        
         self.animateTimeForEndRefreshContentInSetTop = animateTimeForEndRefreshContentInSetTop
         self.animateTimeForEndRefreshContentInSetTop = animateTimeForEndRefreshContentInSetTop
         self.afterDelayTimeForEndInsetTopRefreshing = afterDelayTimeForEndInsetTopRefreshing
         self.pullLoadingMoreMode = pullLoadingMoreMode
         self.isTriggerRefreshPullHalfingHeaderMaxHeight = isTriggerRefreshPullHalfingHeaderMaxHeight
-        
+
         if let statusLblTextColor = refreshStatusLblTextColor {
             self.refreshStatusLblTextColor = statusLblTextColor
         }
-        
+
         if let statusLblTextFont = refreshStatusLblTextFont {
             self.refreshStatusLblTextFont = statusLblTextFont
         }
     }
-    
+
     public class func colorFromRGB(hexRGB: UInt32) -> UIColor {
         let redComponent = (hexRGB & 0xFF0000) >> 16
         let greenComponent = (hexRGB & 0x00FF00) >> 8
         let blueComponent = hexRGB & 0x0000FF
-        
-        return UIColor (red: CGFloat(redComponent)/255.0, green: CGFloat(greenComponent)/255.0, blue: CGFloat(blueComponent)/255.0, alpha: 1)
+
+        return UIColor (red: CGFloat(redComponent) / 255.0, green: CGFloat(greenComponent) / 255.0, blue: CGFloat(blueComponent) / 255.0, alpha: 1)
     }
-    
 }

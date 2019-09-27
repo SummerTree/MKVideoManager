@@ -11,6 +11,5 @@ import Foundation
 import UIKit
 
 protocol FilterProtocol: NSObjectProtocol {
-    
-    var filterModel: FilterModel  {set get}
+    var filterModel: FilterModel { get set }
 }

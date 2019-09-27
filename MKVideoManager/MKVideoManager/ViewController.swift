@@ -21,13 +21,13 @@ class ViewController: UIViewController {
         self.setSubViews()
 //        self.navigationController?.isNavigationBarHidden = true
     }
-    
+
     func setSubViews() {
-        self.tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height), style: UITableView.Style.grouped)
+        self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height), style: UITableView.Style.grouped)
 //        self.tableView.backgroundColor = UIColor.red
         self.tableView.dataSource = self
         self.tableView.delegate = self
-       
+
         self.view.addSubview(self.tableView)
     }
 }
@@ -36,17 +36,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.modules.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
         cell.textLabel?.text = self.modules[indexPath.row]
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if  indexPath.row >= self.controllers.count {
@@ -54,17 +54,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
 		var vc: UIViewController
 		if indexPath.row == 7 {
-			vc = UIStoryboard.init(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "scrollTableVC") as! MKScrollTableViewController
+			vc = UIStoryboard(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "scrollTableVC") as! MKScrollTableViewController
 		} else if indexPath.row == 8 {
-			vc = UIStoryboard.init(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "scrollTextVC") as! MKScrollTextViewController
+			vc = UIStoryboard(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "scrollTextVC") as! MKScrollTextViewController
 		} else if indexPath.row == 9 {
-			vc = UIStoryboard.init(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "scrollTimerVC") as! MKScrollTextTimerViewController
+			vc = UIStoryboard(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "scrollTimerVC") as! MKScrollTextTimerViewController
 		} else if indexPath.row == 10 {
-			vc = UIStoryboard.init(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "deleteCellVC") as! MKDeleteCellTableViewController
+			vc = UIStoryboard(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "deleteCellVC") as! MKDeleteCellTableViewController
 		} else if indexPath.row == 11 {
 			vc = UIStoryboard(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "compostionVC") as! MKVideoCompositionViewController
 		} else if indexPath.row == 12 {
-			vc = UIStoryboard.init(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "giphyVC") as! GiphyUIViewController
+			vc = UIStoryboard(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "giphyVC") as! GiphyUIViewController
 		} else if indexPath.row == 14 {
 			vc = UIStoryboard(name: "MKStory", bundle: nil).instantiateViewController(withIdentifier: "popTipVC") as! PopTipViewController
 		} else if indexPath.row == 15 {

@@ -11,11 +11,11 @@ import GPUImage
 
 class GPUImageCustomLookupFilter: GPUImageFilterGroup {
     var lookupImageSource: GPUImagePicture?
-    
+
     init(lookupImageNamed: String) {
         super.init()
-        self.lookupImageSource = GPUImagePicture.init(image: UIImage.imageWithFilter(named: lookupImageNamed))
-        let lookupFilter = GPUImageLookupFilter.init()
+        self.lookupImageSource = GPUImagePicture(image: UIImage.imageWithFilter(named: lookupImageNamed))
+        let lookupFilter = GPUImageLookupFilter()
         self.addTarget(lookupFilter)
         self.lookupImageSource?.addTarget(lookupFilter, atTextureLocation: 1)
         self.lookupImageSource?.processImage()

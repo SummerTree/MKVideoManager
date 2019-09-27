@@ -110,7 +110,7 @@ class GoodsNumberTipView: UIView {
 		}
 	}
 
-	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
 		self.numberLabelWidth.constant = self.numberView.frame.size.width
 		UIView.animate(withDuration: 0.2) {
 			self.stackView.layoutIfNeeded()

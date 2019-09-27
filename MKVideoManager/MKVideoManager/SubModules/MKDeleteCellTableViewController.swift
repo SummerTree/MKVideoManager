@@ -10,16 +10,16 @@ import Foundation
 
 class MKDeleteCellTableViewController: UIViewController {
 	@IBOutlet weak var tableView: UITableView!
-	var dataSource: [String] = Array.init(repeating: "ssssgeawoghewiaghewihgilewahgjiwaehgiewhga", count: 10)
+	var dataSource: [String] = Array(repeating: "ssssgeawoghewiaghewihgilewahgjiwaehgiewhga", count: 10)
 	var bIsDeletingCell: Bool = false
-	var deletingIndexPath: IndexPath? = nil
+	var deletingIndexPath: IndexPath?
 	var sourceViews: [[UIView]] = []
 	var bombAnimationFlag: Int = 0
 	var bombAnimationRow: Int = 0
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
-	
+
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 	}
@@ -29,22 +29,22 @@ extension MKDeleteCellTableViewController: UITableViewDataSource, UITableViewDel
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
-	
+
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return dataSource.count
 	}
-	
+
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "deleteCell", for: indexPath) as? DeleteCell else {
 			return DeleteCell()
 		}
 		return cell
 	}
-	
+
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 100
 	}
-	
+
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		guard let cell = tableView.cellForRow(at: indexPath) as? DeleteCell, self.bIsDeletingCell == false else {
 			return
@@ -57,7 +57,6 @@ extension MKDeleteCellTableViewController: UITableViewDataSource, UITableViewDel
 }
 
 extension MKDeleteCellTableViewController {
-	
 	//Animation
 	func cellStartAnimation(with cell: DeleteCell) {
 		let srcImg = cell.containerView.screenshot()
@@ -71,9 +70,9 @@ extension MKDeleteCellTableViewController {
 			self.deleteViewAnimation()
 		}
 	}
-	
+
 	func scaleAnimation(with view: UIView) {
-		let scaleAnimation = CAKeyframeAnimation.init(keyPath: "transform.scale")
+		let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
 		scaleAnimation.values = [1, 0.97, 1]
 		scaleAnimation.keyTimes = [0, 0.5, 1]
 		scaleAnimation.duration = 0.17
@@ -82,9 +81,9 @@ extension MKDeleteCellTableViewController {
 		scaleAnimation.fillMode = .forwards
 		view.layer.add(scaleAnimation, forKey: "scaleCellAnimation")
 	}
-	
+
 	func cropItems(with srcView: UIView, srcImage: UIImage, to parentView: UIView) -> [[UIView]] {
-		let newSize = CGSize.init(width: srcView.bounds.width / 24.0, height: srcView.bounds.height / 5.0)
+		let newSize = CGSize(width: srcView.bounds.width / 24.0, height: srcView.bounds.height / 5.0)
 		var datas: [[UIView]] = []
 		for i in 0...23 {
 			var itemViews: [UIView] = []
@@ -94,15 +93,15 @@ extension MKDeleteCellTableViewController {
 				let subY = newSize.height * CGFloat(j) * scale
 				let subWidth = newSize.width * scale
 				let subHeight = newSize.height * scale
-				let subRect = CGRect.init(x: subX, y: subY, width: subWidth, height: subHeight)
+				let subRect = CGRect(x: subX, y: subY, width: subWidth, height: subHeight)
 				guard let subImageRef = srcImage.cgImage?.cropping(to: subRect) else {
 					continue
 				}
-				let subImage = UIImage.init(cgImage: subImageRef)
-				let subImageView = UIImageView.init(image: subImage)
+				let subImage = UIImage(cgImage: subImageRef)
+				let subImageView = UIImageView(image: subImage)
 				let subImageViewX = newSize.width * CGFloat(i)
 				let subImageViewY = newSize.height * CGFloat(j)
-				subImageView.frame = CGRect.init(x: subImageViewX, y: subImageViewY, width: newSize.width, height: newSize.height)
+				subImageView.frame = CGRect(x: subImageViewX, y: subImageViewY, width: newSize.width, height: newSize.height)
 				parentView.addSubview(subImageView)
 				itemViews.append(subImageView)
 			}
@@ -110,7 +109,7 @@ extension MKDeleteCellTableViewController {
 		}
 		return datas
 	}
-	
+
 	@objc func deleteViewAnimation() {
 		if self.bombAnimationRow < 0 {
 			for itemViews: [UIView] in self.sourceViews {
@@ -127,10 +126,10 @@ extension MKDeleteCellTableViewController {
 			self.sourceViews.removeAll()
 			self.bIsDeletingCell = false
 			self.tableView.isScrollEnabled = true
-			
+
 			return
 		}
-		
+
 		var itemViews: [UIView] = self.sourceViews[self.bombAnimationRow]
 		let existOne: Int = Int.random(in: 0 ... 4)
 		var existTwo: Int = Int.random(in: 0 ... 4)
@@ -147,22 +146,22 @@ extension MKDeleteCellTableViewController {
 		let oneView = itemViews[indexArray[0]]
 		let twoView = itemViews[indexArray[1]]
 		let threeView = itemViews[indexArray[2]]
-		
+
 		oneView.alpha = 0
 		twoView.alpha = 0
 		threeView.alpha = 0
 		if let index = itemViews.firstIndex(of: oneView) {
 			itemViews.remove(at: index)
 		}
-		
+
 		if let index = itemViews.firstIndex(of: twoView) {
 			itemViews.remove(at: index)
 		}
-		
+
 		if let index = itemViews.firstIndex(of: threeView) {
 			itemViews.remove(at: index)
 		}
-		
+
 		if self.bombAnimationFlag == 1 {
 			var itemViews = self.sourceViews[self.bombAnimationRow + 1]
 			let dRandom = Int.random(in: 0 ... 2)
@@ -176,13 +175,13 @@ extension MKDeleteCellTableViewController {
 				itemViews.remove(at: 1)
 			}
 		}
-		
+
 		if self.bombAnimationFlag == 2 {
 			let itemViews2 = self.sourceViews[self.bombAnimationRow + 2]
 			for view in itemViews2 {
 				view.alpha = 0
 			}
-			
+
 			var itemViews1 = self.sourceViews[self.bombAnimationRow + 1]
 			let dRandom = Int.random(in: 0 ... 2)
 			if dRandom == 0 {
@@ -195,14 +194,14 @@ extension MKDeleteCellTableViewController {
 				itemViews1.remove(at: 1)
 			}
 		}
-		
+
 		if self.bombAnimationRow + 2 <= self.sourceViews.count - 1 {
 			let itemViews2 = self.sourceViews[self.bombAnimationRow + 2]
 			for view in itemViews2 {
 				view.alpha = 0
 			}
 		}
-		
+
 		self.bombAnimationFlag += 1
 		if self.bombAnimationFlag == 3 {
 			self.bombAnimationFlag = 0
@@ -213,16 +212,14 @@ extension MKDeleteCellTableViewController {
 }
 
 class DeleteCell: UITableViewCell {
-	
 	@IBOutlet weak var containerView: UIView!
 	@IBOutlet weak var contentLabel: UILabel!
-	
+
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 	}
-	
+
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
-	
 }

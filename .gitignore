@@ -216,5 +216,5 @@ Podfile.lock
 ####
 # UNKNOWN: recommended by others, but I can't discover what these files are
 #
-Pods/
-buildscripts/output
+MKVideoManager/Pods
+MKVideoManager/buildscripts/output

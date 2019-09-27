@@ -52,7 +52,7 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AMPopTip
     - DeepDiff
     - Giphy
@@ -93,4 +93,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 9439c093a10fbebb174ff6f263738236abd73282
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.8.0

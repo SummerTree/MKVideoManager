@@ -10,16 +10,14 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let rootVC = ViewController.init()
-        let nav = UINavigationController.init(rootViewController: rootVC)
+        let rootVC = ViewController()
+        let nav = UINavigationController(rootViewController: rootVC)
         nav.view.backgroundColor = UIColor.white
-        self.window = UIWindow.init(frame: UIScreen.main.bounds)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.backgroundColor = UIColor.white
         self.window?.rootViewController = nav
         self.window?.makeKeyAndVisible()
@@ -47,7 +45,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
-
