@@ -729,5 +729,20 @@
             </objects>
             <point key="canvasLocation" x="2673" y="448"/>
         </scene>
+        <!--Mask View Controller-->
+        <scene sceneID="rBp-pg-GiF">
+            <objects>
+                <viewController storyboardIdentifier="waveFormVC" id="oG7-yN-LbE" customClass="MaskViewController" customModule="MKVideoManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f2R-hd-zJN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="69R-ed-rD3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CeD-kV-2AJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3381.5999999999999" y="396.25187406296857"/>
+        </scene>
     </scenes>
 </document>

@@ -102,10 +102,8 @@ class GoodsNumberTipView: UIView {
 		let lightRed = UIColor(red: 255 / 255, green: 111 / 255, blue: 111 / 255, alpha: 1)
 		self.numberView.change(to: NSNumber(value: lastCount), animated: false)
 		if lastCount > 10 {
-			self.numberView.updateNumber(lightOrange)
 			self.timesLabel.textColor = lightOrange
 		} else {
-			self.numberView.updateNumber(lightRed)
 			self.timesLabel.textColor = lightRed
 		}
 	}
