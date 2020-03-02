@@ -1,69 +1,28 @@
 PODS:
-  - AMPopTip (4.1.0)
-  - DeepDiff (2.2.0)
   - DPScrollNumberLabel (0.0.2)
-  - Giphy (1.0):
-    - DeepDiff (~> 2.2.0)
-    - libwebp
-    - PINCache
   - GPUImage (0.1.7)
   - Hero (1.4.0)
   - JTNumberScrollAnimatedView (1.0.0)
-  - libwebp (1.0.2):
-    - libwebp/core (= 1.0.2)
-    - libwebp/dec (= 1.0.2)
-    - libwebp/demux (= 1.0.2)
-    - libwebp/dsp (= 1.0.2)
-    - libwebp/enc (= 1.0.2)
-    - libwebp/mux (= 1.0.2)
-    - libwebp/utils (= 1.0.2)
-    - libwebp/webp (= 1.0.2)
-  - libwebp/core (1.0.2):
-    - libwebp/webp
-  - libwebp/dec (1.0.2):
-    - libwebp/core
-  - libwebp/demux (1.0.2):
-    - libwebp/core
-  - libwebp/dsp (1.0.2):
-    - libwebp/core
-  - libwebp/enc (1.0.2):
-    - libwebp/core
-  - libwebp/mux (1.0.2):
-    - libwebp/core
-  - libwebp/utils (1.0.2):
-    - libwebp/core
-  - libwebp/webp (1.0.2)
-  - MBProgressHUD (1.1.0)
   - MJRefresh (3.2.0)
   - NumberScrollAnimatedView (0.2.1)
-  - PINCache (2.3)
   - SnapKit (5.0.0)
 
 DEPENDENCIES:
-  - AMPopTip
   - "DPScrollNumberLabel (from `git@github.com:xiao-xi/DPScrollNumberLabel.git`, commit `af5d927`)"
-  - Giphy
   - GPUImage
   - Hero
   - JTNumberScrollAnimatedView (~> 1.0)
-  - MBProgressHUD
   - MJRefresh
   - NumberScrollAnimatedView
   - SnapKit
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - AMPopTip
-    - DeepDiff
-    - Giphy
     - GPUImage
     - Hero
     - JTNumberScrollAnimatedView
-    - libwebp
-    - MBProgressHUD
     - MJRefresh
     - NumberScrollAnimatedView
-    - PINCache
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -77,20 +36,14 @@ CHECKOUT OPTIONS:
     :git: "git@github.com:xiao-xi/DPScrollNumberLabel.git"
 
 SPEC CHECKSUMS:
-  AMPopTip: fc50f5cea7743d1a03076dbd6a1a270f2e6b6d55
-  DeepDiff: e329bc46dd14ca788d8ec08d34420799ba1d77f2
   DPScrollNumberLabel: 5124eaccf3029bb84116de391e1273cba676f4f5
-  Giphy: 976029d54b1fa1926ffeda884519f9129e490044
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   JTNumberScrollAnimatedView: 2777d71cab7ca8126e9cfa99f9fdd22c37644d48
-  libwebp: b068a3bd7c45f7460f6715be7bed1a18fd5d6b48
-  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   NumberScrollAnimatedView: 4a4e4af469c791a8d8bbbbef7853dcbdb2a7e3f9
-  PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
 
-PODFILE CHECKSUM: 9439c093a10fbebb174ff6f263738236abd73282
+PODFILE CHECKSUM: bf49d56a935c21b37800f6ba235c1129da92cf57
 
 COCOAPODS: 1.8.4
