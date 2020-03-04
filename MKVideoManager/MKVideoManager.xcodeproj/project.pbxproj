@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		2F0A1CE0E913885CA3A3BBCC /* Pods_MKVideoManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD58404F34ABF658D8C5971 /* Pods_MKVideoManager.framework */; };
+		653FA4B7240F5FA800A84504 /* PhotoZoomItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653FA4B6240F5FA800A84504 /* PhotoZoomItem.swift */; };
+		65B8CF74240D3307005DC919 /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B8CF72240D3307005DC919 /* PhotoViewerViewController.swift */; };
+		65B8CF75240D3307005DC919 /* PhotoViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B8CF73240D3307005DC919 /* PhotoViewerViewController.xib */; };
+		65B8CF77240E0E75005DC919 /* AlbumsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B8CF76240E0E75005DC919 /* AlbumsManager.swift */; };
+		65B8CF7B240E4C1B005DC919 /* PhotoViewerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B8CF7A240E4C1B005DC919 /* PhotoViewerListCell.xib */; };
+		65B8CF7E240E5231005DC919 /* PhotoSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B8CF7C240E5231005DC919 /* PhotoSelectViewController.swift */; };
+		65B8CF7F240E5231005DC919 /* PhotoSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B8CF7D240E5231005DC919 /* PhotoSelectViewController.xib */; };
+		65B8CF81240E5560005DC919 /* PhotoSelectItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B8CF80240E5560005DC919 /* PhotoSelectItemCell.xib */; };
 		6F001C55219BFA8B0099602A /* MKFilterMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C54219BFA8B0099602A /* MKFilterMaskView.swift */; };
 		6F001C57219C52620099602A /* MKVideoCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C56219C52620099602A /* MKVideoCoverViewController.swift */; };
 		6F001C59219D566C0099602A /* ColorToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C58219D566C0099602A /* ColorToImage.swift */; };
@@ -103,12 +111,19 @@
 		6FF1C9A3228E51F5007E8583 /* pre.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6FF1C9A2228E51F5007E8583 /* pre.mp4 */; };
 		6FF1C9A5228E52AB007E8583 /* main.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6FF1C9A4228E52AB007E8583 /* main.mp4 */; };
 		6FFF54FC2202EFB300FA8156 /* MKAdjustFontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF54FB2202EFB300FA8156 /* MKAdjustFontViewController.swift */; };
-		E21F223E240D028E0070BC79 /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F223D240D028E0070BC79 /* PhotoViewerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3D5D2A6A126EDD7D5CB996FF /* Pods-MKVideoManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MKVideoManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MKVideoManager/Pods-MKVideoManager.debug.xcconfig"; sourceTree = "<group>"; };
 		5AD58404F34ABF658D8C5971 /* Pods_MKVideoManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MKVideoManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		653FA4B6240F5FA800A84504 /* PhotoZoomItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoZoomItem.swift; sourceTree = "<group>"; };
+		65B8CF72240D3307005DC919 /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
+		65B8CF73240D3307005DC919 /* PhotoViewerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoViewerViewController.xib; sourceTree = "<group>"; };
+		65B8CF76240E0E75005DC919 /* AlbumsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsManager.swift; sourceTree = "<group>"; };
+		65B8CF7A240E4C1B005DC919 /* PhotoViewerListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoViewerListCell.xib; sourceTree = "<group>"; };
+		65B8CF7C240E5231005DC919 /* PhotoSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectViewController.swift; sourceTree = "<group>"; };
+		65B8CF7D240E5231005DC919 /* PhotoSelectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoSelectViewController.xib; sourceTree = "<group>"; };
+		65B8CF80240E5560005DC919 /* PhotoSelectItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoSelectItemCell.xib; sourceTree = "<group>"; };
 		6F001C54219BFA8B0099602A /* MKFilterMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKFilterMaskView.swift; sourceTree = "<group>"; };
 		6F001C56219C52620099602A /* MKVideoCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoCoverViewController.swift; sourceTree = "<group>"; };
 		6F001C58219D566C0099602A /* ColorToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToImage.swift; sourceTree = "<group>"; };
@@ -217,7 +232,6 @@
 		6FF1C9A4228E52AB007E8583 /* main.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = main.mp4; sourceTree = "<group>"; };
 		6FFF54FB2202EFB300FA8156 /* MKAdjustFontViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKAdjustFontViewController.swift; sourceTree = "<group>"; };
 		D24FF6C93D82A2FDBC45E9CF /* Pods-MKVideoManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MKVideoManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-MKVideoManager/Pods-MKVideoManager.release.xcconfig"; sourceTree = "<group>"; };
-		E21F223D240D028E0070BC79 /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +397,7 @@
 				6F49AAE4219E7ADA007EA231 /* MKDefine.swift */,
 				6F49AAEE219EEF76007EA231 /* MKVideoManager.swift */,
 				6F33C33A21CB378100FAE42B /* MKRefresh.swift */,
+				65B8CF76240E0E75005DC919 /* AlbumsManager.swift */,
 				6FA4FA1122B25CD3000BB650 /* VideoEdit */,
 			);
 			path = VideoManager;
@@ -410,7 +425,10 @@
 				6FDA1F6722DC26F000072A09 /* ScrollNumberViewController.swift */,
 				6F6C9E3B2373EC5E00CA48CB /* SliderViewController.swift */,
 				6FE51DE0238BB099009B80A5 /* MaskViewController.swift */,
-				E21F223D240D028E0070BC79 /* PhotoViewerViewController.swift */,
+				65B8CF72240D3307005DC919 /* PhotoViewerViewController.swift */,
+				65B8CF7C240E5231005DC919 /* PhotoSelectViewController.swift */,
+				65B8CF7D240E5231005DC919 /* PhotoSelectViewController.xib */,
+				65B8CF73240D3307005DC919 /* PhotoViewerViewController.xib */,
 				6F3BCFBB225F212C003BB3F5 /* MKStory.storyboard */,
 			);
 			path = SubModules;
@@ -472,6 +490,9 @@
 				6FDA1F6D22DC814200072A09 /* GoodNumberView.xib */,
 				6F6C9E3D2373F1D000CA48CB /* CustomSliderView.swift */,
 				6FE51DE2238BB0ED009B80A5 /* WaveFormView.swift */,
+				653FA4B6240F5FA800A84504 /* PhotoZoomItem.swift */,
+				65B8CF80240E5560005DC919 /* PhotoSelectItemCell.xib */,
+				65B8CF7A240E4C1B005DC919 /* PhotoViewerListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -599,11 +620,15 @@
 				6F48B47422D58D9E00CCDA50 /* tenor(1).gif in Resources */,
 				6FA4FA2322B34492000BB650 /* ariana.mp4 in Resources */,
 				6FDE326521991B77008CB0E9 /* LaunchScreen.storyboard in Resources */,
+				65B8CF7B240E4C1B005DC919 /* PhotoViewerListCell.xib in Resources */,
+				65B8CF81240E5560005DC919 /* PhotoSelectItemCell.xib in Resources */,
 				6FDA1F6A22DC279800072A09 /* GoodTipView.xib in Resources */,
 				6FDE326221991B77008CB0E9 /* Assets.xcassets in Resources */,
+				65B8CF7F240E5231005DC919 /* PhotoSelectViewController.xib in Resources */,
 				6F3BCFBC225F212C003BB3F5 /* MKStory.storyboard in Resources */,
 				6FF1C9A3228E51F5007E8583 /* pre.mp4 in Resources */,
 				6FDA1F6E22DC814200072A09 /* GoodNumberView.xib in Resources */,
+				65B8CF75240D3307005DC919 /* PhotoViewerViewController.xib in Resources */,
 				6FDA1F6C22DC804100072A09 /* GoodTimeTipView.xib in Resources */,
 				6F48B47522D58D9E00CCDA50 /* tenor.gif in Resources */,
 				6FC68C44219957C80073F3D2 /* 220.mp4 in Resources */,
@@ -684,6 +709,7 @@
 				6F33C34421CB50D500FAE42B /* MKRefreshHeaderView.m in Sources */,
 				6F49AAEF219EEF76007EA231 /* MKVideoManager.swift in Sources */,
 				6F7B0E01219BBD1700CA2BD2 /* FilterModel.swift in Sources */,
+				65B8CF7E240E5231005DC919 /* PhotoSelectViewController.swift in Sources */,
 				6F8A270A22C0A5D7002B8E2D /* ShareManager.swift in Sources */,
 				6F49AAE7219EA4E5007EA231 /* MKCaptionLabel.swift in Sources */,
 				6F33C32E21CA655000FAE42B /* XRActivityRefreshFooter.swift in Sources */,
@@ -693,6 +719,7 @@
 				6FE51DE3238BB0ED009B80A5 /* WaveFormView.swift in Sources */,
 				6F49AB3B21A56B94007EA231 /* TLGPUImageMovieFillFiter.m in Sources */,
 				6F6C9E3C2373EC5E00CA48CB /* SliderViewController.swift in Sources */,
+				65B8CF74240D3307005DC919 /* PhotoViewerViewController.swift in Sources */,
 				6F48B47122D5836400CCDA50 /* TenorViewController.swift in Sources */,
 				6FDA1F7022DC827B00072A09 /* GoodsTipView.swift in Sources */,
 				6F7B0DFA219AB46700CA2BD2 /* AttributeStringExtention.swift in Sources */,
@@ -735,13 +762,14 @@
 				6F23627B22D87C2900AE7B77 /* PopTipViewController.swift in Sources */,
 				6FA4FA1D22B27864000BB650 /* Date+Extension.swift in Sources */,
 				6F7B0E05219BD68400CA2BD2 /* FilterImageView.swift in Sources */,
+				653FA4B7240F5FA800A84504 /* PhotoZoomItem.swift in Sources */,
 				6F49AB4221A56BA3007EA231 /* MKStoryOutput.swift in Sources */,
 				6F33C33221CA655000FAE42B /* UIScrollView+XRRefresh.swift in Sources */,
 				6F49AAED219EBBAD007EA231 /* MKCoverCollectionCell.swift in Sources */,
-				E21F223E240D028E0070BC79 /* PhotoViewerViewController.swift in Sources */,
 				6F33C32D21CA655000FAE42B /* XRActivityRefreshHeader.swift in Sources */,
 				6F33C33321CA655000FAE42B /* UIScrollView+XRExtension.swift in Sources */,
 				6F7B0DF8219A730800CA2BD2 /* ColorsCollectionCell.swift in Sources */,
+				65B8CF77240E0E75005DC919 /* AlbumsManager.swift in Sources */,
 				6F48B47722D58FB000CCDA50 /* WatermarkEngine.swift in Sources */,
 				6F001C57219C52620099602A /* MKVideoCoverViewController.swift in Sources */,
 				6FC68C4E219971AD0073F3D2 /* TextColorInputView.swift in Sources */,
