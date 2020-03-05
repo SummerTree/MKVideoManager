@@ -15,7 +15,8 @@
 		65B8CF7B240E4C1B005DC919 /* PhotoViewerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B8CF7A240E4C1B005DC919 /* PhotoViewerListCell.xib */; };
 		65B8CF7E240E5231005DC919 /* PhotoSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B8CF7C240E5231005DC919 /* PhotoSelectViewController.swift */; };
 		65B8CF7F240E5231005DC919 /* PhotoSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B8CF7D240E5231005DC919 /* PhotoSelectViewController.xib */; };
-		65B8CF81240E5560005DC919 /* PhotoSelectItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B8CF80240E5560005DC919 /* PhotoSelectItemCell.xib */; };
+		65DDB4E42410A330008F4516 /* PhotoSelectItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DDB4E32410A330008F4516 /* PhotoSelectItemCell.xib */; };
+		65DDB4E62410A602008F4516 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65DDB4E52410A602008F4516 /* Assets.xcassets */; };
 		6F001C55219BFA8B0099602A /* MKFilterMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C54219BFA8B0099602A /* MKFilterMaskView.swift */; };
 		6F001C57219C52620099602A /* MKVideoCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C56219C52620099602A /* MKVideoCoverViewController.swift */; };
 		6F001C59219D566C0099602A /* ColorToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F001C58219D566C0099602A /* ColorToImage.swift */; };
@@ -103,7 +104,6 @@
 		6FDD79FA21F2F5EF00F83604 /* MKMomentEditMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD79F921F2F5EF00F83604 /* MKMomentEditMaskView.swift */; };
 		6FDE325B21991B74008CB0E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE325A21991B74008CB0E9 /* AppDelegate.swift */; };
 		6FDE325D21991B75008CB0E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE325C21991B75008CB0E9 /* ViewController.swift */; };
-		6FDE326221991B77008CB0E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE326121991B77008CB0E9 /* Assets.xcassets */; };
 		6FDE326521991B77008CB0E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE326321991B77008CB0E9 /* LaunchScreen.storyboard */; };
 		6FE51DE1238BB099009B80A5 /* MaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE51DE0238BB099009B80A5 /* MaskViewController.swift */; };
 		6FE51DE3238BB0ED009B80A5 /* WaveFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE51DE2238BB0ED009B80A5 /* WaveFormView.swift */; };
@@ -123,7 +123,8 @@
 		65B8CF7A240E4C1B005DC919 /* PhotoViewerListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoViewerListCell.xib; sourceTree = "<group>"; };
 		65B8CF7C240E5231005DC919 /* PhotoSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectViewController.swift; sourceTree = "<group>"; };
 		65B8CF7D240E5231005DC919 /* PhotoSelectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoSelectViewController.xib; sourceTree = "<group>"; };
-		65B8CF80240E5560005DC919 /* PhotoSelectItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoSelectItemCell.xib; sourceTree = "<group>"; };
+		65DDB4E32410A330008F4516 /* PhotoSelectItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoSelectItemCell.xib; sourceTree = "<group>"; };
+		65DDB4E52410A602008F4516 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F001C54219BFA8B0099602A /* MKFilterMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKFilterMaskView.swift; sourceTree = "<group>"; };
 		6F001C56219C52620099602A /* MKVideoCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKVideoCoverViewController.swift; sourceTree = "<group>"; };
 		6F001C58219D566C0099602A /* ColorToImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToImage.swift; sourceTree = "<group>"; };
@@ -222,7 +223,6 @@
 		6FDE325721991B74008CB0E9 /* MKVideoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MKVideoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FDE325A21991B74008CB0E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FDE325C21991B75008CB0E9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6FDE326121991B77008CB0E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FDE326421991B77008CB0E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FDE326621991B77008CB0E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FE51DE0238BB099009B80A5 /* MaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskViewController.swift; sourceTree = "<group>"; };
@@ -491,8 +491,8 @@
 				6F6C9E3D2373F1D000CA48CB /* CustomSliderView.swift */,
 				6FE51DE2238BB0ED009B80A5 /* WaveFormView.swift */,
 				653FA4B6240F5FA800A84504 /* PhotoZoomItem.swift */,
-				65B8CF80240E5560005DC919 /* PhotoSelectItemCell.xib */,
 				65B8CF7A240E4C1B005DC919 /* PhotoViewerListCell.xib */,
+				65DDB4E32410A330008F4516 /* PhotoSelectItemCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -530,7 +530,7 @@
 				6FDE325C21991B75008CB0E9 /* ViewController.swift */,
 				6FDE325A21991B74008CB0E9 /* AppDelegate.swift */,
 				6F49AB5221A57EA8007EA231 /* Bridge.h */,
-				6FDE326121991B77008CB0E9 /* Assets.xcassets */,
+				65DDB4E52410A602008F4516 /* Assets.xcassets */,
 				6FDE326321991B77008CB0E9 /* LaunchScreen.storyboard */,
 				6FDE326621991B77008CB0E9 /* Info.plist */,
 			);
@@ -621,9 +621,9 @@
 				6FA4FA2322B34492000BB650 /* ariana.mp4 in Resources */,
 				6FDE326521991B77008CB0E9 /* LaunchScreen.storyboard in Resources */,
 				65B8CF7B240E4C1B005DC919 /* PhotoViewerListCell.xib in Resources */,
-				65B8CF81240E5560005DC919 /* PhotoSelectItemCell.xib in Resources */,
+				65DDB4E42410A330008F4516 /* PhotoSelectItemCell.xib in Resources */,
+				65DDB4E62410A602008F4516 /* Assets.xcassets in Resources */,
 				6FDA1F6A22DC279800072A09 /* GoodTipView.xib in Resources */,
-				6FDE326221991B77008CB0E9 /* Assets.xcassets in Resources */,
 				65B8CF7F240E5231005DC919 /* PhotoSelectViewController.xib in Resources */,
 				6F3BCFBC225F212C003BB3F5 /* MKStory.storyboard in Resources */,
 				6FF1C9A3228E51F5007E8583 /* pre.mp4 in Resources */,
