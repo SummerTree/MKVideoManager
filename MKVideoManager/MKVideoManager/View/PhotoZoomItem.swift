@@ -11,40 +11,51 @@ import Photos
 
 class PhotoZoomItem: UIScrollView {
     var imageView: UIImageView!
-    var asset:PHAsset! {
+	lazy var indicator: UIActivityIndicatorView = {
+		let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
+		return indicator
+	}()
+	
+    var asset: PHAsset! {
         willSet (newAsset) {
-            PHImageManager.default().requestImage(for: newAsset, targetSize: self.frame.size, contentMode: .aspectFill, options: nil) { (image, _) in
-                           self.imageView.image = image
-            }
+			self.indicator.startAnimating()
+			AlbumsManager.loadImageWithAsset(asset: newAsset, targetSize: CGSize.zero, isExclusive: true) { (image: UIImage?) in
+				guard image != nil else {
+					return
+				}
+				self.indicator.stopAnimating()
+				self.imageView.image = image
+				if image == nil {
+					self.imageView.image = UIImage(named: "image_default")
+				}
+			}
         }
     }
-        
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialAppearance()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     func initialAppearance() {
         self.delegate = self
-//        self.isPagingEnabled = true
         self.showsHorizontalScrollIndicator = false
         self.backgroundColor = UIColor.clear
         self.minimumZoomScale = 1.0
         self.maximumZoomScale = 2.0
 
-        imageView = UIImageView.init(frame: self.bounds)
+        imageView = UIImageView(frame: self.bounds)
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         self.addSubview(imageView)
-        
     }
-    
-    func resetZoom()  {
+
+	func resetZoom() {
         //还原
         self.zoomScale = 1.0
         self.imageView.frame = self.bounds
@@ -52,33 +63,16 @@ class PhotoZoomItem: UIScrollView {
 }
 
 extension PhotoZoomItem: UIScrollViewDelegate {
-    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return imageView
+        return self.imageView
     }
-    
-    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-        
+
+	func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+	}
+
+	func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+	}
+
+	func scrollViewDidZoom(_ scrollView: UIScrollView) {
     }
-    
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        
-    }
-    
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-//        // 延中心点缩放
-//        CGFloat imageScaleWidth = scrollView.zoomScale * self.imageNormalWidth;
-//        CGFloat imageScaleHeight = scrollView.zoomScale * self.imageNormalHeight;
-//        CGFloat imageX = 0;
-//        CGFloat imageY = 0;
-//        if (imageScaleWidth < self.frame.size.width) {
-//            imageX = floorf((self.frame.size.width - imageScaleWidth) / 2.0);
-//        }
-//        if (imageScaleHeight < self.frame.size.height) {
-//            imageY = floorf((self.frame.size.height - imageScaleHeight) / 2.0);
-//        }
-//        self.imageView.frame = CGRectMake(imageX, imageY, imageScaleWidth, imageScaleHeight);
-    }
-    
-    
 }
